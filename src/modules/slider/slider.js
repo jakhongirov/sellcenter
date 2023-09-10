@@ -199,6 +199,8 @@ module.exports = {
       try {
          const { id } = req.body
 
+         console.log(id);
+
          if (id) {
             const foundSlider = await model.sliderById(id)
 
