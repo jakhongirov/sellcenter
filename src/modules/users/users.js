@@ -1,0 +1,352 @@
+const model = require('./model')
+const JWT = require('../../lib/jwt')
+const bcryptjs = require('bcryptjs')
+
+module.exports = {
+   GET_USERS_LIST: async (req, res) => {
+      try {
+         const { limit, offset } = req.query
+
+         if (limit && offset) {
+            const usersList = await model.usersList(limit, offset)
+
+            if (usersList) {
+               return res.json({
+                  status: 200,
+                  message: "Success",
+                  data: usersList
+               })
+            } else {
+               return res.json({
+                  status: 404,
+                  message: "Not found"
+               })
+            }
+
+         } else {
+            return res.json({
+               status: 400,
+               message: "Bad request"
+            })
+         }
+
+      } catch (error) {
+         console.log(error)
+         res.json({
+            status: 500,
+            message: "Internal Server Error",
+         })
+      }
+   },
+
+   GET: async (req, res) => {
+      try {
+         const { id } = req.query
+
+         if (id) {
+            const user = await model.foundUserById(id)
+
+            return res.json({
+               status: 200,
+               message: "Success",
+               data: user
+            })
+         } else {
+            return res.json({
+               status: 400,
+               message: "Bad request"
+            })
+         }
+
+      } catch (error) {
+         console.log(error)
+         res.json({
+            status: 500,
+            message: "Internal Server Error",
+         })
+      }
+   },
+
+   REGISTER_USER: async (req, res) => {
+      try {
+         const { user_email, user_password, user_company } = req.body
+         const checkUser = await model.checkUser(user_email)
+
+         if (!checkUser) {
+            const pass_hash = await bcryptjs.hash(user_password, 10)
+            const registerUser = await model.registerUser(user_email, pass_hash, user_company)
+
+            if (registerUser) {
+               const token = await new JWT({ id: registerUser.user_id }).sign()
+
+               return res.json({
+                  status: 200,
+                  message: "Success",
+                  data: registerUser,
+                  token: token
+               })
+            }
+
+         } else {
+            return res.json({
+               status: 302,
+               message: "Found"
+            })
+         }
+
+      } catch (error) {
+         console.log(error)
+         res.json({
+            status: 500,
+            message: "Internal Server Error",
+         })
+      }
+   },
+
+   LOGIN: async (req, res) => {
+      try {
+         const { user_email, user_password } = req.body
+         const foundUser = await model.foundUser(user_email)
+
+         if (foundUser) {
+            const validPass = await bcryptjs.compare(user_password, foundUser.user_password)
+
+            if (validPass) {
+               const token = await new JWT({ id: foundUser.user_id }).sign()
+               return res.json({
+                  status: 200,
+                  message: "Success",
+                  data: foundUser,
+                  token: token
+               })
+            } else {
+               return res.json({
+                  status: 401,
+                  message: "Unauthorized"
+               })
+            }
+         } else {
+            return res.json({
+               status: 404,
+               message: "Not Found"
+            })
+         }
+
+      } catch (error) {
+         console.log(error)
+         res.json({
+            status: 500,
+            message: "Internal Server Error",
+         })
+      }
+   },
+
+   EDIT_USER_EMAIL: async (req, res) => {
+      try {
+         const { user_id, user_email, user_new_password } = req.body
+         const foundUser = await model.foundUserById(user_id)
+
+         if (foundUser) {
+            const pass_hash = await bcryptjs.hash(user_new_password, 10)
+            const updateUser = await model.updateUserEmail(user_id, user_email, pass_hash)
+
+            if (updateUser) {
+               return res.json({
+                  status: 200,
+                  message: 'Success',
+                  data: updateUser
+               })
+            } else {
+               return res.json({
+                  status: 400,
+                  message: "Bad request"
+               })
+            }
+         }
+         else {
+            return res.json({
+               status: 404,
+               message: "Not found"
+            })
+         }
+
+      } catch (error) {
+         console.log(error)
+         res.json({
+            status: 500,
+            message: "Internal Server Error",
+         })
+      }
+   },
+
+   EDIT_USER_NAME: async (req, res) => {
+      try {
+         const { user_id, gender, first_name, last_name } = req.body
+         const foundUser = await model.foundUserById(user_id)
+
+         if (foundUser) {
+            const editUserName = await model.editUserName(user_id, gender, first_name, last_name)
+
+            if (editUserName) {
+               return res.json({
+                  status: 200,
+                  message: 'Success',
+                  data: editUserName
+               })
+            } else {
+               return res.json({
+                  status: 400,
+                  message: "Bad request"
+               })
+            }
+         } else {
+            return res.json({
+               status: 404,
+               message: "Not found"
+            })
+         }
+
+      } catch (error) {
+         console.log(error)
+         res.json({
+            status: 500,
+            message: "Internal Server Error",
+         })
+      }
+   },
+
+   EDIT_USER_ADDRESS: async (req, res) => {
+      try {
+         const { user_id, street, near, zip, country, city } = req.body
+         const foundUser = await model.foundUserById(user_id)
+
+         if (foundUser) {
+            const editUserAddress = await model.editUserAddress(user_id, street, near, zip, country, city)
+
+            if (editUserAddress) {
+               return res.json({
+                  status: 200,
+                  message: 'Success',
+                  data: editUserAddress
+               })
+            } else {
+               return res.json({
+                  status: 400,
+                  message: "Bad request"
+               })
+            }
+         } else {
+            return res.json({
+               status: 404,
+               message: "Not found"
+            })
+         }
+
+      } catch (error) {
+         console.log(error)
+         res.json({
+            status: 500,
+            message: "Internal Server Error",
+         })
+      }
+   },
+
+   EDIT_USER_PHONE_NUMBER: async (req, res) => {
+      try {
+         const { user_id, country_code, prefix, phone_number } = req.body
+         const foundUser = await model.foundUserById(user_id)
+
+         if (foundUser) {
+            const editUserPhone = await model.editUserPhone(user_id, country_code, prefix, phone_number)
+
+            if (editUserPhone) {
+               return res.json({
+                  status: 200,
+                  message: 'Success',
+                  data: editUserPhone
+               })
+            } else {
+               return res.json({
+                  status: 400,
+                  message: "Bad request"
+               })
+            }
+         } else {
+            return res.json({
+               status: 404,
+               message: "Not found"
+            })
+         }
+
+      } catch (error) {
+         console.log(error)
+         res.json({
+            status: 500,
+            message: "Internal Server Error",
+         })
+      }
+   },
+
+   EDIT_USER_BALANCE: async (req, res) => {
+      try {
+         const { id, balance } = req.body
+         const foundUserById = await model.foundUserById(id)
+
+         if (foundUserById) {
+            const editBalance = await model.editBalance(id, balance)
+
+            if (editBalance) {
+               return res.json({
+                  status: 200,
+                  message: "Success",
+                  data: editBalance
+               })
+            } else {
+               return res.json({
+                  status: 400,
+                  message: "Bad request"
+               })
+            }
+
+         } else {
+            return res.json({
+               status: 404,
+               message: "User not found"
+            })
+         }
+
+      } catch (error) {
+         console.log(error)
+         res.json({
+            status: 500,
+            message: "Internal Server Error",
+         })
+      }
+   },
+
+   DELETE_USER: async (req, res) => {
+      try {
+         const { user_id } = req.body
+         const deleteUser = await model.deleteUser(user_id)
+
+         if (deleteUser) {
+            return res.json({
+               status: 200,
+               message: "Success"
+            })
+         } else {
+            return res.json({
+               status: 400,
+               message: 'Bad request'
+            })
+         }
+
+      } catch (error) {
+         console.log(error)
+         res.json({
+            status: 500,
+            message: "Internal Server Error",
+         })
+      }
+   }
+}
