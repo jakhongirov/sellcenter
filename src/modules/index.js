@@ -136,16 +136,16 @@ router
    .get('/ads/list', adsCard.GET_ADS_LIST)
    .get('/ads/card', adsCard.GET_ADS)
    .get('/ads/:id', adsCard.GET_ADS_ID)
-   .post('/ads/add', adsCard.POST_ADS)
-   .put('/ads/update', adsCard.PUT_ADS)
+   .post('/ads/add', FileUpload.single("photo"), adsCard.POST_ADS)
+   .put('/ads/update', FileUpload.single("photo"), adsCard.PUT_ADS)
    .put('/ads/update/status', adsCard.PUT_STATUS)
    .delete('/ads/delete', adsCard.DELETE_ADS)
 
    // Sliders
    .get('/slider/admin/list', sliders.GET_ADMIN)
    .get('/slider/list', sliders.GET)
-   .post('/slider/add', sliders.POST)
-   .put('/slider/update', sliders.PUT)
+   .post('/slider/add', FileUpload.single("photo"), sliders.POST)
+   .put('/slider/update', FileUpload.single("photo"), sliders.PUT)
    .put('/slider/update/status', sliders.PUT_STATUS)
    .delete('/slider/delete', sliders.DELETE)
 
