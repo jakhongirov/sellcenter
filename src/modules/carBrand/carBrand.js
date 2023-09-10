@@ -195,7 +195,8 @@ module.exports = {
                })
             }
 
-         } else {``
+         } else {
+            ``
             return res.json({
                status: 404,
                message: "Not found"
@@ -215,6 +216,8 @@ module.exports = {
       try {
          const { mark_id } = req.body
          const deleteMark = await model.deleteMark(mark_id)
+
+         console.log(deleteMark, mark_id);
 
          if (deleteMark) {
             return res.json({
