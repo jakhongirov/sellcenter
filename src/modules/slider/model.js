@@ -1,5 +1,14 @@
 const { fetch, fetchALL } = require("../../lib/postgres");
 
+const FOUND_SLIDER = `
+   SELECT
+      *
+   FROM
+      sliders
+   WHERE
+      slider_id = $1;
+`;
+
 const UPDATE_SLIDER = `
    UPDATE
       sliders
@@ -101,6 +110,7 @@ const updateSlider = (
 )
 const updateStatus = (id, status) => fetch(UPDATE_STATUS, id, status)
 const deleteSlider = (id) => fetch(DELETE_SLIDER, id)
+const sliderById = (id) => fetch(FOUND_SLIDER, id)
 
 module.exports = {
    sliderListAdmin,
@@ -108,5 +118,6 @@ module.exports = {
    addSlider,
    updateSlider,
    updateStatus,
-   deleteSlider
+   deleteSlider,
+   sliderById
 }
