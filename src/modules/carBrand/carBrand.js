@@ -217,8 +217,6 @@ module.exports = {
          const { mark_id } = req.body
          const deleteMark = await model.deleteMark(Number(mark_id))
 
-         console.log(deleteMark, mark_id);
-
          if (deleteMark) {
             return res.json({
                status: 200,

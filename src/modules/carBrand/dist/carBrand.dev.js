@@ -425,10 +425,9 @@ module.exports = {
 
           case 4:
             deleteMark = _context7.sent;
-            console.log(deleteMark, mark_id);
 
             if (!deleteMark) {
-              _context7.next = 10;
+              _context7.next = 9;
               break;
             }
 
@@ -438,18 +437,18 @@ module.exports = {
               data: deleteMark
             }));
 
-          case 10:
+          case 9:
             return _context7.abrupt("return", res.json({
               status: 400,
               message: "Bad request"
             }));
 
-          case 11:
-            _context7.next = 17;
+          case 10:
+            _context7.next = 16;
             break;
 
-          case 13:
-            _context7.prev = 13;
+          case 12:
+            _context7.prev = 12;
             _context7.t0 = _context7["catch"](0);
             console.log(_context7.t0);
             res.json({
@@ -457,12 +456,12 @@ module.exports = {
               message: "Internal Server Error"
             });
 
-          case 17:
+          case 16:
           case "end":
             return _context7.stop();
         }
       }
-    }, null, null, [[0, 13]]);
+    }, null, null, [[0, 12]]);
   },
   DELETE_MODEL: function DELETE_MODEL(req, res) {
     var model_id, deleteModel;
