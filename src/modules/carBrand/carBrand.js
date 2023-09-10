@@ -215,7 +215,7 @@ module.exports = {
    DELETE_MARK: async (req, res) => {
       try {
          const { mark_id } = req.body
-         const deleteMark = await model.deleteMark(mark_id)
+         const deleteMark = await model.deleteMark(Number(mark_id))
 
          console.log(deleteMark, mark_id);
          console.log(req.body)

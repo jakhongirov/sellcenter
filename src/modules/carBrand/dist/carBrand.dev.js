@@ -421,7 +421,7 @@ module.exports = {
             _context7.prev = 0;
             mark_id = req.body.mark_id;
             _context7.next = 4;
-            return regeneratorRuntime.awrap(model.deleteMark(mark_id));
+            return regeneratorRuntime.awrap(model.deleteMark(Number(mark_id)));
 
           case 4:
             deleteMark = _context7.sent;
