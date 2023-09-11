@@ -15,8 +15,8 @@ const UPDATE_SLIDER = `
    SET
       slider_title = $2,
       slider_link = $3,
-      slider_img_url = $4,
-      slider_img_name = $5
+      slider_image_url = $4,
+      slider_image_name = $5
    WHERE
       slider_id = $1
    RETURNING *;
