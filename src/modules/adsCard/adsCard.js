@@ -110,8 +110,10 @@ module.exports = {
             ads_link
          } = req.body
 
-         const ads_img_name = uploadPhoto.filename
-         const ads_img_url = `${process.env.BACKEND_URL}/${uploadPhoto.filename}`
+         console.log(uploadPhoto);
+
+         const ads_img_name = uploadPhoto?.filename
+         const ads_img_url = `${process.env.BACKEND_URL}/${uploadPhoto?.filename}`
 
          const addAds = await model.addAds(
             ads_title,
