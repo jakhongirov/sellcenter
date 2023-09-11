@@ -48,6 +48,14 @@ const UPDATE_COMPANY = `
    RETURNING *;
 `;
 
+const DELETE_COMPANY = `
+   DELETE FROM
+      user_companies
+   WHERE
+      company_id = $1
+   RETURNING *; 
+`;
+
 const ADD_COMPANY = `
    INSERT INTO
       user_companies (
@@ -155,7 +163,7 @@ const editCompany = (
    company_phone_number,
    user_id
 )
-
+const deleteCompany = (company_id) => fetch(DELETE_COMPANY, company_id)
 
 module.exports = {
    companiesListAdmin,
@@ -163,5 +171,6 @@ module.exports = {
    addCompany,
    editCompany,
    foundUser,
-   foundCompany
+   foundCompany,
+   deleteCompany
 }
