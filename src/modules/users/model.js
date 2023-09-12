@@ -96,6 +96,16 @@ const EDIT_USER_PHONE = `
       user_id = $1
    RETURNING *;
 `;
+const EDIT_PHOTO = `
+   UPDATE
+      users
+   SET
+      user_image_url = $2,
+      user_image_name = $3
+   WHERE
+      user_id = $1
+   RETURNING *;
+`;
 
 const EDIT_BALANCE = `
    UPDATE
@@ -131,6 +141,7 @@ const usersList = (limit, offset) => {
 
    return fetchALL(USER_LIST)
 }
+const editPhoto = (id, user_img_url, user_img_name) => fetch(EDIT_PHOTO, id, user_img_url, user_img_name)
 
 module.exports = {
    checkUser,
@@ -143,5 +154,6 @@ module.exports = {
    editUserAddress,
    editUserPhone,
    editBalance,
-   usersList
+   usersList,
+   editPhoto
 }

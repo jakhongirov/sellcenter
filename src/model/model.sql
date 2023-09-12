@@ -22,6 +22,8 @@ CREATE TABLE users (
    user_phone_number int,
    user_balance int DEFAULT 0,
    user_company boolean DEFAULT false,
+   user_image_url text,
+   user_image_name text,
    user_create_at timestamptz DEFAULT CURRENT_TIMESTAMP
 );
 

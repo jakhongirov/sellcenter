@@ -324,9 +324,60 @@ module.exports = {
       }
    },
 
+   EDIT_PROFILE_IMAGE: async (req, res) => {
+      try {
+         const uploadPhoto = req.file;
+         const { id } = req.body
+
+         const foundUserById = await model.foundUserById(id)
+         let user_img_name = ''
+         let user_img_url = ''
+
+         if (foundUserById?.user_image_url && foundUserById?.user_image_name) {
+            const deleteOldImg = new FS(path.resolve(__dirname, '..', '..', '..', 'public', 'images', `${foundUserById?.user_image_name}`))
+            deleteOldImg.delete()
+            user_img_name = uploadPhoto.filename
+            user_img_url = `${process.env.BACKEND_URL}/${uploadPhoto.filename}`
+         } else {
+            user_img_name = uploadPhoto.filename
+            user_img_url = `${process.env.BACKEND_URL}/${uploadPhoto.filename}`
+         }
+
+         const editPhoto = await model.editPhoto(id, user_img_url, user_img_name)
+
+         if (editPhoto) {
+            return res.json({
+               status: 200,
+               message: "Success",
+               data: editPhoto
+            })
+
+         } else {
+            return res.json({
+               status: 400,
+               message
+            })
+         }
+
+      } catch (error) {
+         console.log(error)
+         res.json({
+            status: 500,
+            message: "Internal Server Error",
+         })
+      }
+   },
+
    DELETE_USER: async (req, res) => {
       try {
          const { user_id } = req.body
+         const foundUserById = await model.foundUserById(id)
+
+         if (foundUserById?.user_image_name) {
+            const deleteOldImg = new FS(path.resolve(__dirname, '..', '..', '..', 'public', 'images', `${foundUserById?.user_image_name}`))
+            deleteOldImg.delete()
+         }
+
          const deleteUser = await model.deleteUser(user_id)
 
          if (deleteUser) {
