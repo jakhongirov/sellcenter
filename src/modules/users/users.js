@@ -1,6 +1,8 @@
 const model = require('./model')
 const JWT = require('../../lib/jwt')
 const bcryptjs = require('bcryptjs')
+const FS = require('../../lib/fs/fs');
+const path = require('path');
 
 module.exports = {
    GET_USERS_LIST: async (req, res) => {
