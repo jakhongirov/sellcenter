@@ -171,7 +171,8 @@ const motorcycleList = (
    motorcycle_power_from,
    motorcycle_power_to,
    motorcycle_country,
-   motorcycle_city_zipcode,
+   motorcycle_city,
+   zipcode,
    motorcycle_radius,
    fuelArr,
    modeArr,
@@ -214,7 +215,8 @@ const motorcycleList = (
          ${motorcycle_power_from ? `and motorcycle_power >= ${motorcycle_power_from}` : ""}
          ${motorcycle_power_to ? `and motorcycle_power =< ${motorcycle_power_to}` : ""}
          ${motorcycle_country ? `and motorcycle_country ilike '%${motorcycle_country}%'` : ""}
-         ${motorcycle_city_zipcode ? `and motorcycle_city_zipcode ilike '%${motorcycle_city_zipcode}%'` : ""}
+         ${motorcycle_city?.length > 0 ? `and ${motorcycle_city} @> ARRAY[motorcycle_city_zipcode]` : ""}
+         ${zipcode ? `and motorcycle_city_zipcode ilike '%${zipcode}%'` : ""}
          ${motorcycle_radius ? `and motorcycle_radius = ${motorcycle_radius}` : ""}
          ${fuelArr?.length > 0 ? `and ${fuelArr} @> ARRAY[motorcycle_fuel_type]` : ''}
          ${modeArr?.length > 0 ? `and ${modeArr} @> ARRAY[motorcycle_driving_mode]` : ''}
@@ -256,7 +258,8 @@ const motorcycleCount = (
    motorcycle_power_from,
    motorcycle_power_to,
    motorcycle_country,
-   motorcycle_city_zipcode,
+   motorcycle_city,
+   zipcode,
    motorcycle_radius,
    fuelArr,
    modeArr,
@@ -297,7 +300,8 @@ const motorcycleCount = (
       ${motorcycle_power_from ? `and motorcycle_power >= ${motorcycle_power_from}` : ""}
       ${motorcycle_power_to ? `and motorcycle_power =< ${motorcycle_power_to}` : ""}
       ${motorcycle_country ? `and motorcycle_country ilike '%${motorcycle_country}%'` : ""}
-      ${motorcycle_city_zipcode ? `and motorcycle_city_zipcode ilike '%${motorcycle_city_zipcode}%'` : ""}
+      ${motorcycle_city?.length > 0 ? `and ${motorcycle_city} @> ARRAY[motorcycle_city_zipcode]` : ""}
+      ${zipcode ? `and motorcycle_city_zipcode ilike '%${zipcode}%'` : ""}
       ${motorcycle_radius ? `and motorcycle_radius = ${motorcycle_radius}` : ""}
       ${fuelArr?.length > 0 ? `and ${fuelArr} @> ARRAY[motorcycle_fuel_type]` : ''}
       ${modeArr?.length > 0 ? `and ${modeArr} @> ARRAY[motorcycle_driving_mode]` : ''}

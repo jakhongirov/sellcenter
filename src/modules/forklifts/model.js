@@ -168,7 +168,8 @@ const forkliftList = (
    forklift_operating_hours_from,
    forklift_operating_hours_to,
    forklift_country,
-   forklift_city_zipcode,
+   forklift_city,
+   zipcode,
    forklift_radius,
    fuelArr,
    transmissionArr,
@@ -210,7 +211,8 @@ const forkliftList = (
          ${forklift_operating_hours_from ? `and ${forklift_operating_hours_from} <= forklift_operating_hours` : ""}
          ${forklift_operating_hours_to ? `and ${forklift_operating_hours_to} >= forklift_operating_hours` : ""}
          ${forklift_country ? `and forklift_country = '${forklift_country}'` : ""}
-         ${forklift_city_zipcode ? `and forklift_city_zipcode ilike '%${forklift_city_zipcode}%'` : ""}
+         ${forklift_city?.length > 0 ? `and ${forklift_city} @> ARRAY[forklift_city_zipcode] ` : ""}
+         ${zipcode ? `and forklift_city_zipcode ilike '%${zipcode}%'` : ""}
          ${forklift_radius ? `and ${forklift_radius} >= forklift_radius` : ""}
          ${fuelArr?.length > 0 ? `and ${fuelArr} @> ARRAY[forklift_fuel_type]` : ''}
          ${transmissionArr?.length > 0 ? `and ${transmissionArr} @> ARRAY[forklift_transmission]` : ''}
@@ -251,7 +253,8 @@ const forkliftCount = (
    forklift_operating_hours_from,
    forklift_operating_hours_to,
    forklift_country,
-   forklift_city_zipcode,
+   forklift_city,
+   zipcode,
    forklift_radius,
    fuelArr,
    transmissionArr,
@@ -291,7 +294,8 @@ const forkliftCount = (
          ${forklift_operating_hours_from ? `and ${forklift_operating_hours_from} <= forklift_operating_hours` : ""}
          ${forklift_operating_hours_to ? `and ${forklift_operating_hours_to} >= forklift_operating_hours` : ""}
          ${forklift_country ? `and forklift_country = '${forklift_country}'` : ""}
-         ${forklift_city_zipcode ? `and forklift_city_zipcode ilike '%${forklift_city_zipcode}%'` : ""}
+         ${forklift_city?.length > 0 ? `and ${forklift_city} @> ARRAY[forklift_city_zipcode] ` : ""}
+         ${zipcode ? `and forklift_city_zipcode ilike '%${zipcode}%'` : ""}
          ${forklift_radius ? `and ${forklift_radius} >= forklift_radius` : ""}
          ${fuelArr?.length > 0 ? `and ${fuelArr} @> ARRAY[forklift_fuel_type]` : ''}
          ${transmissionArr?.length > 0 ? `and ${transmissionArr} @> ARRAY[forklift_transmission]` : ''}

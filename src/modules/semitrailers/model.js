@@ -160,7 +160,8 @@ const trailerList = (
    trailer_price_type,
    trailer_vat,
    trailer_country,
-   trailer_city_zipcode,
+   trailer_city,
+   zipcode,
    trailer_radius,
    featuresId,
    trailer_axles,
@@ -198,7 +199,8 @@ const trailerList = (
          ${trailer_price_type ? `and trailer_price_type = '${trailer_price_type}'` : ""}
          ${trailer_vat ? `and trailer_vat = '${trailer_vat}'` : ""}
          ${trailer_country ? `and trailer_country ilike '%${trailer_country}%'` : ""}
-         ${trailer_city_zipcode ? `and trailer_city_zipcode ilike '%${trailer_city_zipcode}%'` : ""}
+         ${trailer_city?.length > 0 ? `and ${trailer_city} @> ARRAY[trailer_city_zipcode]` : ""}
+         ${zipcode ? `and trailer_city_zipcode ilike '%${zipcode}%'` : ""}
          ${trailer_radius ? `and ${trailer_radius} >=  trailer_radius` : ""}
          ${featuresId?.length > 0 ? `and ${featuresId} @> trailer_features` : ""}
          ${trailer_axles <= 3 ? `and ${trailer_axles} = trailer_axles` : trailer_axles > 3 ? `and 3 < trailer_axles` : ''}
@@ -235,7 +237,8 @@ const trailerCount = (
    trailer_price_type,
    trailer_vat,
    trailer_country,
-   trailer_city_zipcode,
+   trailer_city,
+   zipcode,
    trailer_radius,
    featuresId,
    trailer_axles,
@@ -271,7 +274,8 @@ const trailerCount = (
          ${trailer_price_type ? `and trailer_price_type = '${trailer_price_type}'` : ""}
          ${trailer_vat ? `and trailer_vat = '${trailer_vat}'` : ""}
          ${trailer_country ? `and trailer_country ilike '%${trailer_country}%'` : ""}
-         ${trailer_city_zipcode ? `and trailer_city_zipcode ilike '%${trailer_city_zipcode}%'` : ""}
+         ${trailer_city?.length > 0 ? `and ${trailer_city} @> ARRAY[trailer_city_zipcode]` : ""}
+         ${zipcode ? `and trailer_city_zipcode ilike '%${zipcode}%'` : ""}ƒ
          ${trailer_radius ? `and ${trailer_radius} >=  trailer_radius` : ""}
          ${featuresId?.length > 0 ? `and ${featuresId} @> trailer_features` : ""}
          ${trailer_axles <= 3 ? `and ${trailer_axles} = trailer_axles` : trailer_axles > 3 ? `and 3 < trailer_axles` : ''}

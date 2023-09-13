@@ -57,7 +57,8 @@ module.exports = {
             forklift_operating_hours_from,
             forklift_operating_hours_to,
             forklift_country,
-            forklift_city_zipcode,
+            city,
+            zipcode,
             forklift_radius,
             fuel_type,
             transmission,
@@ -80,6 +81,7 @@ module.exports = {
 
          if (offset && limit) {
             const featuresId = []
+            const forklift_city = city ? city?.split(',') : ""
             const securityArr = security ? security?.split(',') : ""
             const fuelArr = fuel_type ? fuel_type?.split(',') : ""
             const transmissionArr = transmission ? transmission?.split(',') : ""
@@ -107,7 +109,8 @@ module.exports = {
                forklift_operating_hours_from,
                forklift_operating_hours_to,
                forklift_country,
-               forklift_city_zipcode,
+               forklift_city,
+               zipcode,
                forklift_radius,
                fuelArr,
                transmissionArr,
@@ -175,7 +178,8 @@ module.exports = {
             forklift_operating_hours_from,
             forklift_operating_hours_to,
             forklift_country,
-            forklift_city_zipcode,
+            city,
+            zipcode,
             forklift_radius,
             fuel_type,
             transmission,
@@ -197,6 +201,7 @@ module.exports = {
          } = req.body
 
          const featuresId = []
+         const forklift_city = city ? city?.split(',') : ""
          const securityArr = security ? security?.split(',') : ""
          const fuelArr = fuel_type ? fuel_type?.split(',') : ""
          const transmissionArr = transmission ? transmission?.split(',') : ""
@@ -224,7 +229,8 @@ module.exports = {
             forklift_operating_hours_from,
             forklift_operating_hours_to,
             forklift_country,
-            forklift_city_zipcode,
+            forklift_city,
+            zipcode,
             forklift_radius,
             fuelArr,
             transmissionArr,

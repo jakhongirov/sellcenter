@@ -200,7 +200,8 @@ const semitruckList = (
    truck_power_from,
    truck_power_to,
    truck_country,
-   truck_city_zipcode,
+   truck_city,
+   zipcode,
    truck_radius,
    fuelArr,
    transmissionArr,
@@ -252,7 +253,8 @@ const semitruckList = (
          ${truck_power_from ? `and ${truck_power_from} <= truck_power` : ""}
          ${truck_power_to ? `and ${truck_power_to} >= truck_power` : ""}
          ${truck_country ? `and truck_country ilike '%${truck_country}%'` : ""}
-         ${truck_city_zipcode ? `and truck_city_zipcode ilike '%${truck_city_zipcode}%'` : ""}
+         ${truck_city?.length > 0 ? `and ${truck_city} @> ARRAY[truck_city_zipcode]` : ""}
+         ${zipcode ? `and truck_city_zipcode ilike '%${zipcode}%'` : ""}
          ${truck_radius ? `and ${truck_radius} >= truck_radius` : ""}
          ${fuelArr?.length > 0 ? `and ${fuelArr} @> ARRAY[truck_fuel_type]` : ''}
          ${transmissionArr?.length > 0 ? `and ${transmissionArr} @> ARRAY[truck_transmission]` : ''}
@@ -303,7 +305,8 @@ const semitruckCount = (
    truck_power_from,
    truck_power_to,
    truck_country,
-   truck_city_zipcode,
+   truck_city,
+   zipcode,
    truck_radius,
    fuelArr,
    transmissionArr,
@@ -353,7 +356,8 @@ const semitruckCount = (
          ${truck_power_from ? `and ${truck_power_from} <= truck_power` : ""}
          ${truck_power_to ? `and ${truck_power_to} >= truck_power` : ""}
          ${truck_country ? `and truck_country ilike '%${truck_country}%'` : ""}
-         ${truck_city_zipcode ? `and truck_city_zipcode ilike '%${truck_city_zipcode}%'` : ""}
+         ${truck_city?.length > 0 ? `and ${truck_city} @> ARRAY[truck_city_zipcode]` : ""}
+         ${zipcode ? `and truck_city_zipcode ilike '%${zipcode}%'` : ""}
          ${truck_radius ? `and ${truck_radius} >= truck_radius` : ""}
          ${fuelArr?.length > 0 ? `and ${fuelArr} @> ARRAY[truck_fuel_type]` : ''}
          ${transmissionArr?.length > 0 ? `and ${transmissionArr} @> ARRAY[truck_transmission]` : ''}

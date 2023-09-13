@@ -173,7 +173,8 @@ const vehicleList = (
    vehicle_operating_hours_from,
    vehicle_operating_hours_to,
    vehicle_country,
-   vehicle_city_zipcode,
+   vehicle_city,
+   zipcode,
    vehicle_radius,
    featuresId,
    vehicle_air_conditioning,
@@ -214,7 +215,8 @@ const vehicleList = (
          ${vehicle_operating_hours_from ? `and ${vehicle_operating_hours_from} <= vehicle_operating_hours` : ""}
          ${vehicle_operating_hours_to ? `and ${vehicle_operating_hours_to} >= vehicle_operating_hours` : ""}
          ${vehicle_country ? `and vehicle_country ilike '%${vehicle_country}%'` : ""}
-         ${vehicle_city_zipcode ? `and vehicle_city_zipcode ilike '%${vehicle_city_zipcode}%'` : ""}
+         ${vehicle_city?.length > 0 ? `and ARRAY[vehicle_city_zipcode] @> ${vehicle_city_zipcode}` : ""}
+         ${zipcode ? `and vehicle_city_zipcode ilike '%${zipcode}%'` : ""}
          ${vehicle_radius ? `and ${vehicle_radius} >= vehicle_radius` : ""}
          ${featuresId?.length > 0 ? `and ${featuresId} @> vehicle_features` : ''}
          ${vehicle_air_conditioning ? `and vehicle_air_conditioning = '${vehicle_air_conditioning}'` : ""}
@@ -254,7 +256,8 @@ const vehicleCount = (
    vehicle_operating_hours_from,
    vehicle_operating_hours_to,
    vehicle_country,
-   vehicle_city_zipcode,
+   vehicle_city,
+   zipcode,
    vehicle_radius,
    featuresId,
    vehicle_air_conditioning,
@@ -293,7 +296,8 @@ const vehicleCount = (
          ${vehicle_operating_hours_from ? `and ${vehicle_operating_hours_from} <= vehicle_operating_hours` : ""}
          ${vehicle_operating_hours_to ? `and ${vehicle_operating_hours_to} >= vehicle_operating_hours` : ""}
          ${vehicle_country ? `and vehicle_country ilike '%${vehicle_country}%'` : ""}
-         ${vehicle_city_zipcode ? `and vehicle_city_zipcode ilike '%${vehicle_city_zipcode}%'` : ""}
+         ${vehicle_city?.length > 0 ? `and ARRAY[vehicle_city_zipcode] @> ${vehicle_city_zipcode}` : ""}
+         ${zipcode ? `and vehicle_city_zipcode ilike '%${zipcode}%'` : ""}
          ${vehicle_radius ? `and ${vehicle_radius} >= vehicle_radius` : ""}
          ${featuresId?.length > 0 ? `and ${featuresId} @> vehicle_features` : ''}
          ${vehicle_air_conditioning ? `and vehicle_air_conditioning = '${vehicle_air_conditioning}'` : ""}

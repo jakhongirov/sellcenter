@@ -66,7 +66,8 @@ module.exports = {
             car_full_service_history,
             car_roadworthy,
             car_country,
-            car_city_zipcode,
+            city,
+            zipcode,
             car_radius,
             fuel_type,
             car_power_from,
@@ -105,6 +106,7 @@ module.exports = {
 
          const bodyArr = body ? body?.split(',') : false
          const typeArr = type ? type?.split(',') : false
+         const car_city = city ? city?.split(',') : false
          const fuelArr = fuel_type ? fuel_type?.split(',') : false
          const transmissionArr = transmission ? transmission?.split(',') : false
          const colorArr = exterior_colour ? exterior_colour?.split(',') : false
@@ -155,7 +157,8 @@ module.exports = {
             car_full_service_history,
             car_roadworthy,
             car_country,
-            car_city_zipcode,
+            car_city,
+            zipcode,
             car_radius,
             fuelArr,
             car_power_from,
@@ -241,7 +244,8 @@ module.exports = {
             car_full_service_history,
             car_roadworthy,
             car_country,
-            car_city_zipcode,
+            city,
+            zipcode,
             car_radius,
             fuel_type,
             car_power_from,
@@ -280,6 +284,7 @@ module.exports = {
 
          const bodyArr = body ? body?.split(',') : false
          const typeArr = type ? type?.split(',') : false
+         const car_city = city ? city?.split(',') : false
          const fuelArr = fuel_type ? fuel_type?.split(',') : false
          const transmissionArr = transmission ? transmission?.split(',') : false
          const colorArr = exterior_colour ? exterior_colour?.split(',') : false
@@ -330,7 +335,8 @@ module.exports = {
             car_full_service_history,
             car_roadworthy,
             car_country,
-            car_city_zipcode,
+            car_city,
+            zipcode,
             car_radius,
             fuelArr,
             car_power_from,

@@ -57,7 +57,8 @@ module.exports = {
             machine_operating_hours_from,
             machine_operating_hours_to,
             machine_country,
-            machine_city_zipcode,
+            city,
+            zipcode,
             machine_radius,
             features,
             machine_emissions_sticker,
@@ -73,6 +74,7 @@ module.exports = {
          } = req.body
 
          if (limit && offset) {
+            const machine_city = city ? city.split(',') : ""
             const featuresId = []
             const safetyId = []
 
@@ -108,7 +110,8 @@ module.exports = {
                machine_operating_hours_from,
                machine_operating_hours_to,
                machine_country,
-               machine_city_zipcode,
+               machine_city,
+               zipcode,
                machine_radius,
                featuresId,
                machine_emissions_sticker,
@@ -169,7 +172,8 @@ module.exports = {
             machine_operating_hours_from,
             machine_operating_hours_to,
             machine_country,
-            machine_city_zipcode,
+            city,
+            zipcode,
             machine_radius,
             features,
             machine_emissions_sticker,
@@ -184,6 +188,7 @@ module.exports = {
             day,
          } = req.body
 
+         const machine_city = city ? city.split(',') : ""
          const featuresId = []
          const safetyId = []
 
@@ -219,7 +224,8 @@ module.exports = {
             machine_operating_hours_from,
             machine_operating_hours_to,
             machine_country,
-            machine_city_zipcode,
+            machine_city,
+            zipcode,
             machine_radius,
             featuresId,
             machine_emissions_sticker,

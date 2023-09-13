@@ -59,7 +59,8 @@ module.exports = {
             van_power_from,
             van_power_to,
             van_country,
-            van_city_zipcode,
+            city,
+            zipcode,
             van_radius,
             fuel_type,
             transmission,
@@ -93,6 +94,7 @@ module.exports = {
          } = req.body
 
          if (offset && limit) {
+            const van_city = city ? city?.split(',') : ""
             const fuelArr = fuel_type ? fuel_type?.split(',') : ""
             const colorArr = exterior_colour ? exterior_colour?.split(',') : ""
             const transmissionArr = transmission ? transmission?.split(',') : ""
@@ -133,7 +135,8 @@ module.exports = {
                van_power_from,
                van_power_to,
                van_country,
-               van_city_zipcode,
+               van_city,
+               zipcode,
                van_radius,
                fuelArr,
                transmissionArr,
@@ -215,7 +218,8 @@ module.exports = {
             van_power_from,
             van_power_to,
             van_country,
-            van_city_zipcode,
+            city,
+            zipcode,
             van_radius,
             fuel_type,
             transmission,
@@ -248,6 +252,7 @@ module.exports = {
             video
          } = req.body
 
+         const van_city = city ? city?.split(',') : ""
          const fuelArr = fuel_type ? fuel_type?.split(',') : ""
          const colorArr = exterior_colour ? exterior_colour?.split(',') : ""
          const transmissionArr = transmission ? transmission?.split(',') : ""
@@ -288,7 +293,8 @@ module.exports = {
             van_power_from,
             van_power_to,
             van_country,
-            van_city_zipcode,
+            van_city,
+            zipcode,
             van_radius,
             fuelArr,
             transmissionArr,

@@ -159,7 +159,8 @@ const constructionList = (
    machine_operating_hours_from,
    machine_operating_hours_to,
    machine_country,
-   machine_city_zipcode,
+   machine_city,
+   zipcode,
    machine_radius,
    featuresId,
    machine_emissions_sticker,
@@ -195,7 +196,8 @@ const constructionList = (
          ${machine_operating_hours_from ? `and ${machine_operating_hours_from} <= machine_operating_hours` : ""}
          ${machine_operating_hours_to ? `and ${machine_operating_hours_to} >= machine_operating_hours` : ""}
          ${machine_country ? `and machine_country = '${machine_country}'` : ""}
-         ${machine_city_zipcode ? `and machine_city_zipcode ilike '%${machine_city_zipcode}%'` : ""}
+         ${machine_city?.length > 0 ? `and ${machine_city} @> ARRAY[machine_city_zipcode]` : ""}
+         ${zipcode ? `and machine_city_zipcode ilike '%${zipcode}%'` : ""}
          ${machine_radius ? `and ${machine_radius} >= machine_radius` : ""}
          ${safetyId?.length > 0 ? `and ${safetyId} @> machine_safety` : ""}
          ${machine_emissions_sticker ? `and machine_emissions_sticker = '${machine_emissions_sticker}'` : ""}
@@ -230,7 +232,8 @@ const constructionCount = (
    machine_operating_hours_from,
    machine_operating_hours_to,
    machine_country,
-   machine_city_zipcode,
+   machine_city,
+   zipcode,
    machine_radius,
    featuresId,
    machine_emissions_sticker,
@@ -264,7 +267,8 @@ const constructionCount = (
          ${machine_operating_hours_from ? `and ${machine_operating_hours_from} <= machine_operating_hours` : ""}
          ${machine_operating_hours_to ? `and ${machine_operating_hours_to} >= machine_operating_hours` : ""}
          ${machine_country ? `and machine_country = '${machine_country}'` : ""}
-         ${machine_city_zipcode ? `and machine_city_zipcode = '${machine_city_zipcode}'` : ""}
+         ${machine_city?.length > 0 ? `and ${machine_city} @> ARRAY[machine_city_zipcode]` : ""}
+         ${zipcode ? `and machine_city_zipcode ilike '%${zipcode}%'` : ""}
          ${machine_radius ? `and ${machine_radius} >= machine_radius` : ""}
          ${safetyId?.length > 0 ? `and ${safetyId} @> machine_safety` : ""}
          ${machine_emissions_sticker ? `and machine_emissions_sticker = '${machine_emissions_sticker}'` : ""}

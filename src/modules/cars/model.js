@@ -254,7 +254,8 @@ const foundCarsList = (
    car_full_service_history,
    car_roadworthy,
    car_country,
-   car_city_zipcode,
+   car_city,
+   zipcode,
    car_radius,
    fuelArr,
    car_power_from,
@@ -334,7 +335,8 @@ const foundCarsList = (
          ${car_full_service_history ? `and car_full_service_history = '${car_full_service_history}'` : ""}
          ${car_roadworthy ? `and car_roadworthy = '${car_roadworthy}'` : ""}
          ${car_country ? `and car_country = '${car_country}'` : ""}
-         ${car_city_zipcode ? `and car_city_zipcode = '${car_city_zipcode}'` : ""}
+         ${car_city?.length > 0 ? `and ${car_city} @> ARRAY[car_city_zipcode]` : ""}
+         ${zipcode ? `and car_city_zipcode ilike '%${zipcode}%'` : ""}
          ${car_radius ? `and car_radius = ${car_radius}` : ""}
          ${fuelArr?.length > 0 ? `and ARRAY[car_fuel_type]@> ${fuelArr}` : ''}
          ${car_power_from ? `and car_power >= ${car_power_from}` : ""}
@@ -400,7 +402,8 @@ const foundCarsCount = (
    car_full_service_history,
    car_roadworthy,
    car_country,
-   car_city_zipcode,
+   car_city,
+   zipcode,
    car_radius,
    fuelArr,
    car_power_from,
@@ -465,7 +468,8 @@ const foundCarsCount = (
       ${car_full_service_history ? `and car_full_service_history = '${car_full_service_history}'` : ""}
       ${car_roadworthy ? `and car_roadworthy = '${car_roadworthy}'` : ""}
       ${car_country ? `and car_country = '${car_country}'` : ""}
-      ${car_city_zipcode ? `and car_city_zipcode = '${car_city_zipcode}'` : ""}
+      ${car_city?.length > 0 ? `and ${car_city} @> ARRAY[car_city_zipcode]` : ""}
+      ${zipcode ? `and car_city_zipcode ilike '%${zipcode}%'` : ""}
       ${car_radius ? `and car_radius = ${car_radius}` : ""}
       ${fuelArr?.length > 0 ? `and ${fuelArr} @> ARRAY[car_fuel_type]` : ''}
       ${car_power_from ? `and car_power >= ${car_power_from}` : ""}

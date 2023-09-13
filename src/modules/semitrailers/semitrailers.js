@@ -55,7 +55,8 @@ module.exports = {
             trailer_price_type,
             trailer_vat,
             trailer_country,
-            trailer_city_zipcode,
+            city,
+            zipcode,
             trailer_radius,
             features,
             trailer_axles,
@@ -76,6 +77,7 @@ module.exports = {
 
          if (limit && offset) {
             const securityArr = security ? security?.split(',') : ""
+            const trailer_city = city ? city?.split(',') : ""
             const featuresId = []
 
             if (features) {
@@ -99,7 +101,8 @@ module.exports = {
                trailer_price_type,
                trailer_vat,
                trailer_country,
-               trailer_city_zipcode,
+               trailer_city,
+               zipcode,
                trailer_radius,
                featuresId,
                trailer_axles,
@@ -163,7 +166,8 @@ module.exports = {
             trailer_price_type,
             trailer_vat,
             trailer_country,
-            trailer_city_zipcode,
+            city,
+            zipcode,
             trailer_radius,
             features,
             trailer_axles,
@@ -183,6 +187,7 @@ module.exports = {
          } = req.body
 
          const securityArr = security ? security?.split(',') : ""
+         const trailer_city = city ? city?.split(',') : ""
          const featuresId = []
 
          if (features) {
@@ -206,7 +211,8 @@ module.exports = {
             trailer_price_type,
             trailer_vat,
             trailer_country,
-            trailer_city_zipcode,
+            trailer_city,
+            zipcode,
             trailer_radius,
             featuresId,
             trailer_axles,

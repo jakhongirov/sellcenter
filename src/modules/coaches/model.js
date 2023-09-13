@@ -194,7 +194,8 @@ const coachesList = (
    coache_power_from,
    coache_power_to,
    coache_country,
-   coache_city_zipcode,
+   coache_city,
+   zipcode,
    coache_radius,
    fuelArr,
    transmissionArr,
@@ -243,7 +244,8 @@ const coachesList = (
          ${coache_power_from ? `and ${coache_power_from} <= coache_power` : ""}
          ${coache_power_to ? `and ${coache_power_to} >= coache_power` : ""}
          ${coache_country ? `and coache_country ilike '%${coache_country}%'` : ""}
-         ${coache_city_zipcode ? `and coache_city_zipcode ilike '%${coache_city_zipcode}%'` : ""}
+         ${coache_city?.length > 0 ? `and ${coache_city} @> ARRAY[coache_city_zipcode]` : ""}
+         ${zipcode ? `and coache_city_zipcode ilike '%${zipcode}%'` : ""}
          ${coache_radius ? `and ${coache_radius} >= coache_radius` : ""}
          ${fuelArr?.length > 0 ? `and ${fuelArr} @> ARRAY[coache_fuel_type]` : ''}
          ${transmissionArr?.length > 0 ? `and ${transmissionArr} @> ARRAY[coache_transmission]` : ''}
@@ -291,7 +293,8 @@ const coachesCount = (
    coache_power_from,
    coache_power_to,
    coache_country,
-   coache_city_zipcode,
+   coache_city,
+   zipcode,
    coache_radius,
    fuelArr,
    transmissionArr,
@@ -338,7 +341,8 @@ const coachesCount = (
       ${coache_power_from ? `and ${coache_power_from} <= coache_power` : ""}
       ${coache_power_to ? `and ${coache_power_to} >= coache_power` : ""}
       ${coache_country ? `and coache_country ilike '%${coache_country}%'` : ""}
-      ${coache_city_zipcode ? `and coache_city_zipcode ilike '%${coache_city_zipcode}%'` : ""}
+      ${coache_city?.length > 0 ? `and ${coache_city} @> ARRAY[coache_city_zipcode]` : ""}
+      ${zipcode ? `and coache_city_zipcode ilike '%${zipcode}%'` : ""}
       ${coache_radius ? `and ${coache_radius} >= coache_radius` : ""}
       ${fuelArr?.length > 0 ? `and ${fuelArr} @> ARRAY[coache_fuel_type]` : ''}
       ${transmissionArr?.length > 0 ? `and ${transmissionArr} @> ARRAY[coache_transmission]` : ''}

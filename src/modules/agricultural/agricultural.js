@@ -59,7 +59,8 @@ module.exports = {
             vehicle_operating_hours_from,
             vehicle_operating_hours_to,
             vehicle_country,
-            vehicle_city_zipcode,
+            city,
+            zipcode,
             vehicle_radius,
             features,
             vehicle_air_conditioning,
@@ -79,6 +80,7 @@ module.exports = {
 
          if (limit && offset) {
             const securityArr = security ? security?.split(',') : ""
+            const vehicle_city = city ? city?.split(',') : ""
             const featuresId = []
             const interiorFeaturesId = []
 
@@ -116,7 +118,8 @@ module.exports = {
                vehicle_operating_hours_from,
                vehicle_operating_hours_to,
                vehicle_country,
-               vehicle_city_zipcode,
+               vehicle_city,
+               zipcode,
                vehicle_radius,
                featuresId,
                vehicle_air_conditioning,
@@ -183,7 +186,8 @@ module.exports = {
             vehicle_operating_hours_from,
             vehicle_operating_hours_to,
             vehicle_country,
-            vehicle_city_zipcode,
+            city,
+            zipcode,
             vehicle_radius,
             features,
             vehicle_air_conditioning,
@@ -202,6 +206,7 @@ module.exports = {
          } = req.body
 
          const securityArr = security ? security?.split(',') : ""
+         const vehicle_city = city ? city?.split(',') : ""
          const featuresId = []
          const interiorFeaturesId = []
 
@@ -239,7 +244,8 @@ module.exports = {
             vehicle_operating_hours_from,
             vehicle_operating_hours_to,
             vehicle_country,
-            vehicle_city_zipcode,
+            vehicle_city,
+            zipcode,
             vehicle_radius,
             featuresId,
             vehicle_air_conditioning,

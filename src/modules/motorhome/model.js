@@ -218,7 +218,8 @@ const foundMotorhomeList = (
    motor_home_power_from,
    motor_home_power_to,
    motor_home_country,
-   motor_home_city_zipcode,
+   motor_home_city,
+   zipcode,
    motor_home_city_radius,
    fuelArr,
    transmissionArr,
@@ -288,7 +289,8 @@ const foundMotorhomeList = (
          ${motor_home_number_of_bunks_to ? `and ${motor_home_number_of_bunks_to} >= motor_home_number_of_bunks` : ""}
          ${motor_home_numbrt_of_owner ? `and ${motor_home_numbrt_of_owner} >= motor_home_numbrt_of_owner` : ""}
          ${motor_home_country ? `and ${motor_home_country} ilike '%motor_home_country%'` : ""}
-         ${motor_home_city_zipcode ? `and ${motor_home_city_zipcode} ilike '%motor_home_city_zipcode%'` : ""}
+         ${motor_home_city?.length > 0 ? `and ${motor_home_city} ARRAY[motor_home_city_zipcode]` : ""}
+         ${zipcode ? `and ${zipcode} ilike '%motor_home_city_zipcode%'` : ""}
          ${motor_home_city_radius ? `and ${motor_home_city_radius} <= motor_home_city_radius` : ""}
          ${motor_home_axles <= 3 ? `and ${motor_home_axles} = motor_home_axles` : motor_home_axles > 3 ? `and 3 < motor_home_axles` : ''}
          ${motor_home_trailer_coupling ? `and motor_home_trailer_coupling ilike '%${motor_home_trailer_coupling}%' ` : ""}
@@ -334,7 +336,8 @@ const foundMotorhomeCount = (
    motor_home_power_from,
    motor_home_power_to,
    motor_home_country,
-   motor_home_city_zipcode,
+   motor_home_city,
+   zipcode,
    motor_home_city_radius,
    fuelArr,
    transmissionArr,
@@ -402,7 +405,8 @@ const foundMotorhomeCount = (
          ${motor_home_number_of_bunks_to ? `and ${motor_home_number_of_bunks_to} >= motor_home_number_of_bunks` : ""}
          ${motor_home_numbrt_of_owner ? `and ${motor_home_numbrt_of_owner} >= motor_home_numbrt_of_owner` : ""}
          ${motor_home_country ? `and ${motor_home_country} ilike '%motor_home_country%'` : ""}
-         ${motor_home_city_zipcode ? `and ${motor_home_city_zipcode} ilike '%motor_home_city_zipcode%'` : ""}
+         ${motor_home_city?.length > 0 ? `and ${motor_home_city} ARRAY[motor_home_city_zipcode]` : ""}
+         ${zipcode ? `and ${zipcode} ilike '%motor_home_city_zipcode%'` : ""}
          ${motor_home_city_radius ? `and ${motor_home_city_radius} <= motor_home_city_radius` : ""}
          ${motor_home_axles <= 3 ? `and ${motor_home_axles} = motor_home_axles` : motor_home_axles > 3 ? `3 < motor_home_axles` : ''}
          ${motor_home_trailer_coupling ? `and motor_home_trailer_coupling ilike '%${motor_home_trailer_coupling}%' ` : ""}

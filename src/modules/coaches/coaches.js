@@ -58,7 +58,8 @@ module.exports = {
             coache_power_from,
             coache_power_to,
             coache_country,
-            coache_city_zipcode,
+            city,
+            zipcode,
             coache_radius,
             fuel_type,
             transmission,
@@ -86,6 +87,7 @@ module.exports = {
 
          if (offset && limit) {
             const fuelArr = fuel_type ? fuel_type?.split(',') : ""
+            const coache_city = city ? city?.split(',') : ""
             const colorArr = exterior_colour ? exterior_colour?.split(',') : ""
             const transmissionArr = transmission ? transmission?.split(',') : ""
             const featuresId = []
@@ -125,7 +127,8 @@ module.exports = {
                coache_power_from,
                coache_power_to,
                coache_country,
-               coache_city_zipcode,
+               coache_city,
+               zipcode,
                coache_radius,
                fuelArr,
                transmissionArr,
@@ -199,7 +202,8 @@ module.exports = {
             coache_power_from,
             coache_power_to,
             coache_country,
-            coache_city_zipcode,
+            city,
+            zipcode,
             coache_radius,
             fuel_type,
             transmission,
@@ -226,6 +230,7 @@ module.exports = {
          } = req.body
 
          const fuelArr = fuel_type ? fuel_type?.split(',') : ""
+         const coache_city = city ? city?.split(',') : ""
          const colorArr = exterior_colour ? exterior_colour?.split(',') : ""
          const transmissionArr = transmission ? transmission?.split(',') : ""
          const featuresId = []
@@ -265,7 +270,8 @@ module.exports = {
             coache_power_from,
             coache_power_to,
             coache_country,
-            coache_city_zipcode,
+            coache_city,
+            zipcode,
             coache_radius,
             fuelArr,
             transmissionArr,

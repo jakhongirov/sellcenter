@@ -208,7 +208,8 @@ const vansList = (
    van_power_from,
    van_power_to,
    van_country,
-   van_city_zipcode,
+   van_city,
+   zipcode,
    van_radius,
    fuelArr,
    transmissionArr,
@@ -264,7 +265,8 @@ const vansList = (
          ${van_power_from ? `and ${van_power_from} <= van_power` : ""}
          ${van_power_to ? `and ${van_power_to} >= van_power` : ""}
          ${van_country ? `and van_country ilike '%${van_country}%'` : ""}
-         ${van_city_zipcode ? `and van_city_zipcode ilike '%${van_city_zipcode}%'` : ""}
+         ${van_city?.length > 0 ? `and ${van_city} @> ARRAY[van_city_zipcode]` : ""}
+         ${zipcode ? `and van_city_zipcode ilike '%${zipcode}%'` : ""}
          ${van_radius ? `and ${van_radius} >= van_radius` : ""}
          ${fuelArr?.length > 0 ? `and ${fuelArr} @> ARRAY[van_fuel_type]` : ''}
          ${transmissionArr?.length > 0 ? `and ${transmissionArr} @> ARRAY[van_transmission]` : ''}
@@ -319,7 +321,8 @@ const vansCount = (
    van_power_from,
    van_power_to,
    van_country,
-   van_city_zipcode,
+   van_city,
+   zipcode,
    van_radius,
    fuelArr,
    transmissionArr,
@@ -373,7 +376,8 @@ const vansCount = (
          ${van_power_from ? `and ${van_power_from} <= van_power` : ""}
          ${van_power_to ? `and ${van_power_to} >= van_power` : ""}
          ${van_country ? `and van_country ilike '%${van_country}%'` : ""}
-         ${van_city_zipcode ? `and van_city_zipcode ilike '%${van_city_zipcode}%'` : ""}
+         ${van_city?.length > 0 ? `and ${van_city} @> ARRAY[van_city_zipcode]` : ""}
+         ${zipcode ? `and van_city_zipcode ilike '%${zipcode}%'` : ""}
          ${van_radius ? `and ${van_radius} >= van_radius` : ""}
          ${fuelArr?.length > 0 ? `and ${fuelArr} @> ARRAY[van_fuel_type]` : ''}
          ${transmissionArr?.length > 0 ? `and ${transmissionArr} @> ARRAY[van_transmission]` : ''}

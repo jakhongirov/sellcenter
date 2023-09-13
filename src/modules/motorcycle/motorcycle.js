@@ -57,7 +57,8 @@ module.exports = {
             motorcycle_power_from,
             motorcycle_power_to,
             motorcycle_country,
-            motorcycle_city_zipcode,
+            city,
+            zipcode,
             motorcycle_radius,
             fuel_type,
             driving_mode,
@@ -81,6 +82,7 @@ module.exports = {
 
          if (offset, limit) {
             const fuelArr = fuel_type ? fuel_type?.split(',') : ""
+            const motorcycle_city = city ? city?.split(',') : ""
             const modeArr = driving_mode ? driving_mode?.split(',') : ""
             const transmissionArr = transmission ? transmission?.split(',') : ""
             const colorArr = exterior_colour ? exterior_colour?.split(',') : ""
@@ -120,7 +122,8 @@ module.exports = {
                motorcycle_power_from,
                motorcycle_power_to,
                motorcycle_country,
-               motorcycle_city_zipcode,
+               motorcycle_city,
+               zipcode,
                motorcycle_radius,
                fuelArr,
                modeArr,
@@ -181,7 +184,8 @@ module.exports = {
             motorcycle_power_from,
             motorcycle_power_to,
             motorcycle_country,
-            motorcycle_city_zipcode,
+            city,
+            zipcode,
             motorcycle_radius,
             fuel_type,
             driving_mode,
@@ -204,6 +208,7 @@ module.exports = {
          } = req.body
 
          const fuelArr = fuel_type ? fuel_type?.split(',') : ""
+         const motorcycle_city = city ? city?.split(',') : ""
          const modeArr = driving_mode ? driving_mode?.split(',') : ""
          const transmissionArr = transmission ? transmission?.split(',') : ""
          const colorArr = exterior_colour ? exterior_colour?.split(',') : ""
@@ -243,7 +248,8 @@ module.exports = {
             motorcycle_power_from,
             motorcycle_power_to,
             motorcycle_country,
-            motorcycle_city_zipcode,
+            motorcycle_city,
+            zipcode,
             motorcycle_radius,
             fuelArr,
             modeArr,
