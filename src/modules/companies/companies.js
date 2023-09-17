@@ -202,13 +202,13 @@ module.exports = {
 
    DELETE_COMPANY: async (req, res) => {
       try {
-         const { company_id } = req.body
-         const foundCompany = await model.foundCompany(company_id)
+         const { id } = req.body
+         const foundCompany = await model.foundCompany(id)
 
-         console.log(company_id);
+         console.log(id);
 
          if (foundCompany) {
-            const deleteCompany = await model.deleteCompany(company_id)
+            const deleteCompany = await model.deleteCompany(id)
 
             if (deleteCompany) {
                return res.json({
