@@ -202,7 +202,7 @@ module.exports = {
 
    DELETE_COMPANY: async (req, res) => {
       try {
-         const { id } = req.body
+         const { id } = req.params
          const foundCompany = await model.foundCompany(id)
 
          console.log(id);
