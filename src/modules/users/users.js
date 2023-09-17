@@ -375,22 +375,29 @@ module.exports = {
          const { user_id } = req.body
          const foundUserById = await model.foundUserById(user_id)
 
-         if (foundUserById?.user_image_name) {
-            const deleteOldImg = new FS(path.resolve(__dirname, '..', '..', '..', 'public', 'images', `${foundUserById?.user_image_name}`))
-            deleteOldImg.delete()
-         }
+         if (foundUserById) {
+            if (foundUserById?.user_image_name) {
+               const deleteOldImg = new FS(path.resolve(__dirname, '..', '..', '..', 'public', 'images', `${foundUserById?.user_image_name}`))
+               deleteOldImg.delete()
+            }
 
-         const deleteUser = await model.deleteUser(user_id)
+            const deleteUser = await model.deleteUser(user_id)
 
-         if (deleteUser) {
-            return res.json({
-               status: 200,
-               message: "Success"
-            })
+            if (deleteUser) {
+               return res.json({
+                  status: 200,
+                  message: "Success"
+               })
+            } else {
+               return res.json({
+                  status: 400,
+                  message: 'Bad request'
+               })
+            }
          } else {
             return res.json({
-               status: 400,
-               message: 'Bad request'
+               status: 404,
+               message: 'Not found'
             })
          }
 
