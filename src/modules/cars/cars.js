@@ -456,9 +456,17 @@ module.exports = {
 
          const car_img_name = [];
          const car_img = [];
-         const extrasId = extras?.split(',')
-         const othersId = others?.split(',')
+         let extrasId = [];
+         let othersId = [];
 
+         if (extras) {
+            extrasId = extras?.split(',')
+         }
+
+         if (others) {
+            othersId = others?.split(',')
+         }
+         
          uploadPhoto?.forEach((e) => {
             car_img.push(
                `${process.env.BACKEND_URL}/${e.filename}`,
