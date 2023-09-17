@@ -110,7 +110,7 @@ router
    .put('/user/edit/phone', users.EDIT_USER_PHONE_NUMBER)
    .put('/user/edit/balance', users.EDIT_USER_BALANCE)
    .put('/user/edit/photo', FileUpload.single("photo"), users.EDIT_PROFILE_IMAGE)
-   .delete('/user/delete', users.DELETE_USER)
+   .delete('/user/delete/:id', users.DELETE_USER)
 
    // User ads
    .get('/user/cars/:id', userAds.GET_CARS)

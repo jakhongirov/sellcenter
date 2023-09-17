@@ -372,8 +372,8 @@ module.exports = {
 
    DELETE_USER: async (req, res) => {
       try {
-         const { user_id } = req.body
-         const foundUserById = await model.foundUserById(user_id)
+         const { id } = req.params
+         const foundUserById = await model.foundUserById(id)
 
          if (foundUserById) {
             if (foundUserById?.user_image_name) {
@@ -381,7 +381,7 @@ module.exports = {
                deleteOldImg.delete()
             }
 
-            const deleteUser = await model.deleteUser(user_id)
+            const deleteUser = await model.deleteUser(id)
 
             if (deleteUser) {
                return res.json({
