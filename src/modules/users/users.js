@@ -373,7 +373,7 @@ module.exports = {
    DELETE_USER: async (req, res) => {
       try {
          const { user_id } = req.body
-         const foundUserById = await model.foundUserById(id)
+         const foundUserById = await model.foundUserById(user_id)
 
          if (foundUserById?.user_image_name) {
             const deleteOldImg = new FS(path.resolve(__dirname, '..', '..', '..', 'public', 'images', `${foundUserById?.user_image_name}`))

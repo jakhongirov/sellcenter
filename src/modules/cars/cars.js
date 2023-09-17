@@ -113,26 +113,8 @@ module.exports = {
          const parkingArr = parking_sensors ? parking_sensors?.split(',') : false
          const interiorColourgArr = interior_colour ? interior_colour?.split(',') : false
          const interiorMaterialgArr = interior_material ? interior_material?.split(',') : false
-         const extrasId = []
-         const othersId = []
-
-         if (extras) {
-            const extrasArr = extras?.split(',')
-            if (extrasArr?.length > 0) {
-               for (let i = 0; i < extrasArr?.length; i++) {
-                  extrasId.push(Number(extrasArr[i]))
-               }
-            }
-         }
-
-         if (others) {
-            const othersArr = others?.split(',')
-            if (othersArr?.length > 0) {
-               for (let i = 0; i < othersArr?.length; i++) {
-                  othersId.push(Number(othersArr[i]))
-               }
-            }
-         }
+         const extrasId = others?.split(',')
+         const othersId = extras?.split(',')
 
          const foundCarsList = await model.foundCarsList(
             car_make,
@@ -291,26 +273,8 @@ module.exports = {
          const parkingArr = parking_sensors ? parking_sensors?.split(',') : false
          const interiorColourgArr = interior_colour ? interior_colour?.split(',') : false
          const interiorMaterialgArr = interior_material ? interior_material?.split(',') : false
-         const extrasId = []
-         const othersId = []
-
-         if (extras) {
-            const extrasArr = extras?.split(',')
-            if (extrasArr?.length > 0) {
-               for (let i = 0; i < extrasArr?.length; i++) {
-                  extrasId.push(Number(extrasArr[i]))
-               }
-            }
-         }
-
-         if (others) {
-            const othersArr = others?.split(',')
-            if (othersArr?.length > 0) {
-               for (let i = 0; i < othersArr?.length; i++) {
-                  othersId.push(Number(othersArr[i]))
-               }
-            }
-         }
+         const extrasId = extras?.split(',')
+         const othersId = others?.split(',')
 
          const foundCarsCount = await model.foundCarsCount(
             car_make,
@@ -492,26 +456,8 @@ module.exports = {
 
          const car_img_name = [];
          const car_img = [];
-         const extrasId = []
-         const othersId = []
-
-         if (extras) {
-            const extrasArr = extras?.split(',')
-            if (extrasArr?.length > 0) {
-               for (let i = 0; i < extrasArr?.length; i++) {
-                  extrasId.push(Number(extrasArr[i]))
-               }
-            }
-         }
-
-         if (others) {
-            const othersArr = others?.split(',')
-            if (othersArr?.length > 0) {
-               for (let i = 0; i < othersArr?.length; i++) {
-                  othersId.push(Number(othersArr[i]))
-               }
-            }
-         }
+         const extrasId = extras?.split(',')
+         const othersId = others?.split(',')
 
          uploadPhoto?.forEach((e) => {
             car_img.push(
@@ -665,26 +611,8 @@ module.exports = {
          const car_img_name = [];
          const car_img = [];
          const foundCar = await model.foundCar(car_id)
-         const extrasId = []
-         const othersId = []
-
-         if (extras) {
-            const extrasArr = extras?.split(',')
-            if (extrasArr?.length > 0) {
-               for (let i = 0; i < extrasArr?.length; i++) {
-                  extrasId.push(Number(extrasArr[i]))
-               }
-            }
-         }
-
-         if (others) {
-            const othersArr = others?.split(',')
-            if (othersArr?.length > 0) {
-               for (let i = 0; i < othersArr?.length; i++) {
-                  othersId.push(Number(othersArr[i]))
-               }
-            }
-         }
+         const extrasId = extras?.split(',')
+         const othersId = others?.split(',')
 
          if (uploadPhoto.length) {
             foundCar?.car_images_name.forEach((e) => {

@@ -205,6 +205,8 @@ module.exports = {
          const { company_id } = req.body
          const foundCompany = await model.foundCompany(company_id)
 
+         console.log(company_id);
+
          if (foundCompany) {
             const deleteCompany = await model.deleteCompany(company_id)
 
