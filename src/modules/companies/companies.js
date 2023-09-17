@@ -209,13 +209,22 @@ module.exports = {
 
          if (foundCompany) {
             const deleteCompany = await model.deleteCompany(id)
-
             if (deleteCompany) {
-               return res.json({
-                  status: 200,
-                  message: "Success",
-                  data: deleteCompany
-               })
+               const editUserCompany = await model.editUserCompany(deleteCompany.user_id)
+
+               if (editUserCompany) {
+                  return res.json({
+                     status: 200,
+                     message: "Success",
+                     data: deleteCompany
+                  })
+               } else {
+                  return res.json({
+                     status: 400,
+                     message: "Bad request"
+                  })
+               }
+
             } else {
                return res.json({
                   status: 400,
