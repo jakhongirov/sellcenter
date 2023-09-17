@@ -46,6 +46,7 @@ const DELETE_USER = `
       users
    WHERE
       user_id = $1
+   RETURNING *;
 `;
 
 const EDIT_USER_EMAIL = `
