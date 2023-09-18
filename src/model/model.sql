@@ -77,8 +77,8 @@ CREATE TABLE cars (
    car_mileage int,
    car_hu_valid_until text,
    car_previous_owners int,
-   car_full_service_history text,
-   car_roadworthy boolean,
+   car_full_service_history boolean DEFAULT false,
+   car_roadworthy boolean DEFAULT false,
    car_country text,
    car_city_zipcode text,
    car_radius int,
@@ -116,30 +116,6 @@ CREATE TABLE cars (
    car_active boolean DEFAULT false,
    car_ad_create_at timestamptz DEFAULT CURRENT_TIMESTAMP
 );
-
--- CREATE TABLE car_others (
---    id bigserial PRiMARY KEY,
---    title_en text not null,
---    title_fr text not null,
---    title_gr text not null,
---    title_sw text not null,
---    title_sp text not null,
---    title_ru text not null,
---    title_pl text not null,
---    other_create_at timestamptz DEFAULT CURRENT_TIMESTAMP
--- );
-
--- CREATE TABLE car_extras (
---    id bigserial PRiMARY KEY,
---    title_en text not null,
---    title_fr text not null,
---    title_gr text not null,
---    title_sw text not null,
---    title_sp text not null,
---    title_ru text not null,
---    title_pl text not null,
---    extra_create_at timestamptz DEFAULT CURRENT_TIMESTAMP
--- );
 
 CREATE TABLE motorcycle_makes(
    motorcycle_make_id bigserial PRiMARY KEY,

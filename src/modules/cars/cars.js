@@ -113,8 +113,8 @@ module.exports = {
          const parkingArr = parking_sensors ? parking_sensors?.split(',') : false
          const interiorColourgArr = interior_colour ? interior_colour?.split(',') : false
          const interiorMaterialgArr = interior_material ? interior_material?.split(',') : false
-         const extrasId = others?.split(',')
-         const othersId = extras?.split(',')
+         const extrasId = others ? others?.split(',') : ""
+         const othersId = extras ? extras?.split(',') : ""
 
          const foundCarsList = await model.foundCarsList(
             car_make,
@@ -394,14 +394,13 @@ module.exports = {
       }
    },
 
-   POST_CAR: async (req, res) => {
+   POST_BASIC_DATA: async (req, res) => {
       try {
          const uploadPhoto = req.files;
          const {
             user_id,
             car_make,
             car_model,
-            car_description,
             car_variant,
             car_body,
             car_number_seats,
@@ -421,52 +420,14 @@ module.exports = {
             car_country,
             car_city_zipcode,
             car_radius,
-            car_fuel_type,
-            car_power,
-            car_cubic_capacity,
-            car_transmission,
-            car_fuel_consumption,
-            car_emissions_sticker,
-            car_emission_class,
-            car_exterior_colour,
-            car_trailer_coupling,
-            car_parking_sensors,
-            car_cruise_control,
-            car_interior_colour,
-            car_interior_material,
-            car_airbags,
-            car_air_conditioning,
-            extras,
-            others,
-            car_vendor,
-            car_dealer_rating,
-            car_discount_offers,
-            car_non_smoker,
-            car_taxi,
-            car_vat,
-            car_warranty,
-            car_environmental_bonus,
-            car_damaged,
-            car_commercial,
-            car_programme,
-            car_vide_link,
+            user_email,
             user_phone,
-            user_email
+            car_vide_link
          } = req.body
 
          const car_img_name = [];
          const car_img = [];
-         let extrasId = [];
-         let othersId = [];
 
-         if (extras) {
-            extrasId = extras?.split(',')
-         }
-
-         if (others) {
-            othersId = others?.split(',')
-         }
-         
          uploadPhoto?.forEach((e) => {
             car_img.push(
                `${process.env.BACKEND_URL}/${e.filename}`,
@@ -478,7 +439,6 @@ module.exports = {
             user_id,
             car_make,
             car_model,
-            car_description,
             car_variant,
             car_body,
             car_number_seats,
@@ -498,39 +458,11 @@ module.exports = {
             car_country,
             car_city_zipcode,
             car_radius,
-            car_fuel_type,
-            car_power,
-            car_cubic_capacity,
-            car_transmission,
-            car_fuel_consumption,
-            car_emissions_sticker,
-            car_emission_class,
-            car_exterior_colour,
-            car_trailer_coupling,
-            car_parking_sensors,
-            car_cruise_control,
-            car_interior_colour,
-            car_interior_material,
-            car_airbags,
-            car_air_conditioning,
-            extrasId,
-            othersId,
-            car_vendor,
-            car_dealer_rating,
-            car_discount_offers,
-            car_non_smoker,
-            car_taxi,
-            car_vat,
-            car_warranty,
-            car_environmental_bonus,
-            car_damaged,
-            car_commercial,
-            car_programme,
             car_img,
             car_img_name,
-            car_vide_link,
+            user_email,
             user_phone,
-            user_email
+            car_vide_link
          )
 
          if (addCar) {
@@ -555,6 +487,130 @@ module.exports = {
       }
    },
 
+   PUT_ENGINE: async (req, res) => {
+      try {
+         const {
+            car_id,
+            car_fuel_type,
+            car_power,
+            car_cubic_capacity,
+            car_transmission,
+            car_fuel_consumption,
+            car_emissions_sticker,
+            car_emission_class,
+            car_exterior_colour,
+            car_trailer_coupling,
+            car_parking_sensors,
+            car_cruise_control,
+            others
+         } = req.body
+
+         const othersId = others ? others.split(',') : []
+
+         const addEngineData = await model.addEngineData(
+            car_id,
+            car_fuel_type,
+            car_power,
+            car_cubic_capacity,
+            car_transmission,
+            car_fuel_consumption,
+            car_emissions_sticker,
+            car_emission_class,
+            car_exterior_colour,
+            car_trailer_coupling,
+            car_parking_sensors,
+            car_cruise_control,
+            othersId
+         )
+
+         if (addEngineData) {
+            return res.json({
+               status: 200,
+               message: "Success",
+               data: addEngineData
+            })
+         } else {
+            return res.json({
+               status: 400,
+               message: "Bad request"
+            })
+         }
+
+      } catch (error) {
+         console.log(error)
+         res.json({
+            status: 500,
+            message: "Internal Server Error",
+         })
+      }
+   },
+
+   PUT_INTERIOR: async (req, res) => {
+      try {
+         const {
+            car_interior_colour,
+            car_interior_material,
+            car_airbags,
+            car_air_conditioning,
+            extras,
+            car_vendor,
+            car_dealer_rating,
+            car_discount_offers,
+            car_non_smoker,
+            car_taxi,
+            car_vat,
+            car_warranty,
+            car_environmental_bonus,
+            car_damaged,
+            car_commercial,
+            car_programme,
+            car_description
+         } = req.body
+
+         const extrasId = extras ? extras.split(',') : []
+
+         const addInteriorData = await model.addInteriorData(
+            car_interior_colour,
+            car_interior_material,
+            car_airbags,
+            car_air_conditioning,
+            extrasId,
+            car_vendor,
+            car_dealer_rating,
+            car_discount_offers,
+            car_non_smoker,
+            car_taxi,
+            car_vat,
+            car_warranty,
+            car_environmental_bonus,
+            car_damaged,
+            car_commercial,
+            car_programme,
+            car_description
+         )
+
+         if (addInteriorData) {
+            return res.json({
+               status: 200,
+               message: "Success",
+               data: addInteriorData
+            })
+         } else {
+            return res.json({
+               status: 400,
+               message: "Bad request"
+            })
+         } ƒ
+
+      } catch (error) {
+         console.log(error)
+         res.json({
+            status: 500,
+            message: "Internal Server Error",
+         })
+      }
+   },
+
    UPDATE_CAR: async (req, res) => {
       try {
          const uploadPhoto = req.files;
@@ -563,7 +619,6 @@ module.exports = {
             user_id,
             car_make,
             car_model,
-            car_description,
             car_variant,
             car_body,
             car_number_seats,
@@ -583,44 +638,14 @@ module.exports = {
             car_country,
             car_city_zipcode,
             car_radius,
-            car_fuel_type,
-            car_power,
-            car_cubic_capacity,
-            car_transmission,
-            car_fuel_consumption,
-            car_emissions_sticker,
-            car_emission_class,
-            car_exterior_colour,
-            car_trailer_coupling,
-            car_parking_sensors,
-            car_cruise_control,
-            car_interior_colour,
-            car_interior_material,
-            car_airbags,
-            car_air_conditioning,
-            extras,
-            others,
-            car_vendor,
-            car_dealer_rating,
-            car_discount_offers,
-            car_non_smoker,
-            car_taxi,
-            car_vat,
-            car_warranty,
-            car_environmental_bonus,
-            car_damaged,
-            car_commercial,
-            car_programme,
-            car_vide_link,
+            user_email,
             user_phone,
-            user_email
+            car_vide_link
          } = req.body
 
          const car_img_name = [];
          const car_img = [];
          const foundCar = await model.foundCar(car_id)
-         const extrasId = extras?.split(',')
-         const othersId = others?.split(',')
 
          if (uploadPhoto.length) {
             foundCar?.car_images_name.forEach((e) => {
@@ -657,7 +682,6 @@ module.exports = {
             user_id,
             car_make,
             car_model,
-            car_description,
             car_variant,
             car_body,
             car_number_seats,
@@ -677,39 +701,11 @@ module.exports = {
             car_country,
             car_city_zipcode,
             car_radius,
-            car_fuel_type,
-            car_power,
-            car_cubic_capacity,
-            car_transmission,
-            car_fuel_consumption,
-            car_emissions_sticker,
-            car_emission_class,
-            car_exterior_colour,
-            car_trailer_coupling,
-            car_parking_sensors,
-            car_cruise_control,
-            car_interior_colour,
-            car_interior_material,
-            car_airbags,
-            car_air_conditioning,
-            extrasId,
-            othersId,
-            car_vendor,
-            car_dealer_rating,
-            car_discount_offers,
-            car_non_smoker,
-            car_taxi,
-            car_vat,
-            car_warranty,
-            car_environmental_bonus,
-            car_damaged,
-            car_commercial,
-            car_programme,
             car_img,
             car_img_name,
-            car_vide_link,
+            user_email,
             user_phone,
-            user_email
+            car_vide_link
          )
 
          if (updateCar) {

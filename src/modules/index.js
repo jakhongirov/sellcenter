@@ -23,8 +23,6 @@ const sliders = require('./slider/slider')
 
 //Cars files
 const carBrand = require('./carBrand/carBrand')
-const carOthers = require('./carOtherDetails/carOtherDetails')
-const carExtras = require('./carExtraDetails/carExtraDetails')
 const cars = require('./cars/cars')
 
 // Motorcycles files
@@ -162,24 +160,14 @@ router
    .put('/car/update/model', carBrand.PUT_MODEL)
    .delete('/car/delete/model', carBrand.DELETE_MODEL)
 
-   // Car others
-   .get('/car/others', carOthers.GET)
-   .post('/car/add/other', carOthers.POST)
-   .put('/car/update/other', carOthers.PUT)
-   .delete('/car/delete/other', carOthers.DELETE)
-
-   // Car extras
-   .get('/car/extras', carExtras.GET)
-   .post('/car/add/extra', carExtras.POST)
-   .put('/car/update/extra', carExtras.PUT)
-   .delete('/car/delete/extra', carExtras.DELETE)
-
    // Cars
    .get('/cars/admin/list', cars.GET_ADMIN)
    .get('/cars/list', cars.GET_CARS)
    .get('/cars/count', cars.GET_CARS_COUNT)
    .get('/car/:id', cars.GET_CAR_ID)
-   .post('/car/add', FileUpload.array("photos"), cars.POST_CAR)
+   .post('/car/add', FileUpload.array("photos"), cars.POST_BASIC_DATA)
+   .put('/car/add/engine', cars.PUT_ENGINE)
+   .put('/car/add/interior', cars.PUT_INTERIOR)
    .put('/car/update', FileUpload.array("photos"), cars.UPDATE_CAR)
    .delete('/car/delete', cars.DELETE_CAR)
 
