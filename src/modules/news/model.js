@@ -64,7 +64,7 @@ const newsAdminList = (limit, offset) => {
          *
       FROM
          news
-      OREDER BY
+      ORDER BY
          news_id
       LIMIT ${limit}
       OFFSET ${offset}
@@ -78,7 +78,7 @@ const newsList = (limit, offset) => {
          *
       FROM
          news
-      OREDER BY
+      ORDER BY
          news_id
       WHERE
          news_active = true
