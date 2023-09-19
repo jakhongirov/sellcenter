@@ -504,10 +504,6 @@ module.exports = {
             car_cruise_control,
             others
          } = req.body
-
-         
-         // const othersId = others ? others?.split(',') : []
-         console.log(others);
          
          const addEngineData = await model.addEngineData(
             car_id,
