@@ -505,7 +505,9 @@ module.exports = {
             others
          } = req.body
 
-         const othersId = others ? others.split(',') : []
+         console.log(othersId);
+
+         const othersId = others ? others?.split(',') : []
 
          const addEngineData = await model.addEngineData(
             car_id,
@@ -567,7 +569,7 @@ module.exports = {
             car_description
          } = req.body
 
-         const extrasId = extras ? extras.split(',') : []
+         const extrasId = extras ? extras?.split(',') : []
 
          const addInteriorData = await model.addInteriorData(
             car_interior_colour,
