@@ -565,14 +565,14 @@ module.exports = {
             car_description
          } = req.body
 
-         const extrasId = extras ? extras?.split(',') : []
+         // const extrasId = extras ? extras?.split(',') : []
 
          const addInteriorData = await model.addInteriorData(
             car_interior_colour,
             car_interior_material,
             car_airbags,
             car_air_conditioning,
-            extrasId,
+            extras,
             car_vendor,
             car_dealer_rating,
             car_discount_offers,
