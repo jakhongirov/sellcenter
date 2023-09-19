@@ -65,7 +65,7 @@ CREATE TABLE cars (
    car_vide_link text,
    car_variant text,
    car_body text,
-   car_number_seats int,
+   car_number_seats text,
    car_number_door int,
    car_silding_door text,
    car_condition text,

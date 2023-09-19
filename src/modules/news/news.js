@@ -207,7 +207,7 @@ module.exports = {
       }
    },
 
-   PUT_SATATUS: async (req, res) => {
+   PUT_STATUS: async (req, res) => {
       try {
          const { id, status } = req.body
          const newsById = await model.newsById(id)
