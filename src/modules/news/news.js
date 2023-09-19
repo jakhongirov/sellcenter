@@ -9,7 +9,7 @@ module.exports = {
          const { limit, offset } = req.query
 
          if (limit && offset) {
-            const newsList = await model.newsList(limit, offset)
+            const newsList = await model.newsAdminList(limit, offset)
 
             if (newsList) {
                return res.json({
