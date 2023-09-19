@@ -546,6 +546,7 @@ module.exports = {
    PUT_INTERIOR: async (req, res) => {
       try {
          const {
+            car_id,
             car_interior_colour,
             car_interior_material,
             car_airbags,
@@ -568,6 +569,7 @@ module.exports = {
          // const extrasId = extras ? extras?.split(',') : []
 
          const addInteriorData = await model.addInteriorData(
+            car_id,
             car_interior_colour,
             car_interior_material,
             car_airbags,

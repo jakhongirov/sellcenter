@@ -41,7 +41,7 @@ const ADD_INTERIOR_DATA = `
       car_damaged = $15,
       car_commercial = $16,
       car_programme = $17,
-      car_description  = $18,
+      car_description = $18,
       car_active = true
    WHERE
       car_id = $1
@@ -558,6 +558,7 @@ const addEngineData = (
    othersId
 )
 const addInteriorData = (
+   car_id,
    car_interior_colour,
    car_interior_material,
    car_airbags,
@@ -577,6 +578,7 @@ const addInteriorData = (
    car_description
 ) => fetch(
    ADD_INTERIOR_DATA,
+   car_id,
    car_interior_colour,
    car_interior_material,
    car_airbags,
