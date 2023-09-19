@@ -18,7 +18,7 @@ const ADD_ENGINE_DATA = `
       others = $13
    WHERE
       car_id = $1
-   RETUENING *;
+   RETURNING *;
 `;
 
 const ADD_INTERIOR_DATA = `
@@ -45,7 +45,7 @@ const ADD_INTERIOR_DATA = `
       car_active = true
    WHERE
       car_id = $1
-   RETUENING *;
+   RETURNING *;
 `;
 
 const ADD_CAR = `
