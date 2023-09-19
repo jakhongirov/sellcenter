@@ -26,7 +26,7 @@ const ADD_INTERIOR_DATA = `
       cars
    SET
       car_interior_colour = $2,
-      car_interior_material $3,
+      car_interior_material = $3,
       car_airbags = $4,
       car_air_conditioning = $5,
       extras = $6,
