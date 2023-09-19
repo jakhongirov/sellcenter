@@ -78,10 +78,10 @@ const newsList = (limit, offset) => {
          *
       FROM
          news
-      ORDER BY
-         news_id
       WHERE
          news_active = true
+      ORDER BY
+         news_id
       LIMIT ${limit}
       OFFSET ${offset}
    `;
