@@ -426,14 +426,12 @@ module.exports = {
          const car_img_name = [];
          const car_img = [];
 
-         if (uploadPhoto?.length) {
-            uploadPhoto?.forEach((e) => {
-               car_img.push(
-                  `${process.env.BACKEND_URL}/${e.filename}`,
-               );
-               car_img_name.push(e.filename);
-            });
-         }
+         uploadPhoto?.forEach((e) => {
+            car_img.push(
+               `${process.env.BACKEND_URL}/${e.filename}`,
+            );
+            car_img_name.push(e.filename);
+         });
 
          const addCar = await model.addCar(
             user_id,
