@@ -114,7 +114,6 @@ module.exports = {
          // const interiorColourgArr = interior_colour ? interior_colour?.split(',') : false
          // const interiorMaterialgArr = interior_material ? interior_material?.split(',') : false
 
-         console.log(car_make);
          const foundCarsList = await model.foundCarsList(
             car_make,
             car_model,
@@ -262,6 +261,8 @@ module.exports = {
             picture,
             days
          } = req.body
+
+         console.log(car_make);
 
          // const bodyArr = body ? body?.split(',') : false
          // const typeArr = type ? type?.split(',') : false
