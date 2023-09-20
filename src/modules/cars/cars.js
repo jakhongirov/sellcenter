@@ -433,8 +433,8 @@ module.exports = {
                );
                car_img_name.push(e.filename);
             });
-         } 
-         
+         }
+
          const addCar = await model.addCar(
             user_id,
             car_make,
@@ -638,7 +638,36 @@ module.exports = {
             car_radius,
             user_email,
             user_phone,
-            car_vide_link
+            car_vide_link,
+            car_interior_colour,
+            car_interior_material,
+            car_airbags,
+            car_air_conditioning,
+            extras,
+            car_vendor,
+            car_dealer_rating,
+            car_discount_offers,
+            car_non_smoker,
+            car_taxi,
+            car_vat,
+            car_warranty,
+            car_environmental_bonus,
+            car_damaged,
+            car_commercial,
+            car_programme,
+            car_description,
+            car_fuel_type,
+            car_power,
+            car_cubic_capacity,
+            car_transmission,
+            car_fuel_consumption,
+            car_emissions_sticker,
+            car_emission_class,
+            car_exterior_colour,
+            car_trailer_coupling,
+            car_parking_sensors,
+            car_cruise_control,
+            others
          } = req.body
 
          const car_img_name = [];
@@ -699,11 +728,40 @@ module.exports = {
             car_country,
             car_city_zipcode,
             car_radius,
-            car_img,
-            car_img_name,
             user_email,
             user_phone,
-            car_vide_link
+            car_vide_link,
+            car_interior_colour,
+            car_interior_material,
+            car_airbags,
+            car_air_conditioning,
+            extras,
+            car_vendor,
+            car_dealer_rating,
+            car_discount_offers,
+            car_non_smoker,
+            car_taxi,
+            car_vat,
+            car_warranty,
+            car_environmental_bonus,
+            car_damaged,
+            car_commercial,
+            car_programme,
+            car_description,
+            car_fuel_type,
+            car_power,
+            car_cubic_capacity,
+            car_transmission,
+            car_fuel_consumption,
+            car_emissions_sticker,
+            car_emission_class,
+            car_exterior_colour,
+            car_trailer_coupling,
+            car_parking_sensors,
+            car_cruise_control,
+            others,
+            car_img,
+            car_img_name
          )
 
          if (updateCar) {
