@@ -400,7 +400,7 @@ const foundCarsCount = (
 ) => {
    const FOUND_CARS_COUNT = `
    SELECT 
-      *
+      count(car_id)
    FROM
       cars
    WHERE
@@ -465,7 +465,7 @@ const foundCarsCount = (
       ${days ? `and car_ad_create_at > current_date - interval '${days} days'` : ""};
 `;
 
-   return fetchALL(FOUND_CARS_COUNT)
+   return fetch(FOUND_CARS_COUNT)
 }
 const foundCarById = (id) => fetch(FOUND_CAR_BY_ID, id)
 const foundCar = (car_id) => fetch(FOUND_CAR, car_id)

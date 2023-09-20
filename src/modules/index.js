@@ -174,8 +174,8 @@ router
 
    // Cars
    .get('/cars/admin/list', cars.GET_ADMIN)
-   .get('/cars/list', cars.GET_CARS)
-   .get('/cars/count', cars.GET_CARS_COUNT)
+   .post('/cars/list', cars.GET_CARS)
+   .post('/cars/count', cars.GET_CARS_COUNT)
    .get('/car/:id', cars.GET_CAR_ID)
    .post('/car/add', FileUpload.array("photos"), cars.POST_BASIC_DATA)
    .put('/car/add/engine', cars.PUT_ENGINE)
