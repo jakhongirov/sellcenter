@@ -400,7 +400,7 @@ const foundCarsCount = (
 ) => {
    const FOUND_CARS_COUNT = `
    SELECT 
-      count(car_id)
+      *
    FROM
       cars
    WHERE
