@@ -426,6 +426,8 @@ module.exports = {
          const car_img_name = [];
          const car_img = [];
 
+         console.log(uploadPhoto);
+
          uploadPhoto?.forEach((e) => {
             car_img.push(
                `${process.env.BACKEND_URL}/${e.filename}`,
