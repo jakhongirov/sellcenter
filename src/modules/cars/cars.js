@@ -104,27 +104,27 @@ module.exports = {
             days
          } = req.body
 
-         // const bodyArr = body ? body?.split(',') : false
-         // const typeArr = type ? type?.split(',') : false
-         // const car_city = city ? city?.split(',') : false
-         // const fuelArr = fuel_type ? fuel_type?.split(',') : false
-         // const transmissionArr = transmission ? transmission?.split(',') : false
-         // const colorArr = exterior_colour ? exterior_colour?.split(',') : false
-         // const parkingArr = parking_sensors ? parking_sensors?.split(',') : false
-         // const interiorColourgArr = interior_colour ? interior_colour?.split(',') : false
-         // const interiorMaterialArr = interior_material ? interior_material?.split(',') : false
+         const bodyArr = body ? body?.split(',') : false
+         const typeArr = type ? type?.split(',') : false
+         const car_city = city ? city?.split(',') : false
+         const fuelArr = fuel_type ? fuel_type?.split(',') : false
+         const transmissionArr = transmission ? transmission?.split(',') : false
+         const colorArr = exterior_colour ? exterior_colour?.split(',') : false
+         const parkingArr = parking_sensors ? parking_sensors?.split(',') : false
+         const interiorColourgArr = interior_colour ? interior_colour?.split(',') : false
+         const interiorMaterialgArr = interior_material ? interior_material?.split(',') : false
 
          const foundCarsList = await model.foundCarsList(
             car_make,
             car_model,
             car_description,
             car_variant,
-            JSON.parse(body),
+            bodyArr,
             car_number_seats,
             car_number_door,
             car_silding_door,
             car_condition,
-            JSON.parse(type),
+            typeArr,
             car_payment_type,
             car_price_from,
             car_price_up_to,
@@ -137,28 +137,28 @@ module.exports = {
             car_full_service_history,
             car_roadworthy,
             car_country,
-            JSON.parse(city),
+            car_city,
             zipcode,
             car_radius,
-            JSON.parse(fuel_type),
+            fuelArr,
             car_power_from,
             car_power_up_to,
             car_cubic_capacity_from,
             car_cubic_capacity_to,
-            JSON.parse(transmission),
+            transmissionArr,
             car_fuel_consumption,
             car_emissions_sticker,
             car_emission_class,
-            JSON.parse(exterior_colour),
+            colorArr,
             car_trailer_coupling,
-            parking_sensors,
+            parkingArr,
             car_cruise_control,
-            JSON.parse(interior_colour),
-            JSON.parse(interior_material),
+            interiorColourgArr,
+            interiorMaterialgArr,
             car_airbags,
             car_air_conditioning,
-            JSON.parse(extras),
-            JSON.parse(others),
+            others,
+            others,
             car_vendor,
             car_dealer_rating,
             car_discount_offers,
@@ -262,27 +262,27 @@ module.exports = {
             days
          } = req.body
 
-         // const bodyArr = body ? body?.split(',') : false
-         // const typeArr = type ? type?.split(',') : false
-         // const car_city = city ? city?.split(',') : false
-         // const fuelArr = fuel_type ? fuel_type?.split(',') : false
-         // const transmissionArr = transmission ? transmission?.split(',') : false
-         // const colorArr = exterior_colour ? exterior_colour?.split(',') : false
-         // const parkingArr = parking_sensors ? parking_sensors?.split(',') : false
-         // const interiorColourgArr = interior_colour ? interior_colour?.split(',') : false
-         // const interiorMaterialgArr = interior_material ? interior_material?.split(',') : false
+         const bodyArr = body ? body?.split(',') : false
+         const typeArr = type ? type?.split(',') : false
+         const car_city = city ? city?.split(',') : false
+         const fuelArr = fuel_type ? fuel_type?.split(',') : false
+         const transmissionArr = transmission ? transmission?.split(',') : false
+         const colorArr = exterior_colour ? exterior_colour?.split(',') : false
+         const parkingArr = parking_sensors ? parking_sensors?.split(',') : false
+         const interiorColourgArr = interior_colour ? interior_colour?.split(',') : false
+         const interiorMaterialgArr = interior_material ? interior_material?.split(',') : false
 
          const foundCarsCount = await model.foundCarsCount(
             car_make,
             car_model,
             car_description,
             car_variant,
-            body,
+            bodyArr,
             car_number_seats,
             car_number_door,
             car_silding_door,
             car_condition,
-            type,
+            typeArr,
             car_payment_type,
             car_price_from,
             car_price_up_to,
@@ -295,24 +295,24 @@ module.exports = {
             car_full_service_history,
             car_roadworthy,
             car_country,
-            city,
+            car_city,
             zipcode,
             car_radius,
-            fuel_type,
+            fuelArr,
             car_power_from,
             car_power_up_to,
             car_cubic_capacity_from,
             car_cubic_capacity_to,
-            transmission,
+            transmissionArr,
             car_fuel_consumption,
             car_emissions_sticker,
             car_emission_class,
-            exterior_colour,
+            colorArr,
             car_trailer_coupling,
-            parking_sensors,
+            parkingArr,
             car_cruise_control,
-            interior_colour,
-            interior_material,
+            interiorColourgArr,
+            interiorMaterialgArr,
             car_airbags,
             car_air_conditioning,
             extras,
@@ -424,7 +424,7 @@ module.exports = {
          const car_img_name = [];
          const car_img = [];
 
-         if (uploadPhoto) {
+         if (uploadPhoto?.length) {
             uploadPhoto?.forEach((e) => {
                car_img.push(
                   `${process.env.BACKEND_URL}/${e.filename}`,
