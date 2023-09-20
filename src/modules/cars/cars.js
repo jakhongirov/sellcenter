@@ -433,13 +433,8 @@ module.exports = {
                );
                car_img_name.push(e.filename);
             });
-         } else {
-            return res.json({
-               status: 400,
-               message: "File size exceeds the limit of 5 MB."
-            })
-         }
-
+         } 
+         
          const addCar = await model.addCar(
             user_id,
             car_make,
