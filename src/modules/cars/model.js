@@ -458,8 +458,8 @@ const foundCarsCount = (
       ${car_damaged ? `and car_damaged = '${car_damaged}'` : ""}
       ${car_commercial ? `and car_commercial = '${car_commercial}'` : ""}
       ${car_programme ? `and car_programme = '${car_programme}'` : ""}
-      ${extrasId.length ? `and extras @> ${extrasId}` : ""}
-      ${othersId.length ? `and extras @> ${othersId}` : ""}
+      ${extrasId ? `and extras @> ${extrasId}` : ""}
+      ${othersId ? `and extras @> ${othersId}` : ""}
       ${picture == true ? `and Array_Length(car_images_url, 1) > 0` : ""}
       ${video == true ? `and car_vide_link != '' ` : ""}
       ${days ? `and car_ad_create_at > current_date - interval '${days} days'` : ""};
