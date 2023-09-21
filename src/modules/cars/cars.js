@@ -705,6 +705,8 @@ module.exports = {
             });
          }
 
+         console.log(others, extras);
+
          const updateCar = await model.updateCar(
             car_id,
             user_id,
