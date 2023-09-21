@@ -673,7 +673,7 @@ module.exports = {
          let car_img_name = [];
          let car_img = [];
          const foundCar = await model.foundCar(car_id)
-         console.log(foundCar?.car_images_name);
+         console.log(uploadPhoto);
 
          if (uploadPhoto?.length) {
             foundCar?.car_images_name.forEach((e) => {
