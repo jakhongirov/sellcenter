@@ -41,10 +41,10 @@ module.exports = {
 
    GET: async (req, res) => {
       try {
-         const { limit, offset } = req.query
+         const { limit, offset, lang } = req.query
 
          if (limit && offset) {
-            const newsList = await model.newsList(limit, offset)
+            const newsList = await model.newsList(limit, offset, lang)
 
             if (newsList) {
                return res.json({

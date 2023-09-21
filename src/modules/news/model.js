@@ -72,7 +72,7 @@ const newsAdminList = (limit, offset) => {
 
    return fetchALL(list)
 }
-const newsList = (limit, offset) => {
+const newsList = (limit, offset, lang) => {
    const list = `
       SELECT
          *
@@ -82,6 +82,8 @@ const newsList = (limit, offset) => {
          news_active = true
       ORDER BY
          news_id
+      WHERE
+         news_lang = '${lang}'
       LIMIT ${limit}
       OFFSET ${offset}
    `;
