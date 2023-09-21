@@ -736,7 +736,7 @@ module.exports = {
             car_interior_material,
             car_airbags,
             car_air_conditioning,
-            extras,
+            extras?.split(),
             car_vendor,
             car_dealer_rating,
             car_discount_offers,
@@ -760,7 +760,7 @@ module.exports = {
             car_trailer_coupling,
             car_parking_sensors,
             car_cruise_control,
-            others,
+            others?.split(),
             car_img,
             car_img_name
          )
