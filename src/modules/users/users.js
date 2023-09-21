@@ -115,11 +115,38 @@ module.exports = {
 
             if (validPass) {
                const token = await new JWT({ id: foundUser.user_id }).sign()
+               const carCount = await model.userCarCount(foundUser.user_id)
+               const motorcycleCount = await model.userMotorcycleCount(foundUser.user_id)
+               const motorhomeCount = await model.userMotorhomeCount(foundUser.user_id)
+               const truckCount = await model.userTruckCount(foundUser.user_id)
+               const trailerCount = await model.userTrailerCount(foundUser.user_id)
+               const vanCount = await model.userVanCount(foundUser.user_id)
+               const semiTruckCount = await model.userSemiTruckCount(foundUser.user_id)
+               const semiTrailerCount = await model.userSemiTrailerCount(foundUser.user_id)
+               const coacheCount = await model.userCoacheCount(foundUser.user_id)
+               const agriculturalVehiclesCount = await model.userAgriculturalCount(foundUser.user_id)
+               const constructionMachineCount = await model.userConstructionCount(foundUser.user_id)
+               const forkliftTrucksCount = await model.userForkliftTrucksCount(foundUser.user_id)
+
                return res.json({
                   status: 200,
                   message: "Success",
                   data: foundUser,
-                  token: token
+                  token: token,
+                  count: {
+                     cars_count: carCount?.count,
+                     motorcycle_count: motorcycleCount?.count,
+                     motorhome_count: motorhomeCount?.count,
+                     truck_count: truckCount?.count,
+                     trailer_count: trailerCount?.count,
+                     van_count: vanCount?.count,
+                     semi_trailer_truck_count: semiTruckCount?.count,
+                     semi_trailer_count: semiTrailerCount?.count,
+                     coache_count: coacheCount?.count,
+                     agricultural_vehicle_count: agriculturalVehiclesCount?.count,
+                     construction_machine_count: constructionMachineCount?.count,
+                     forklift_truck_count: forkliftTrucksCount?.count,
+                  }
                })
             } else {
                return res.json({
