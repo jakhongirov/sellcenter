@@ -132,6 +132,7 @@ router
    .get('/company/:id', companies.GET_USER_COMPANY)
    .post('/company/add', companies.POST_COMPANY)
    .put('/company/edit', companies.PUT_COMPANY)
+   .put('/company/edit/photo', companies.EDIT_PROFILE_IMAGE)
    .delete('/company/delete/:id', companies.DELETE_COMPANY)
 
    // ADS

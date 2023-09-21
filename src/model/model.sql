@@ -40,6 +40,8 @@ CREATE TABLE user_companies (
    company_country_code text,
    company_number_prefix int,
    company_phone_number int,
+   company_image_url text,
+   company_image_name text,
    user_id int not null REFERENCES users(user_id) ON DELETE CASCADE,
    company_create_at timestamptz DEFAULT CURRENT_TIMESTAMP
 );

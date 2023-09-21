@@ -48,6 +48,17 @@ const UPDATE_COMPANY = `
    RETURNING *;
 `;
 
+const EDIT_PHOTO = `
+   UPDATE
+      user_companies
+   SET
+      company_image_url = $2,
+      company_image_name = $3
+   WHERE
+      company_id = $1
+   RETURNING *;
+`;
+
 const DELETE_COMPANY = `
    DELETE FROM
       user_companies
@@ -163,6 +174,7 @@ const editCompany = (
    company_phone_number,
    user_id
 )
+const editPhoto = (company_id, company_img_url, company_img_name) => fetch(EDIT_PHOTO, company_id, company_img_url, company_img_name)
 const deleteCompany = (company_id) => fetch(DELETE_COMPANY, company_id)
 
 module.exports = {
@@ -170,6 +182,7 @@ module.exports = {
    userCompany,
    addCompany,
    editCompany,
+   editPhoto,
    foundUser,
    foundCompany,
    deleteCompany

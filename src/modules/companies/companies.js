@@ -200,6 +200,49 @@ module.exports = {
       }
    },
 
+   EDIT_PROFILE_IMAGE: async (req, res) => {
+      try {
+         const uploadPhoto = req.file;
+         const { company_id } = req.body
+
+         const foundCompany = await model.foundCompany(company_id)
+         let company_img_name = ''
+         let company_img_url = ''
+
+         if (foundCompany?.company_image_url && foundCompany?.company_image_name) {
+            const deleteOldImg = new FS(path.resolve(__dirname, '..', '..', '..', 'public', 'images', `${foundCompany?.company_image_name}`))
+            deleteOldImg.delete()
+            company_img_name = uploadPhoto.filename
+            company_img_url = `${process.env.BACKEND_URL}/${uploadPhoto.filename}`
+         } else {
+            company_img_name = uploadPhoto.filename
+            company_img_url = `${process.env.BACKEND_URL}/${uploadPhoto.filename}`
+         }
+
+         const editPhoto = await model.editPhoto(company_id, company_img_url, company_img_name)
+
+         if (editPhoto) {
+            return res.json({
+               status: 200,
+               message: "Success",
+               data: editPhoto
+            })
+
+         } else {
+            return res.json({
+               status: 400,
+               message
+            })
+         }
+      } catch (error) {
+         console.log(error)
+         res.json({
+            status: 500,
+            message: "Internal Server Error",
+         })
+      }
+   },
+
    DELETE_COMPANY: async (req, res) => {
       try {
          const { id } = req.params
