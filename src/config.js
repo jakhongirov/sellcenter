@@ -1,6 +1,6 @@
 const PORT = 6000;
 connection = {
-  connectionStringEL: "postgres://iwfoovqs:CjDd1vtZWDGLp5MZs-eBEiWCUppldQEe@manny.db.elephantsql.com/iwfoovqs",
+  connectionStringEL: "postgres://lzyrzvsw:0cHM9ZffGqfA4nO7sVh4ibopVMaCmUnu@tai.db.elephantsql.com/lzyrzvsw",
   // connectionStringEL: "postgres://jvesrinh:nH4LbnttMxxtujfDFolGSMp2pTt1Ro7Z@tyke.db.elephantsql.com/jvesrinh",
 };
 
