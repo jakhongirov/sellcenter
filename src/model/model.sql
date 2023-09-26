@@ -169,30 +169,6 @@ CREATE TABLE motorcycles (
    motorcycle_ad_create_at timestamptz DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE motorcycle_others (
-   id bigserial PRiMARY KEY,
-   title_en text not null,
-   title_fr text not null,
-   title_gr text not null,
-   title_sw text not null,
-   title_sp text not null,
-   title_ru text not null,
-   title_pl text not null,
-   other_create_at timestamptz DEFAULT CURRENT_TIMESTAMP
-);
-
-CREATE TABLE motorcycle_type (
-   id bigserial PRiMARY KEY,
-   title_en text not null,
-   title_fr text not null,
-   title_gr text not null,
-   title_sw text not null,
-   title_sp text not null,
-   title_ru text not null,
-   title_pl text not null,
-   extra_create_at timestamptz DEFAULT CURRENT_TIMESTAMP
-);
-
 CREATE TABLE motor_home_makes(
    motor_home_make_id bigserial PRiMARY KEY,
    motor_home_make_name text not null
@@ -257,42 +233,6 @@ CREATE TABLE motor_homes (
    motor_home_ad_create_at timestamptz DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE motor_home_type (
-   id bigserial PRiMARY KEY,
-   title_en text not null,
-   title_fr text not null,
-   title_gr text not null,
-   title_sw text not null,
-   title_sp text not null,
-   title_ru text not null,
-   title_pl text not null,
-   extra_create_at timestamptz DEFAULT CURRENT_TIMESTAMP
-);
-
-CREATE TABLE motor_home_features (
-   id bigserial PRiMARY KEY,
-   title_en text not null,
-   title_fr text not null,
-   title_gr text not null,
-   title_sw text not null,
-   title_sp text not null,
-   title_ru text not null,
-   title_pl text not null,
-   extra_create_at timestamptz DEFAULT CURRENT_TIMESTAMP
-);
-
-CREATE TABLE motor_home_interior_features (
-   id bigserial PRiMARY KEY,
-   title_en text not null,
-   title_fr text not null,
-   title_gr text not null,
-   title_sw text not null,
-   title_sp text not null,
-   title_ru text not null,
-   title_pl text not null,
-   extra_create_at timestamptz DEFAULT CURRENT_TIMESTAMP
-);
-
 CREATE TABLE truck_makes(
    truck_make_id bigserial PRiMARY KEY,
    truck_make_name text not null
@@ -354,29 +294,6 @@ CREATE TABLE trucks (
    truck_ad_create_at timestamptz DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE truck_features (
-   id bigserial PRiMARY KEY,
-   title_en text not null,
-   title_fr text not null,
-   title_gr text not null,
-   title_sw text not null,
-   title_sp text not null,
-   title_ru text not null,
-   title_pl text not null,
-   extra_create_at timestamptz DEFAULT CURRENT_TIMESTAMP
-);
-
-CREATE TABLE truck_interior_features (
-   id bigserial PRiMARY KEY,
-   title_en text not null,
-   title_fr text not null,
-   title_gr text not null,
-   title_sw text not null,
-   title_sp text not null,
-   title_ru text not null,
-   title_pl text not null,
-   extra_create_at timestamptz DEFAULT CURRENT_TIMESTAMP
-);
 
 CREATE TABLE trailer_makes(
    trailer_make_id bigserial PRiMARY KEY,
@@ -422,18 +339,6 @@ CREATE TABLE trailers (
    user_email text,
    trailer_active boolean DEFAULT false,
    trailer_ad_create_at timestamptz DEFAULT CURRENT_TIMESTAMP
-);
-
-CREATE TABLE trailer_features (
-   id bigserial PRiMARY KEY,
-   title_en text not null,
-   title_fr text not null,
-   title_gr text not null,
-   title_sw text not null,
-   title_sp text not null,
-   title_ru text not null,
-   title_pl text not null,
-   extra_create_at timestamptz DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE van_makes(
@@ -498,30 +403,6 @@ CREATE TABLE vans (
    van_ad_create_at timestamptz DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE van_features (
-   id bigserial PRiMARY KEY,
-   title_en text not null,
-   title_fr text not null,
-   title_gr text not null,
-   title_sw text not null,
-   title_sp text not null,
-   title_ru text not null,
-   title_pl text not null,
-   extra_create_at timestamptz DEFAULT CURRENT_TIMESTAMP
-);
-
-CREATE TABLE van_interior_features (
-   id bigserial PRiMARY KEY,
-   title_en text not null,
-   title_fr text not null,
-   title_gr text not null,
-   title_sw text not null,
-   title_sp text not null,
-   title_ru text not null,
-   title_pl text not null,
-   extra_create_at timestamptz DEFAULT CURRENT_TIMESTAMP
-);
-
 CREATE TABLE semi_trailer_truck_makes(
    semi_trailer_truck_make_id bigserial PRiMARY KEY,
    semi_trailer_truck_make_name text not null
@@ -581,30 +462,6 @@ CREATE TABLE semi_trailer_trucks (
    truck_ad_create_at timestamptz DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE semi_trailer_truck_features (
-   id bigserial PRiMARY KEY,
-   title_en text not null,
-   title_fr text not null,
-   title_gr text not null,
-   title_sw text not null,
-   title_sp text not null,
-   title_ru text not null,
-   title_pl text not null,
-   extra_create_at timestamptz DEFAULT CURRENT_TIMESTAMP
-);
-
-CREATE TABLE semi_trailer_truck_interior_features (
-   id bigserial PRiMARY KEY,
-   title_en text not null,
-   title_fr text not null,
-   title_gr text not null,
-   title_sw text not null,
-   title_sp text not null,
-   title_ru text not null,
-   title_pl text not null,
-   extra_create_at timestamptz DEFAULT CURRENT_TIMESTAMP
-);
-
 CREATE TABLE semi_trailer_makes(
    semi_trailer_make_id bigserial PRiMARY KEY,
    semi_trailer_make_name text not null
@@ -649,18 +506,6 @@ CREATE TABLE semi_trailers (
    user_email text,
    trailer_active boolean DEFAULT false,
    trailer_ad_create_at timestamptz DEFAULT CURRENT_TIMESTAMP
-);
-
-CREATE TABLE semi_trailer_features (
-   id bigserial PRiMARY KEY,
-   title_en text not null,
-   title_fr text not null,
-   title_gr text not null,
-   title_sw text not null,
-   title_sp text not null,
-   title_ru text not null,
-   title_pl text not null,
-   extra_create_at timestamptz DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE coache_makes(
@@ -719,30 +564,6 @@ CREATE TABLE coaches (
    coache_ad_create_at timestamptz DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE coache_features (
-   id bigserial PRiMARY KEY,
-   title_en text not null,
-   title_fr text not null,
-   title_gr text not null,
-   title_sw text not null,
-   title_sp text not null,
-   title_ru text not null,
-   title_pl text not null,
-   extra_create_at timestamptz DEFAULT CURRENT_TIMESTAMP
-);
-
-CREATE TABLE coache_interior_features (
-   id bigserial PRiMARY KEY,
-   title_en text not null,
-   title_fr text not null,
-   title_gr text not null,
-   title_sw text not null,
-   title_sp text not null,
-   title_ru text not null,
-   title_pl text not null,
-   extra_create_at timestamptz DEFAULT CURRENT_TIMESTAMP
-);
-
 CREATE TABLE agricultural_vehicle_makes(
    agricultural_vehicle_make_id bigserial PRiMARY KEY,
    agricultural_vehicle_make_name text not null
@@ -792,30 +613,6 @@ CREATE TABLE agricultural_vehicles(
    vehicle_ad_create_at timestamptz DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE agricultural_vehicle_features (
-   id bigserial PRiMARY KEY,
-   title_en text not null,
-   title_fr text not null,
-   title_gr text not null,
-   title_sw text not null,
-   title_sp text not null,
-   title_ru text not null,
-   title_pl text not null,
-   extra_create_at timestamptz DEFAULT CURRENT_TIMESTAMP
-);
-
-CREATE TABLE agricultural_vehicle_interior_features (
-   id bigserial PRiMARY KEY,
-   title_en text not null,
-   title_fr text not null,
-   title_gr text not null,
-   title_sw text not null,
-   title_sp text not null,
-   title_ru text not null,
-   title_pl text not null,
-   extra_create_at timestamptz DEFAULT CURRENT_TIMESTAMP
-);
-
 CREATE TABLE construction_makes(
    construction_make_id bigserial PRiMARY KEY,
    construction_make_name text not null
@@ -859,30 +656,6 @@ CREATE TABLE construction_machines (
    user_email text,
    machine_active boolean DEFAULT false,
    machine_ad_create_at timestamptz DEFAULT CURRENT_TIMESTAMP
-);
-
-CREATE TABLE construction_features (
-   id bigserial PRiMARY KEY,
-   title_en text not null,
-   title_fr text not null,
-   title_gr text not null,
-   title_sw text not null,
-   title_sp text not null,
-   title_ru text not null,
-   title_pl text not null,
-   extra_create_at timestamptz DEFAULT CURRENT_TIMESTAMP
-);
-
-CREATE TABLE construction_safety (
-   id bigserial PRiMARY KEY,
-   title_en text not null,
-   title_fr text not null,
-   title_gr text not null,
-   title_sw text not null,
-   title_sp text not null,
-   title_ru text not null,
-   title_pl text not null,
-   extra_create_at timestamptz DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE forklift_makes(
@@ -931,18 +704,6 @@ CREATE TABLE forklift_trucks (
    user_email text,
    forklift_active boolean DEFAULT false,
    forklift_ad_create_at timestamptz DEFAULT CURRENT_TIMESTAMP
-);
-
-CREATE TABLE forklift_features (
-   id bigserial PRiMARY KEY,
-   title_en text not null,
-   title_fr text not null,
-   title_gr text not null,
-   title_sw text not null,
-   title_sp text not null,
-   title_ru text not null,
-   title_pl text not null,
-   extra_create_at timestamptz DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE ads_cards (
