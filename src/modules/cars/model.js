@@ -281,6 +281,12 @@ const foundCarsList = (
    offset,
    limit
 ) => {
+   const bodyConditions = bodyArr?.map(body => `car_body = '${body}'`).join(' OR ');
+   const typeConditions = typeArr?.map(type => `car_type = '${type}'`).join(' OR ');
+   const cityConditions = car_city?.map(city => `car_city_zipcode = '${city}'`).join(' OR ');
+   const fuelConditions = fuelArr?.map(car_fuel_type => `car_fuel_type = '${car_fuel_type}'`).join(' OR ');
+   const transmissionConditions = transmissionArr?.map(transmission => `car_transmission = '${transmission}'`).join(' OR ');
+
    const FOUND_CARS_LIST = `
       SELECT 
          car_make,
@@ -305,33 +311,33 @@ const foundCarsList = (
          ${car_model ? `and car_model = '${car_model}'` : ""}
          ${car_description ? `and car_description ilike '%${car_description}%'` : ""}
          ${car_variant ? `and car_variant = '${car_variant}'` : ""}
-         ${bodyArr > 0 ? `and ARRAY[car_body] @> ${bodyArr}` : ''}
+         ${bodyConditions ? `and (${bodyConditions})` : ""}
          ${car_number_seats ? `and car_number_seats = ${car_number_seats}` : ""}
          ${car_number_door ? `and car_number_door = ${car_number_door}` : ""}
          ${car_silding_door ? `and car_silding_door = '${car_silding_door}'` : ""}
          ${car_condition ? `and car_condition = '${car_condition}'` : ""}
-         ${typeArr > 0 ? `and ARRAY[car_type] @> ${typeArr}` : ''}
+         ${typeConditions ? `and (${typeConditions})` : ""}
          ${car_payment_type ? `and car_payment_type = '${car_payment_type}'` : ""}
          ${car_price_from ? `and car_price >= ${car_price_from}` : ""}
-         ${car_price_up_to ? `and car_price =< ${car_price_up_to}` : ""}
+         ${car_price_up_to ? `and car_price <= ${car_price_up_to}` : ""}
          ${car_firt_date_year_from ? `and car_firt_date_year >= ${car_firt_date_year_from}` : ""}
          ${car_firt_date_year_up_to ? `and car_firt_date_year =< ${car_firt_date_year_up_to}` : ""}
          ${car_mileage_from ? `and car_mileage >= ${car_mileage_from}` : ""}
-         ${car_mileage_up_to ? `and car_mileage =< ${car_mileage_up_to}` : ""}
+         ${car_mileage_up_to ? `and car_mileage <= ${car_mileage_up_to}` : ""}
          ${car_hu_valid_until ? `and car_hu_valid_until = '${car_hu_valid_until}'` : ""}
          ${car_previous_owners ? `and car_previous_owners = ${car_previous_owners}` : ""}
          ${car_full_service_history ? `and car_full_service_history = '${car_full_service_history}'` : ""}
          ${car_roadworthy ? `and car_roadworthy = '${car_roadworthy}'` : ""}
          ${car_country ? `and car_country = '${car_country}'` : ""}
-         ${car_city > 0 ? `and ${car_city} @> ARRAY[car_city_zipcode]` : ""}
+         ${cityConditions ? `and (${cityConditions})` : ""}
          ${zipcode ? `and car_city_zipcode ilike '%${zipcode}%'` : ""}
          ${car_radius ? `and car_radius = ${car_radius}` : ""}
-         ${fuelArr > 0 ? `and ARRAY[car_fuel_type]@> ${fuelArr}` : ''}
+         ${fuelConditions ? `and (${fuelConditions})` : ''}
          ${car_power_from ? `and car_power >= ${car_power_from}` : ""}
-         ${car_power_up_to ? `and car_power =< ${car_power_up_to}` : ""}
+         ${car_power_up_to ? `and car_power <= ${car_power_up_to}` : ""}
          ${car_cubic_capacity_from ? `and car_cubic_capacity >= ${car_cubic_capacity_from}` : ""}
-         ${car_cubic_capacity_to ? `and car_cubic_capacity =< ${car_cubic_capacity_to}` : ""}
-         ${transmissionArr > 0 ? `and ARRAY[car_transmission] @> ${transmissionArr}` : ''}
+         ${car_cubic_capacity_to ? `and car_cubic_capacity <= ${car_cubic_capacity_to}` : ""}
+         ${transmissionConditions ? `and (${transmissionConditions})` : ''}
          ${car_fuel_consumption ? `and car_fuel_consumption = ${car_fuel_consumption}` : ""}
          ${car_emissions_sticker ? `and car_emissions_sticker = '${car_emissions_sticker}'` : ""}
          ${car_emission_class ? `and car_emission_class = '${car_emission_class}'` : ""}
