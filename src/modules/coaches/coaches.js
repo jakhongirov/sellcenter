@@ -86,31 +86,6 @@ module.exports = {
          } = req.body
 
          if (offset && limit) {
-            const fuelArr = fuel_type ? fuel_type?.split(',') : ""
-            const coache_city = city ? city?.split(',') : ""
-            const colorArr = exterior_colour ? exterior_colour?.split(',') : ""
-            const transmissionArr = transmission ? transmission?.split(',') : ""
-            const featuresId = []
-            const interiorFeaturesId = []
-
-            if (features) {
-               const featuresArr = features?.split(',')
-               if (featuresArr?.length > 0) {
-                  for (let i = 0; i < featuresArr.length; i++) {
-                     featuresId.push(Number(featuresArr[i]))
-                  }
-               }
-            }
-
-            if (interior_features) {
-               const interiorFeaturesArr = interior_features?.split(',')
-               if (interiorFeaturesArr?.length > 0) {
-                  for (let i = 0; i < interiorFeaturesArr.length; i++) {
-                     interiorFeaturesId.push(Number(interiorFeaturesArr[i]))
-                  }
-               }
-            }
-
             const coachesList = await model.coachesList(
                coache_condition,
                coache_category,
@@ -127,21 +102,21 @@ module.exports = {
                coache_power_from,
                coache_power_to,
                coache_country,
-               coache_city,
+               city,
                zipcode,
                coache_radius,
-               fuelArr,
-               transmissionArr,
+               fuel_type,
+               transmission,
                coache_emission_class,
                coache_emissions_sticker,
-               featuresId,
+               features,
                coache_air_conditioning,
                coache_number_of_seats_from,
                coache_number_of_seats_to,
                coache_cruise_control,
                coache_trailer_coupling_fix,
-               interiorFeaturesId,
-               colorArr,
+               interior_features,
+               exterior_colour,
                day,
                coache_damaged,
                coache_full_service_history,
@@ -229,31 +204,6 @@ module.exports = {
             video
          } = req.body
 
-         const fuelArr = fuel_type ? fuel_type?.split(',') : ""
-         const coache_city = city ? city?.split(',') : ""
-         const colorArr = exterior_colour ? exterior_colour?.split(',') : ""
-         const transmissionArr = transmission ? transmission?.split(',') : ""
-         const featuresId = []
-         const interiorFeaturesId = []
-
-         if (features) {
-            const featuresArr = features?.split(',')
-            if (featuresArr?.length > 0) {
-               for (let i = 0; i < featuresArr.length; i++) {
-                  featuresId.push(Number(featuresArr[i]))
-               }
-            }
-         }
-
-         if (interior_features) {
-            const interiorFeaturesArr = interior_features?.split(',')
-            if (interiorFeaturesArr?.length > 0) {
-               for (let i = 0; i < interiorFeaturesArr.length; i++) {
-                  interiorFeaturesId.push(Number(interiorFeaturesArr[i]))
-               }
-            }
-         }
-
          const coachesCount = await model.coachesCount(
             coache_condition,
             coache_category,
@@ -270,21 +220,21 @@ module.exports = {
             coache_power_from,
             coache_power_to,
             coache_country,
-            coache_city,
+            city,
             zipcode,
             coache_radius,
-            fuelArr,
-            transmissionArr,
+            fuel_type,
+            transmission,
             coache_emission_class,
             coache_emissions_sticker,
-            featuresId,
+            features,
             coache_air_conditioning,
             coache_number_of_seats_from,
             coache_number_of_seats_to,
             coache_cruise_control,
             coache_trailer_coupling_fix,
-            interiorFeaturesId,
-            colorArr,
+            interior_features,
+            exterior_colour,
             day,
             coache_damaged,
             coache_full_service_history,
@@ -399,26 +349,6 @@ module.exports = {
 
          const coache_img_name = [];
          const coache_img = [];
-         const featuresId = []
-         const interiorFeaturesId = []
-
-         if (features) {
-            const featuresArr = features?.split(',')
-            if (featuresArr?.length > 0) {
-               for (let i = 0; i < featuresArr.length; i++) {
-                  featuresId.push(Number(featuresArr[i]))
-               }
-            }
-         }
-
-         if (interior_features) {
-            const interiorFeaturesArr = interior_features?.split(',')
-            if (interiorFeaturesArr?.length > 0) {
-               for (let i = 0; i < interiorFeaturesArr.length; i++) {
-                  interiorFeaturesId.push(Number(interiorFeaturesArr[i]))
-               }
-            }
-         }
 
          uploadPhoto?.forEach((e) => {
             coache_img.push(
@@ -448,12 +378,12 @@ module.exports = {
             coache_transmission,
             coache_emission_class,
             coache_emissions_sticker,
-            featuresId,
+            features,
             coache_air_conditioning,
             coache_number_of_seats,
             coache_cruise_control,
             coache_trailer_coupling_fix,
-            interiorFeaturesId,
+            interior_features,
             coache_exterior_colour,
             coache_damaged,
             coache_full_service_history,
@@ -538,26 +468,6 @@ module.exports = {
          const foundCoache = await model.foundCoache(id)
          const coache_img_name = [];
          const coache_img = [];
-         const featuresId = []
-         const interiorFeaturesId = []
-
-         if (features) {
-            const featuresArr = features?.split(',')
-            if (featuresArr?.length > 0) {
-               for (let i = 0; i < featuresArr.length; i++) {
-                  featuresId.push(Number(featuresArr[i]))
-               }
-            }
-         }
-
-         if (interior_features) {
-            const interiorFeaturesArr = interior_features?.split(',')
-            if (interiorFeaturesArr?.length > 0) {
-               for (let i = 0; i < interiorFeaturesArr.length; i++) {
-                  interiorFeaturesId.push(Number(interiorFeaturesArr[i]))
-               }
-            }
-         }
 
          if (uploadPhoto.length) {
             foundCoache?.coache_images_name.forEach((e) => {
@@ -611,12 +521,12 @@ module.exports = {
             coache_transmission,
             coache_emission_class,
             coache_emissions_sticker,
-            featuresId,
+            features,
             coache_air_conditioning,
             coache_number_of_seats,
             coache_cruise_control,
             coache_trailer_coupling_fix,
-            interiorFeaturesId,
+            interior_features,
             coache_exterior_colour,
             coache_damaged,
             coache_full_service_history,

@@ -30,66 +30,46 @@ const cars = require('./cars/cars')
 
 // Motorcycles files
 const motorcycleBrand = require('./motorcycleBrand/motorcycleBrand')
-const motorcycleTypes = require('./motorcycleType/motorcycleType')
-const motorcycleOthers = require('./motorcycleOtherDetails/motorcycleOtherDetails')
 const motorcycle = require('./motorcycle/motorcycle')
 
 // Motor home files
 const motorhomeBrand = require('./motorhomeBrand/motorhomeBrand')
-const motorhomeTypes = require('./motorhomeType/motorhomeType')
-const motorhomeFeatures = require('./motorhomeFeatures/motorhomeFeatures')
-const motorhomeInteriorFeatures = require('./motorhomeInteriorFeatures/motorhomeInteriorFeatures')
 const motorhomes = require('./motorhome/motorhome')
 
 // Truck files
 const truckBrand = require('./truckBrand/truckBrand')
-const truckFeatures = require('./truckFeatures/truckFeatures')
-const truckInteriorFeatures = require('./truckInteriorfeatures/truckInteriorfeatures')
 const trucks = require('./truck/truck')
 
 // Trailer files
 const trailerBrand = require('./trailerBrand/trailerBrand')
-const trailerFeatures = require('./trailerFeatures/trailerFeatures')
 const trailers = require('./trailers/trailers')
 
 // Van files
 const vanBrand = require('./vanBrand/vanBrand')
-const vanFeatures = require('./vanFeatures/vanFeatures')
-const vanInteriorFeatures = require('./vanInteriorfeatures/vanInteriorfeatures')
 const vans = require('./vans/vans')
 
 // Semi trailer truck files
 const semitruckBrand = require('./semitruckBrand/semitruckBrand')
-const semitruckFeatures = require('./semitruckFeatures/semitruckFeatures')
-const semitruckInteriorFeatures = require('./semitruckInteriorfeatures/semitruckInteriorfeatures')
 const semitruck = require('./semitruck/semitruck')
 
 // Semi trailer files
 const semitrailerBrand = require('./semitrailerBrand/semitrailerBrand')
-const semitrailerFeatures = require('./semitrailerFeatures/semitrailerFeatures')
 const semitrailers = require('./semitrailers/semitrailers')
 
 // Coache files
 const coacheBrand = require('./coacheBrand/coacheBrand')
-const coacheFeatures = require('./coacheFeatures/coacheFeatures')
-const coacheInteriorFeatures = require('./coacheInteriorfeatures/coacheInteriorfeatures')
 const coaches = require('./coaches/coaches')
 
 // Agricultural vehicle files
 const agriculturalBrand = require('./agriculturalBrand/agriculturalBrand')
-const agriculturalFeatures = require('./agriculturalFeatures/agriculturalFeatures')
-const agriculturalInteriorFeatures = require('./agriculturalInteriorfeatures/agriculturalInteriorfeatures')
 const agriculturals = require('./agricultural/agricultural')
 
 // Construction machine files
 const constructionBrand = require('./constructionBrand/constructionBrand')
-const constructionFeatures = require('./constructionFeatures/constructionFeatures')
-const constructionSafety = require('./constructionSafety/constructionSafety')
 const constructions = require('./constructions/constructions')
 
 // Forklift trucks files
 const forkliftBrand = require('./forkliftBrand/forkliftBrand')
-const forkliftFeatures = require('./forkliftFeatures/forkliftFeatures')
 const forklifts = require('./forklifts/forklifts')
 
 router
@@ -196,22 +176,10 @@ router
    .put('/motorcycle/update/model', motorcycleBrand.PUT_MODEL)
    .delete('/motorcycle/delete/model', motorcycleBrand.DELETE_MODEL)
 
-   // Motorcycle types
-   .get('/motorcycle/types', motorcycleTypes.GET)
-   .post('/motorcycle/add/type', motorcycleTypes.POST)
-   .put('/motorcycle/update/type', motorcycleTypes.PUT)
-   .delete('/motorcycle/delete/type', motorcycleTypes.DELETE)
-
-   // Motorcycle others
-   .get('/motorcycle/others', motorcycleOthers.GET)
-   .post('/motorcycle/add/other', motorcycleOthers.POST)
-   .put('/motorcycle/update/other', motorcycleOthers.PUT)
-   .delete('/motorcycle/delete/other', motorcycleOthers.DELETE)
-
    // Motorcycle
    .get('/motorcycles/admin/list', motorcycle.GET_ADMIN)
-   .get('/motorcycles/list', motorcycle.GET_MOTORCYCLE)
-   .get('/motorcycles/count', motorcycle.GET_MOTORCYCLE_COUNT)
+   .post('/motorcycles/list', motorcycle.GET_MOTORCYCLE)
+   .post('/motorcycles/count', motorcycle.GET_MOTORCYCLE_COUNT)
    .get('/motorcycles/:id', motorcycle.GET_MOTORCYCLE_ID)
    .post('/motorcycles/add', FileUpload.array("photos"), motorcycle.POST_MOTORCYCLE)
    .put('/motorcycles/update', FileUpload.array("photos"), motorcycle.PUT_MOTORCYCLE)
@@ -229,28 +197,10 @@ router
    .put('/motorhome/update/model', motorhomeBrand.PUT_MODEL)
    .delete('/motorhome/delete/model', motorhomeBrand.DELETE_MODEL)
 
-   // Motor home types
-   .get('/motorhome/types', motorhomeTypes.GET)
-   .post('/motorhome/add/type', motorhomeTypes.POST)
-   .put('/motorhome/update/type', motorhomeTypes.PUT)
-   .delete('/motorhome/delete/type', motorhomeTypes.DELETE)
-
-   // Motor home features
-   .get('/motorhome/features', motorhomeFeatures.GET)
-   .post('/motorhome/add/feature', motorhomeFeatures.POST)
-   .put('/motorhome/update/feature', motorhomeFeatures.PUT)
-   .delete('/motorhome/delete/feature', motorhomeFeatures.DELETE)
-
-   // Motor home interior features
-   .get('/motorhome/interiorfeatures', motorhomeInteriorFeatures.GET)
-   .post('/motorhome/add/interiorfeature', motorhomeInteriorFeatures.POST)
-   .put('/motorhome/update/interiorfeature', motorhomeInteriorFeatures.PUT)
-   .delete('/motorhome/delete/interiorfeature', motorhomeInteriorFeatures.DELETE)
-
    // Motor homes
    .get('/motorhomes/admin/list', motorhomes.GET_MOTOR_HOME)
-   .get('/motorhomes/list', motorhomes.GET_MOTOR_HOME)
-   .get('/motorhomes/count', motorhomes.GET_COUNT_MOTOR_HOME)
+   .post('/motorhomes/list', motorhomes.GET_MOTOR_HOME)
+   .post('/motorhomes/count', motorhomes.GET_COUNT_MOTOR_HOME)
    .get('/motorhomes/:id', motorhomes.GET_MOTORHOME_ID)
    .post('/motorhomes/add', FileUpload.array("photos"), motorhomes.POST_MOTOR_HOME)
    .put('/motorhomes/update', FileUpload.array("photos"), motorhomes.PUT_MOTOR_HOME)
@@ -268,22 +218,10 @@ router
    .put('/truck/update/model', truckBrand.PUT_MODEL)
    .delete('/truck/delete/model', truckBrand.DELETE_MODEL)
 
-   // Truck features
-   .get('/truck/features', truckFeatures.GET)
-   .post('/truck/add/feature', truckFeatures.POST)
-   .put('/truck/update/feature', truckFeatures.PUT)
-   .delete('/truck/delete/feature', truckFeatures.DELETE)
-
-   // Truck interior features
-   .get('/truck/interiorfeatures', truckInteriorFeatures.GET)
-   .post('/truck/add/interiorfeature', truckInteriorFeatures.POST)
-   .put('/truck/update/interiorfeature', truckInteriorFeatures.PUT)
-   .delete('/truck/delete/interiorfeature', truckInteriorFeatures.DELETE)
-
    // Trcuks
    .get('/trucks/admin/list', trucks.GET_ADMIN)
-   .get('/trucks/list', trucks.GET_TRUCK_LIST)
-   .get('/trucks/count', trucks.GET_TRUCK_COUNT)
+   .post('/trucks/list', trucks.GET_TRUCK_LIST)
+   .post('/trucks/count', trucks.GET_TRUCK_COUNT)
    .get('/trucks/:id', trucks.GET_TRUCK_ID)
    .post('/trucks/add', FileUpload.array("photos"), trucks.POST_TRUCK)
    .put('/trucks/update', FileUpload.array("photos"), trucks.PUT_TRUCK)
@@ -301,16 +239,10 @@ router
    .put('/trailer/update/model', trailerBrand.PUT_MODEL)
    .delete('/trailer/delete/model', trailerBrand.DELETE_MODEL)
 
-   // Trailer features
-   .get('/trailer/features', trailerFeatures.GET)
-   .post('/trailer/add/feature', trailerFeatures.POST)
-   .put('/trailer/update/feature', trailerFeatures.PUT)
-   .delete('/trailer/delete/feature', trailerFeatures.DELETE)
-
    // Trailers
    .get('/trailers/admin/list', trailers.GET_ADMIN)
-   .get('/trailers/list', trailers.GET_TRAILER_LIST)
-   .get('/trailers/count', trailers.GET_TRAILER_COUNT)
+   .post('/trailers/list', trailers.GET_TRAILER_LIST)
+   .post('/trailers/count', trailers.GET_TRAILER_COUNT)
    .get('/trailers/:id', trailers.GET_TRAILER_BY_ID)
    .post('/trailers/add', FileUpload.array("photos"), trailers.POST_TRAILER)
    .put('/trailers/update', FileUpload.array("photos"), trailers.PUT_TRAILER)
@@ -328,22 +260,10 @@ router
    .put('/van/update/model', vanBrand.PUT_MODEL)
    .delete('/van/delete/model', vanBrand.DELETE_MODEL)
 
-   // Van features
-   .get('/van/features', vanFeatures.GET)
-   .post('/van/add/feature', vanFeatures.POST)
-   .put('/van/update/feature', vanFeatures.PUT)
-   .delete('/van/delete/feature', vanFeatures.DELETE)
-
-   // Van interior features
-   .get('/van/interiorfeatures', vanInteriorFeatures.GET)
-   .post('/van/add/interiorfeature', vanInteriorFeatures.POST)
-   .put('/van/update/interiorfeature', vanInteriorFeatures.PUT)
-   .delete('/van/delete/interiorfeature', vanInteriorFeatures.DELETE)
-
    // Vans
    .get('/vans/admin/list', vans.GET_ADMIN)
-   .get('/vans/list', vans.GET_VAN_LIST)
-   .get('/vans/count', vans.GET_VAN_COUNT)
+   .post('/vans/list', vans.GET_VAN_LIST)
+   .post('/vans/count', vans.GET_VAN_COUNT)
    .get('/vans/:id', vans.GET_VAN_ID)
    .post('/vans/add', FileUpload.array("photos"), vans.POST_VAN)
    .put('/vans/update', FileUpload.array("photos"), vans.PUT_VAN)
@@ -361,22 +281,10 @@ router
    .put('/semitruck/update/model', semitruckBrand.PUT_MODEL)
    .delete('/semitruck/delete/model', semitruckBrand.DELETE_MODEL)
 
-   // Semi truck features
-   .get('/semitruck/features', semitruckFeatures.GET)
-   .post('/semitruck/add/feature', semitruckFeatures.POST)
-   .put('/semitruck/update/feature', semitruckFeatures.PUT)
-   .delete('/semitruck/delete/feature', semitruckFeatures.DELETE)
-
-   // Semi truck interior features
-   .get('/semitruck/interiorfeatures', semitruckInteriorFeatures.GET)
-   .post('/semitruck/add/interiorfeature', semitruckInteriorFeatures.POST)
-   .put('/semitruck/update/interiorfeature', semitruckInteriorFeatures.PUT)
-   .delete('/semitruck/delete/interiorfeature', semitruckInteriorFeatures.DELETE)
-
    // Semi truck
    .get('/semitrucks/admin/list', semitruck.GET_SEMI_TRUCK_LIST)
-   .get('/semitrucks/list', semitruck.GET_SEMI_TRUCK_LIST)
-   .get('/semitrucks/count', semitruck.GET_SEMI_TRUCK_COUNT)
+   .post('/semitrucks/list', semitruck.GET_SEMI_TRUCK_LIST)
+   .post('/semitrucks/count', semitruck.GET_SEMI_TRUCK_COUNT)
    .get('/semitruck/:id', semitruck.GET_SEMI_TRUCK_ID)
    .post('/semitruck/add', FileUpload.array("photos"), semitruck.POST_SEMI_TRUCK)
    .put('/semitruck/update', FileUpload.array("photos"), semitruck.PUT_SEMI_TRUCK)
@@ -394,16 +302,10 @@ router
    .put('/semitrailer/update/model', semitrailerBrand.PUT_MODEL)
    .delete('/semitrailer/delete/model', semitrailerBrand.DELETE_MODEL)
 
-   // Semi trailer features
-   .get('/semitrailer/features', semitrailerFeatures.GET)
-   .post('/semitrailer/add/feature', semitrailerFeatures.POST)
-   .put('/semitrailer/update/feature', semitrailerFeatures.PUT)
-   .delete('/semitrailer/delete/feature', semitrailerFeatures.DELETE)
-
    // Semi trailer
    .get('/semitrailers/admin/list', semitrailers.GET_ADMIN)
-   .get('/semitrailers/list', semitrailers.GET_TRAILER_LIST)
-   .get('/semitrailers/count', semitrailers.GET_TRAILER_COUNT)
+   .post('/semitrailers/list', semitrailers.GET_TRAILER_LIST)
+   .post('/semitrailers/count', semitrailers.GET_TRAILER_COUNT)
    .get('/semitrailer/:id', semitrailers.GET_TRAILER_BY_ID)
    .post('/semitrailer/add', FileUpload.array("photos"), semitrailers.POST_TRAILER)
    .put('/semitrailer/update', FileUpload.array("photos"), semitrailers.PUT_TRAILER)
@@ -421,22 +323,10 @@ router
    .put('/coache/update/model', coacheBrand.PUT_MODEL)
    .delete('/coache/delete/model', coacheBrand.DELETE_MODEL)
 
-   // Coache features
-   .get('/coache/features', coacheFeatures.GET)
-   .post('/coache/add/feature', coacheFeatures.POST)
-   .put('/coache/update/feature', coacheFeatures.PUT)
-   .delete('/coache/delete/feature', coacheFeatures.DELETE)
-
-   // Coache interior features
-   .get('/coache/interiorfeatures', coacheInteriorFeatures.GET)
-   .post('/coache/add/interiorfeature', coacheInteriorFeatures.POST)
-   .put('/coache/update/interiorfeature', coacheInteriorFeatures.PUT)
-   .delete('/coache/delete/interiorfeature', coacheInteriorFeatures.DELETE)
-
    // Coache
    .get('/coaches/admin/list', coaches.GET_ADMIN)
-   .get('/coaches/list', coaches.GET_COACHES_LIST)
-   .get('/coaches/count', coaches.GET_COACHES_COUNT)
+   .post('/coaches/list', coaches.GET_COACHES_LIST)
+   .post('/coaches/count', coaches.GET_COACHES_COUNT)
    .get('/coaches/:id', coaches.GET_COACHE_ID)
    .post('/coaches/add', FileUpload.array("photos"), coaches.POST_COACHE)
    .put('/coaches/update', FileUpload.array("photos"), coaches.PUT_COACHE)
@@ -454,22 +344,10 @@ router
    .put('/agricultural/update/model', agriculturalBrand.PUT_MODEL)
    .delete('/agricultural/delete/model', agriculturalBrand.DELETE_MODEL)
 
-   // Agricultural features
-   .get('/agricultural/features', agriculturalFeatures.GET)
-   .post('/agricultural/add/feature', agriculturalFeatures.POST)
-   .put('/agricultural/update/feature', agriculturalFeatures.PUT)
-   .delete('/agricultural/delete/feature', agriculturalFeatures.DELETE)
-
-   // Agricultural interior features
-   .get('/agricultural/interiorfeatures', agriculturalInteriorFeatures.GET)
-   .post('/agricultural/add/interiorfeature', agriculturalInteriorFeatures.POST)
-   .put('/agricultural/update/interiorfeature', agriculturalInteriorFeatures.PUT)
-   .delete('/agricultural/delete/interiorfeature', agriculturalInteriorFeatures.DELETE)
-
    // Agricultural
    .get('/agriculturals/admin/list', agriculturals.GET_ADMIN)
-   .get('/agriculturals/list', agriculturals.GET_VEHICLE_LIST)
-   .get('/agriculturals/count', agriculturals.GET_VEHICLE_COUNT)
+   .post('/agriculturals/list', agriculturals.GET_VEHICLE_LIST)
+   .post('/agriculturals/count', agriculturals.GET_VEHICLE_COUNT)
    .get('/agriculturals/:id', agriculturals.GET_VEHICLE_ID)
    .post('/agriculturals/add', FileUpload.array("photos"), agriculturals.POST_VEHICLE)
    .put('/agriculturals/update', FileUpload.array("photos"), agriculturals.PUT_VEHICLE)
@@ -487,22 +365,10 @@ router
    .put('/construction/update/model', constructionBrand.PUT_MODEL)
    .delete('/construction/delete/model', constructionBrand.DELETE_MODEL)
 
-   // Construction features
-   .get('/construction/features', constructionFeatures.GET)
-   .post('/construction/add/feature', constructionFeatures.POST)
-   .put('/construction/update/feature', constructionFeatures.PUT)
-   .delete('/construction/delete/feature', constructionFeatures.DELETE)
-
-   // Construction safety
-   .get('/construction/interiorfeatures', constructionSafety.GET)
-   .post('/construction/add/interiorfeature', constructionSafety.POST)
-   .put('/construction/update/interiorfeature', constructionSafety.PUT)
-   .delete('/construction/delete/interiorfeature', constructionSafety.DELETE)
-
    // Construction
    .get('/constructions/admin/list', constructions.GET_ADMIN)
-   .get('/constructions/list', constructions.GET_CONSTRUCTION_LIST)
-   .get('/constructions/count', constructions.GET_CONSTRUCTION_COUNT)
+   .post('/constructions/list', constructions.GET_CONSTRUCTION_LIST)
+   .post('/constructions/count', constructions.GET_CONSTRUCTION_COUNT)
    .get('/constructions/:id', constructions.GET_CONSTRUCTION_ID)
    .post('/constructions/add', FileUpload.array("photos"), constructions.POST_CONSTRUCTION)
    .put('/constructions/update', FileUpload.array("photos"), constructions.PUT_CONSTRUCTION)
@@ -520,16 +386,10 @@ router
    .put('/forklift/update/model', forkliftBrand.PUT_MODEL)
    .delete('/forklift/delete/model', forkliftBrand.DELETE_MODEL)
 
-   // Forklift features
-   .get('/forklift/features', forkliftFeatures.GET)
-   .post('/forklift/add/feature', forkliftFeatures.POST)
-   .put('/forklift/update/feature', forkliftFeatures.PUT)
-   .delete('/forklift/delete/feature', forkliftFeatures.DELETE)
-
    // Forklift
    .get('/forklifts/admin/list', forklifts.GET_ADMIN)
-   .get('/forklifts/list', forklifts.GET_FORKLIFT_LIST)
-   .get('/forklifts/count', forklifts.GET_FORKLIFT_COUNT)
+   .post('/forklifts/list', forklifts.GET_FORKLIFT_LIST)
+   .post('/forklifts/count', forklifts.GET_FORKLIFT_COUNT)
    .get('/forklifts/:id', forklifts.GET_FORKLIFT_ID)
    .post('/forklifts/add', FileUpload.array("photos"), forklifts.POST_FORKLIFT)
    .put('/forklifts/update', FileUpload.array("photos"), forklifts.PUT_FORKLIFT)

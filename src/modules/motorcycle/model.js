@@ -195,6 +195,14 @@ const motorcycleList = (
    offset,
    limit
 ) => {
+   const cityConditions = motorcycle_city?.map(city => `motorcycle_city_zipcode = '${city}'`).join(' OR ');
+   const fuelArrConditions = fuelArr?.map(e => `motorcycle_fuel_type = '${e}'`).join(' OR ');
+   const modeArrConditions = modeArr?.map(e => `motorcycle_driving_mode = '${e}'`).join(' OR ');
+   const colorArrConditions = colorArr?.map(e => `motorcycle_exterior_colour = '${e}'`).join(' OR ');
+   const transmissionArrConditions = transmissionArr?.map(e => `motorcycle_transmission = '${e}'`).join(' OR ');
+   const historyArrConditions = historyArr?.map(e => `motorcycle_history = '${e}'`).join(' OR ');
+   const othersString = others?.map(other => `'${other}'`).join(', ');
+
    const FOUND_MOTORCYCLE_LIST = `
       SELECT
          *
@@ -215,23 +223,23 @@ const motorcycleList = (
          ${motorcycle_power_from ? `and motorcycle_power >= ${motorcycle_power_from}` : ""}
          ${motorcycle_power_to ? `and motorcycle_power =< ${motorcycle_power_to}` : ""}
          ${motorcycle_country ? `and motorcycle_country ilike '%${motorcycle_country}%'` : ""}
-         ${motorcycle_city?.length > 0 ? `and ${motorcycle_city} @> ARRAY[motorcycle_city_zipcode]` : ""}
+         ${cityConditions ? `and (${cityConditions})` : ""}
          ${zipcode ? `and motorcycle_city_zipcode ilike '%${zipcode}%'` : ""}
          ${motorcycle_radius ? `and motorcycle_radius = ${motorcycle_radius}` : ""}
-         ${fuelArr?.length > 0 ? `and ${fuelArr} @> ARRAY[motorcycle_fuel_type]` : ''}
-         ${modeArr?.length > 0 ? `and ${modeArr} @> ARRAY[motorcycle_driving_mode]` : ''}
-         ${transmissionArr?.length > 0 ? `and ${transmissionArr} @> ARRAY[motorcycle_transmission]` : ''}
+         ${fuelArrConditions ? `and (${fuelArrConditions})` : ''}
+         ${modeArrConditions ? `and (${modeArrConditions})` : ''}
+         ${transmissionArrConditions ? `and (${transmissionArrConditions})` : ''}
          ${motorcycle_cubic_capacity_from ? `and motorcycle_cubic_capacity >= ${motorcycle_cubic_capacity_from}` : ""}
          ${motorcycle_cubic_capacity_to ? `and motorcycle_cubic_capacity =< ${motorcycle_cubic_capacity_to}` : ""}
-         ${colorArr?.length > 0 ? `and ${colorArr} @> ARRAY[motorcycle_exterior_colour]` : ''}
-         ${othersId.length ? `and others @> ${othersId}` : ""}
+         ${colorArrConditions ? `and (${colorArrConditions})` : ''}
+         ${othersId?.length ? `and others @> ARRAY[${othersString}]` : ""}
          ${motorcycle_vat ? `and motorcycle_vat = '${motorcycle_vat}'` : ""}
          ${days ? `and motorcycle_ad_create_at > current_date - interval '${days} days'` : ""}
          ${picture == true ? `and Array_Length(motorcycle_images_url, 1) > 0` : ""}
          ${video == true ? `and motorcycle_vide_link != '' ` : ""}
          ${motorcycle_vendor ? `and motorcycle_vendor = '${motorcycle_vendor}'` : ""}
          ${motorcycle_dealer_rating ? `and motorcycle_dealer_rating = ${motorcycle_dealer_rating}` : ""}
-         ${historyArr?.length > 0 ? `and ${historyArr} @> ARRAY[motorcycle_history]` : ''}
+         ${historyArrConditions ? `and (${historyArrConditions})` : ''}
          ${motorcycle_damaged ? `and motorcycle_damaged = '${motorcycle_damaged}'` : ""}
          ${motorcycle_number_owners ? `and motorcycle_number_owners = ${motorcycle_number_owners}` : ""}
          ${motorcycle_approved_used_programme ? `and motorcycle_number_owners = '${motorcycle_approved_used_programme}'` : ""}
@@ -280,6 +288,14 @@ const motorcycleCount = (
    motorcycle_number_owners,
    motorcycle_approved_used_programme
 ) => {
+   const cityConditions = motorcycle_city?.map(city => `motorcycle_city_zipcode = '${city}'`).join(' OR ');
+   const fuelArrConditions = fuelArr?.map(e => `motorcycle_fuel_type = '${e}'`).join(' OR ');
+   const modeArrConditions = modeArr?.map(e => `motorcycle_driving_mode = '${e}'`).join(' OR ');
+   const colorArrConditions = colorArr?.map(e => `motorcycle_exterior_colour = '${e}'`).join(' OR ');
+   const transmissionArrConditions = transmissionArr?.map(e => `motorcycle_transmission = '${e}'`).join(' OR ');
+   const historyArrConditions = historyArr?.map(e => `motorcycle_history = '${e}'`).join(' OR ');
+   const othersString = others?.map(other => `'${other}'`).join(', ');
+
    const FOUND_MOTORCYCLE_COUNT = `
    SELECT
       count(motorcycle_id)
@@ -300,23 +316,23 @@ const motorcycleCount = (
       ${motorcycle_power_from ? `and motorcycle_power >= ${motorcycle_power_from}` : ""}
       ${motorcycle_power_to ? `and motorcycle_power =< ${motorcycle_power_to}` : ""}
       ${motorcycle_country ? `and motorcycle_country ilike '%${motorcycle_country}%'` : ""}
-      ${motorcycle_city?.length > 0 ? `and ${motorcycle_city} @> ARRAY[motorcycle_city_zipcode]` : ""}
+      ${cityConditions ? `and (${cityConditions})` : ""}
       ${zipcode ? `and motorcycle_city_zipcode ilike '%${zipcode}%'` : ""}
       ${motorcycle_radius ? `and motorcycle_radius = ${motorcycle_radius}` : ""}
-      ${fuelArr?.length > 0 ? `and ${fuelArr} @> ARRAY[motorcycle_fuel_type]` : ''}
-      ${modeArr?.length > 0 ? `and ${modeArr} @> ARRAY[motorcycle_driving_mode]` : ''}
-      ${transmissionArr?.length > 0 ? `and ${transmissionArr} @> ARRAY[motorcycle_transmission]` : ''}
+      ${fuelArrConditions ? `and (${fuelArrConditions})` : ''}
+      ${modeArrConditions ? `and (${modeArrConditions})` : ''}
+      ${transmissionArrConditions ? `and (${transmissionArrConditions})` : ''}
       ${motorcycle_cubic_capacity_from ? `and motorcycle_cubic_capacity >= ${motorcycle_cubic_capacity_from}` : ""}
       ${motorcycle_cubic_capacity_to ? `and motorcycle_cubic_capacity =< ${motorcycle_cubic_capacity_to}` : ""}
-      ${colorArr?.length > 0 ? `and ${colorArr} @> ARRAY[motorcycle_exterior_colour]` : ''}
-      ${othersId.length ? `and others @> ${othersId}` : ""}
+      ${colorArrConditions ? `and (${colorArrConditions})` : ''}
+      ${othersId?.length ? `and others @> ARRAY[${othersString}]` : ""}
       ${motorcycle_vat ? `and motorcycle_vat = '${motorcycle_vat}'` : ""}
       ${days ? `and motorcycle_ad_create_at > current_date - interval '${days} days'` : ""}
       ${picture == true ? `and Array_Length(motorcycle_images_url, 1) > 0` : ""}
       ${video == true ? `and motorcycle_vide_link != '' ` : ""}
       ${motorcycle_vendor ? `and motorcycle_vendor = '${motorcycle_vendor}'` : ""}
       ${motorcycle_dealer_rating ? `and motorcycle_dealer_rating = ${motorcycle_dealer_rating}` : ""}
-      ${historyArr?.length > 0 ? `and ${historyArr} @> ARRAY[motorcycle_history]` : ''}
+      ${historyArrConditions ? `and (${historyArrConditions})` : ''}
       ${motorcycle_damaged ? `and motorcycle_damaged = '${motorcycle_damaged}'` : ""}
       ${motorcycle_number_owners ? `and motorcycle_number_owners = ${motorcycle_number_owners}` : ""}
       ${motorcycle_approved_used_programme ? `and motorcycle_number_owners = '${motorcycle_approved_used_programme}'` : ""}

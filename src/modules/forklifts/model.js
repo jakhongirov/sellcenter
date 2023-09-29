@@ -191,6 +191,12 @@ const forkliftList = (
    limit,
    offset
 ) => {
+   const cityConditions = forklift_city?.map(city => `forklift_city_zipcode = '${city}'`).join(' OR ');
+   const fuelConditions = fuelArr?.map(e => `forklift_fuel_type = '${e}'`).join(' OR ');
+   const transmissionConditions = transmissionArr?.map(e => `forklift_transmission = '${e}'`).join(' OR ');
+   const featuresString = featuresId?.map(e => `'${e}'`).join(', ');
+   const securityString = securityArr?.map(e => `'${e}'`).join(', ');
+
    const FORKLIFT_LIST = `
       SELECT
          *
@@ -211,19 +217,19 @@ const forkliftList = (
          ${forklift_operating_hours_from ? `and ${forklift_operating_hours_from} <= forklift_operating_hours` : ""}
          ${forklift_operating_hours_to ? `and ${forklift_operating_hours_to} >= forklift_operating_hours` : ""}
          ${forklift_country ? `and forklift_country = '${forklift_country}'` : ""}
-         ${forklift_city?.length > 0 ? `and ${forklift_city} @> ARRAY[forklift_city_zipcode] ` : ""}
+         ${cityConditions ? `and (${cityConditions})` : ""}
          ${zipcode ? `and forklift_city_zipcode ilike '%${zipcode}%'` : ""}
          ${forklift_radius ? `and ${forklift_radius} >= forklift_radius` : ""}
-         ${fuelArr?.length > 0 ? `and ${fuelArr} @> ARRAY[forklift_fuel_type]` : ''}
-         ${transmissionArr?.length > 0 ? `and ${transmissionArr} @> ARRAY[forklift_transmission]` : ''}
-         ${featuresId?.length > 0 ? `and ${featuresId} @> forklift_features` : ""}
+         ${fuelConditions ? `and (${fuelConditions})` : ''}
+         ${transmissionConditions ? `and (${transmissionConditions})` : ''}
+         ${featuresId?.length > 0 ? `and forklift_features @> ARRAY[${featuresString}]` : ""}
          ${forklift_lifting_capacity_from ? `and ${forklift_lifting_capacity_from} <= forklift_lifting_capacity` : ""}
          ${forklift_lifting_capacity_to ? `and ${forklift_lifting_capacity_to} >= forklift_lifting_capacity` : ""}
          ${forklift_lifting_height_from ? `and ${forklift_lifting_height_from} <= forklift_lifting_height` : ""}
          ${forklift_lifting_height_to ? `and ${forklift_lifting_height_to} >= forklift_lifting_height` : ""}
          ${forklift_height_from ? `and ${forklift_height_from} <= forklift_height` : ""}
          ${forklift_height_to ? `and ${forklift_height_to} >= forklift_height` : ""}
-         ${securityArr?.length > 0 ? `and ${securityArr} @> forklift_security` : ""}
+         ${securityArr?.length > 0 ? `and forklift_security @> ARRAY[${securityString}]` : ""}
          ${forklift_renting_possible == true ? `and forklift_renting_possible = ${forklift_renting_possible}` : ""}
          ${forklift_discount_offers == true ? `and forklift_discount_offers = ${forklift_discount_offers}` : ""}
          ${forklift_vendor ? `and forklift_vendor = '${forklift_vendor}'` : ""}
@@ -274,6 +280,12 @@ const forkliftCount = (
    video,
    day
 ) => {
+   const cityConditions = forklift_city?.map(city => `forklift_city_zipcode = '${city}'`).join(' OR ');
+   const fuelConditions = fuelArr?.map(e => `forklift_fuel_type = '${e}'`).join(' OR ');
+   const transmissionConditions = transmissionArr?.map(e => `forklift_transmission = '${e}'`).join(' OR ');
+   const featuresString = featuresId?.map(e => `'${e}'`).join(', ');
+   const securityString = securityArr?.map(e => `'${e}'`).join(', ');
+
    const FORKLIFT_LIST = `
       SELECT
          count(forklift_id)
@@ -294,19 +306,19 @@ const forkliftCount = (
          ${forklift_operating_hours_from ? `and ${forklift_operating_hours_from} <= forklift_operating_hours` : ""}
          ${forklift_operating_hours_to ? `and ${forklift_operating_hours_to} >= forklift_operating_hours` : ""}
          ${forklift_country ? `and forklift_country = '${forklift_country}'` : ""}
-         ${forklift_city?.length > 0 ? `and ${forklift_city} @> ARRAY[forklift_city_zipcode] ` : ""}
+         ${cityConditions ? `and (${cityConditions})` : ""}
          ${zipcode ? `and forklift_city_zipcode ilike '%${zipcode}%'` : ""}
          ${forklift_radius ? `and ${forklift_radius} >= forklift_radius` : ""}
-         ${fuelArr?.length > 0 ? `and ${fuelArr} @> ARRAY[forklift_fuel_type]` : ''}
-         ${transmissionArr?.length > 0 ? `and ${transmissionArr} @> ARRAY[forklift_transmission]` : ''}
-         ${featuresId?.length > 0 ? `and ${featuresId} @> forklift_features` : ""}
+         ${fuelConditions ? `and (${fuelConditions})` : ''}
+         ${transmissionConditions ? `and (${transmissionConditions})` : ''}
+         ${featuresId?.length > 0 ? `and forklift_features @> ARRAY[${featuresString}]` : ""}
          ${forklift_lifting_capacity_from ? `and ${forklift_lifting_capacity_from} <= forklift_lifting_capacity` : ""}
          ${forklift_lifting_capacity_to ? `and ${forklift_lifting_capacity_to} >= forklift_lifting_capacity` : ""}
          ${forklift_lifting_height_from ? `and ${forklift_lifting_height_from} <= forklift_lifting_height` : ""}
          ${forklift_lifting_height_to ? `and ${forklift_lifting_height_to} >= forklift_lifting_height` : ""}
          ${forklift_height_from ? `and ${forklift_height_from} <= forklift_height` : ""}
          ${forklift_height_to ? `and ${forklift_height_to} >= forklift_height` : ""}
-         ${securityArr?.length > 0 ? `and ${securityArr} @> forklift_security` : ""}
+         ${securityArr?.length > 0 ? `and forklift_security @> ARRAY[${securityString}]` : ""}
          ${forklift_renting_possible == true ? `and forklift_renting_possible = ${forklift_renting_possible}` : ""}
          ${forklift_discount_offers == true ? `and forklift_discount_offers = ${forklift_discount_offers}` : ""}
          ${forklift_vendor ? `and forklift_vendor = '${forklift_vendor}'` : ""}

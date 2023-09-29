@@ -79,28 +79,6 @@ module.exports = {
          } = req.body
 
          if (limit && offset) {
-            const securityArr = security ? security?.split(',') : ""
-            const vehicle_city = city ? city?.split(',') : ""
-            const featuresId = []
-            const interiorFeaturesId = []
-
-            if (features) {
-               const featuresArr = features?.split(',')
-               if (featuresArr?.length > 0) {
-                  for (let i = 0; i < featuresArr.length; i++) {
-                     featuresId.push(Number(featuresArr[i]))
-                  }
-               }
-            }
-
-            if (interior_features) {
-               const interiorFeaturesArr = interior_features?.split(',')
-               if (interiorFeaturesArr?.length > 0) {
-                  for (let i = 0; i < interiorFeaturesArr.length; i++) {
-                     interiorFeaturesId.push(Number(interiorFeaturesArr[i]))
-                  }
-               }
-            }
 
             const vehicleList = await model.vehicleList(
                vehicle_condition,
@@ -118,14 +96,14 @@ module.exports = {
                vehicle_operating_hours_from,
                vehicle_operating_hours_to,
                vehicle_country,
-               vehicle_city,
+               city,
                zipcode,
                vehicle_radius,
-               featuresId,
+               features,
                vehicle_air_conditioning,
-               interiorFeaturesId,
+               interior_features,
                vehicle_emissions_sticker,
-               securityArr,
+               security,
                day,
                vehicle_municipal,
                vehicle_new_hu,
@@ -205,29 +183,6 @@ module.exports = {
             video
          } = req.body
 
-         const securityArr = security ? security?.split(',') : ""
-         const vehicle_city = city ? city?.split(',') : ""
-         const featuresId = []
-         const interiorFeaturesId = []
-
-         if (features) {
-            const featuresArr = features?.split(',')
-            if (featuresArr?.length > 0) {
-               for (let i = 0; i < featuresArr.length; i++) {
-                  featuresId.push(Number(featuresArr[i]))
-               }
-            }
-         }
-
-         if (interior_features) {
-            const interiorFeaturesArr = interior_features?.split(',')
-            if (interiorFeaturesArr?.length > 0) {
-               for (let i = 0; i < interiorFeaturesArr.length; i++) {
-                  interiorFeaturesId.push(Number(interiorFeaturesArr[i]))
-               }
-            }
-         }
-
          const vehicleCount = await model.vehicleCount(
             vehicle_condition,
             vehicle_category,
@@ -244,14 +199,14 @@ module.exports = {
             vehicle_operating_hours_from,
             vehicle_operating_hours_to,
             vehicle_country,
-            vehicle_city,
+            city,
             zipcode,
             vehicle_radius,
-            featuresId,
+            features,
             vehicle_air_conditioning,
-            interiorFeaturesId,
+            interior_features,
             vehicle_emissions_sticker,
-            securityArr,
+            security,
             day,
             vehicle_municipal,
             vehicle_new_hu,
@@ -359,27 +314,6 @@ module.exports = {
 
          const vehicle_img_name = [];
          const vehicle_img = [];
-         const securityArr = security ? security?.split(',') : ""
-         const featuresId = []
-         const interiorFeaturesId = []
-
-         if (features) {
-            const featuresArr = features?.split(',')
-            if (featuresArr?.length > 0) {
-               for (let i = 0; i < featuresArr.length; i++) {
-                  featuresId.push(Number(featuresArr[i]))
-               }
-            }
-         }
-
-         if (interior_features) {
-            const interiorFeaturesArr = interior_features?.split(',')
-            if (interiorFeaturesArr?.length > 0) {
-               for (let i = 0; i < interiorFeaturesArr.length; i++) {
-                  interiorFeaturesId.push(Number(interiorFeaturesArr[i]))
-               }
-            }
-         }
 
          uploadPhoto?.forEach((e) => {
             vehicle_img.push(
@@ -405,11 +339,11 @@ module.exports = {
             vehicle_country,
             vehicle_city_zipcode,
             vehicle_radius,
-            featuresId,
+            features,
             vehicle_air_conditioning,
-            interiorFeaturesId,
+            interior_features,
             vehicle_emissions_sticker,
-            securityArr,
+            security,
             vehicle_municipal,
             vehicle_new_hu,
             vehicle_renting_possible,
@@ -485,27 +419,6 @@ module.exports = {
          const foundVehcile = await model.foundVehcile(id)
          const vehicle_img_name = [];
          const vehicle_img = [];
-         const securityArr = security ? security?.split(',') : ""
-         const featuresId = []
-         const interiorFeaturesId = []
-
-         if (features) {
-            const featuresArr = features?.split(',')
-            if (featuresArr?.length > 0) {
-               for (let i = 0; i < featuresArr.length; i++) {
-                  featuresId.push(Number(featuresArr[i]))
-               }
-            }
-         }
-
-         if (interior_features) {
-            const interiorFeaturesArr = interior_features?.split(',')
-            if (interiorFeaturesArr?.length > 0) {
-               for (let i = 0; i < interiorFeaturesArr.length; i++) {
-                  interiorFeaturesId.push(Number(interiorFeaturesArr[i]))
-               }
-            }
-         }
 
          if (uploadPhoto.length) {
             foundVehcile?.vehicle_images_name.forEach((e) => {
@@ -555,11 +468,11 @@ module.exports = {
             vehicle_country,
             vehicle_city_zipcode,
             vehicle_radius,
-            featuresId,
+            features,
             vehicle_air_conditioning,
-            interiorFeaturesId,
+            interior_features,
             vehicle_emissions_sticker,
-            securityArr,
+            security,
             vehicle_municipal,
             vehicle_new_hu,
             vehicle_renting_possible,

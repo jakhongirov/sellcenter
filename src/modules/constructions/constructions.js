@@ -74,27 +74,6 @@ module.exports = {
          } = req.body
 
          if (limit && offset) {
-            const machine_city = city ? city.split(',') : ""
-            const featuresId = []
-            const safetyId = []
-
-            if (features) {
-               const featuresArr = features?.split(',')
-               if (featuresArr?.length > 0) {
-                  for (let i = 0; i < featuresArr.length; i++) {
-                     featuresId.push(Number(featuresArr[i]))
-                  }
-               }
-            }
-
-            if (safety) {
-               const safetyArr = safety?.split(',')
-               if (safetyArr?.length > 0) {
-                  for (let i = 0; i < safetyArr.length; i++) {
-                     safetyId.push(Number(safetyArr[i]))
-                  }
-               }
-            }
 
             const constructionList = await model.constructionList(
                machine_condition,
@@ -110,12 +89,12 @@ module.exports = {
                machine_operating_hours_from,
                machine_operating_hours_to,
                machine_country,
-               machine_city,
+               city,
                zipcode,
                machine_radius,
-               featuresId,
+               features,
                machine_emissions_sticker,
-               safetyId,
+               safety,
                machine_renting_possible,
                machine_road_licence,
                machine_discount_offers,
@@ -188,28 +167,6 @@ module.exports = {
             day,
          } = req.body
 
-         const machine_city = city ? city.split(',') : ""
-         const featuresId = []
-         const safetyId = []
-
-         if (features) {
-            const featuresArr = features?.split(',')
-            if (featuresArr?.length > 0) {
-               for (let i = 0; i < featuresArr.length; i++) {
-                  featuresId.push(Number(featuresArr[i]))
-               }
-            }
-         }
-
-         if (safety) {
-            const safetyArr = safety?.split(',')
-            if (safetyArr?.length > 0) {
-               for (let i = 0; i < safetyArr.length; i++) {
-                  safetyId.push(Number(safetyArr[i]))
-               }
-            }
-         }
-
          const constructionCount = await model.constructionCount(
             machine_condition,
             machine_category,
@@ -224,12 +181,12 @@ module.exports = {
             machine_operating_hours_from,
             machine_operating_hours_to,
             machine_country,
-            machine_city,
+            city,
             zipcode,
             machine_radius,
-            featuresId,
+            features,
             machine_emissions_sticker,
-            safetyId,
+            safety,
             machine_renting_possible,
             machine_road_licence,
             machine_discount_offers,
@@ -332,26 +289,6 @@ module.exports = {
 
          const construction_img_name = [];
          const construction_img = [];
-         const featuresId = []
-         const safetyId = []
-
-         if (features) {
-            const featuresArr = features?.split(',')
-            if (featuresArr?.length > 0) {
-               for (let i = 0; i < featuresArr.length; i++) {
-                  featuresId.push(Number(featuresArr[i]))
-               }
-            }
-         }
-
-         if (safety) {
-            const safetyArr = safety?.split(',')
-            if (safetyArr?.length > 0) {
-               for (let i = 0; i < safetyArr.length; i++) {
-                  safetyId.push(Number(safetyArr[i]))
-               }
-            }
-         }
 
          uploadPhoto?.forEach((e) => {
             construction_img.push(
@@ -376,9 +313,9 @@ module.exports = {
             machine_country,
             machine_city_zipcode,
             machine_radius,
-            featuresId,
+            features,
             machine_emissions_sticker,
-            safetyId,
+            safety,
             machine_renting_possible,
             machine_road_licence,
             machine_discount_offers,
@@ -449,26 +386,6 @@ module.exports = {
          const foundConstruction = await model.foundConstruction(id)
          const construction_img_name = [];
          const construction_img = [];
-         const featuresId = []
-         const safetyId = []
-
-         if (features) {
-            const featuresArr = features?.split(',')
-            if (featuresArr?.length > 0) {
-               for (let i = 0; i < featuresArr.length; i++) {
-                  featuresId.push(Number(featuresArr[i]))
-               }
-            }
-         }
-
-         if (safety) {
-            const safetyArr = safety?.split(',')
-            if (safetyArr?.length > 0) {
-               for (let i = 0; i < safetyArr.length; i++) {
-                  safetyId.push(Number(safetyArr[i]))
-               }
-            }
-         }
 
          if (uploadPhoto.length) {
             foundConstruction?.machine_images_name.forEach((e) => {
@@ -517,9 +434,9 @@ module.exports = {
             machine_country,
             machine_city_zipcode,
             machine_radius,
-            featuresId,
+            features,
             machine_emissions_sticker,
-            safetyId,
+            safety,
             machine_renting_possible,
             machine_road_licence,
             machine_discount_offers,

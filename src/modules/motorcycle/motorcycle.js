@@ -81,38 +81,12 @@ module.exports = {
          } = req.body
 
          if (offset, limit) {
-            const fuelArr = fuel_type ? fuel_type?.split(',') : ""
-            const motorcycle_city = city ? city?.split(',') : ""
-            const modeArr = driving_mode ? driving_mode?.split(',') : ""
-            const transmissionArr = transmission ? transmission?.split(',') : ""
-            const colorArr = exterior_colour ? exterior_colour?.split(',') : ""
-            const historyArr = history ? history?.split(',') : ""
-            const typesId = []
-            const othersId = []
-
-            if (types) {
-               const typesArr = types?.split(',')
-               if (typesArr?.length > 0) {
-                  for (let i = 0; i < typesArr.length; i++) {
-                     typesId.push(Number(typesArr[i]))
-                  }
-               }
-            }
-
-            if (others) {
-               const othersArr = others?.split(',')
-               if (othersArr?.length > 0) {
-                  for (let i = 0; i < othersArr?.length; i++) {
-                     othersId.push(Number(othersArr[i]))
-                  }
-               }
-            }
 
             const motorcycleList = await model.motorcycleList(
                motorcycle_condition,
                motorcycle_make,
                motorcycle_model,
-               typesId,
+               types,
                motorcycle_price_from,
                motorcycle_price_to,
                motorcycle_firt_date_year_from,
@@ -122,16 +96,16 @@ module.exports = {
                motorcycle_power_from,
                motorcycle_power_to,
                motorcycle_country,
-               motorcycle_city,
+               city,
                zipcode,
                motorcycle_radius,
-               fuelArr,
-               modeArr,
-               transmissionArr,
+               fuel_type,
+               driving_mode,
+               transmission,
                motorcycle_cubic_capacity_from,
                motorcycle_cubic_capacity_to,
-               colorArr,
-               othersId,
+               exterior_colour,
+               others,
                motorcycle_vat,
                days,
                picture,
@@ -139,7 +113,7 @@ module.exports = {
                motorcycle_discount_offers,
                motorcycle_vendor,
                motorcycle_dealer_rating,
-               historyArr,
+               history,
                motorcycle_damaged,
                motorcycle_number_owners,
                motorcycle_approved_used_programme,
@@ -207,38 +181,11 @@ module.exports = {
             motorcycle_approved_used_programme
          } = req.body
 
-         const fuelArr = fuel_type ? fuel_type?.split(',') : ""
-         const motorcycle_city = city ? city?.split(',') : ""
-         const modeArr = driving_mode ? driving_mode?.split(',') : ""
-         const transmissionArr = transmission ? transmission?.split(',') : ""
-         const colorArr = exterior_colour ? exterior_colour?.split(',') : ""
-         const historyArr = history ? history?.split(',') : ""
-         const typesId = []
-         const othersId = []
-
-         if (types) {
-            const typesArr = types?.split(',')
-            if (typesArr?.length > 0) {
-               for (let i = 0; i < typesArr.length; i++) {
-                  typesId.push(Number(typesArr[i]))
-               }
-            }
-         }
-
-         if (others) {
-            const othersArr = others?.split(',')
-            if (othersArr?.length > 0) {
-               for (let i = 0; i < othersArr?.length; i++) {
-                  othersId.push(Number(othersArr[i]))
-               }
-            }
-         }
-
          const motorcycleCount = await model.motorcycleCount(
             motorcycle_condition,
             motorcycle_make,
             motorcycle_model,
-            typesId,
+            types,
             motorcycle_price_from,
             motorcycle_price_to,
             motorcycle_firt_date_year_from,
@@ -248,16 +195,16 @@ module.exports = {
             motorcycle_power_from,
             motorcycle_power_to,
             motorcycle_country,
-            motorcycle_city,
+            city,
             zipcode,
             motorcycle_radius,
-            fuelArr,
-            modeArr,
-            transmissionArr,
+            fuel_type,
+            driving_mode,
+            transmission,
             motorcycle_cubic_capacity_from,
             motorcycle_cubic_capacity_to,
-            colorArr,
-            othersId,
+            exterior_colour,
+            others,
             motorcycle_vat,
             days,
             picture,
@@ -265,7 +212,7 @@ module.exports = {
             motorcycle_discount_offers,
             motorcycle_vendor,
             motorcycle_dealer_rating,
-            historyArr,
+            history,
             motorcycle_damaged,
             motorcycle_number_owners,
             motorcycle_approved_used_programme
@@ -366,26 +313,6 @@ module.exports = {
 
          const motorcycle_img_name = [];
          const motorcycle_img = [];
-         const typesId = []
-         const othersId = []
-
-         if (motorcycle_type) {
-            const typesArr = motorcycle_type?.split(',')
-            if (typesArr?.length > 0) {
-               for (let i = 0; i < typesArr.length; i++) {
-                  typesId.push(Number(typesArr[i]))
-               }
-            }
-         }
-
-         if (others) {
-            const othersArr = others?.split(',')
-            if (othersArr?.length > 0) {
-               for (let i = 0; i < othersArr?.length; i++) {
-                  othersId.push(Number(othersArr[i]))
-               }
-            }
-         }
 
          uploadPhoto?.forEach((e) => {
             motorcycle_img.push(
@@ -400,7 +327,7 @@ module.exports = {
             motorcycle_description,
             motorcycle_condition,
             motorcycle_vide_link,
-            typesId,
+            motorcycle_type,
             motorcycle_price,
             motorcycle_firt_date,
             motorcycle_firt_date_year,
@@ -414,7 +341,7 @@ module.exports = {
             motorcycle_transmission,
             motorcycle_cubic_capacity,
             motorcycle_exterior_colour,
-            othersId,
+            others,
             motorcycle_vat,
             motorcycle_discount_offers,
             motorcycle_vendor,
@@ -493,26 +420,6 @@ module.exports = {
          const foundMotorCycle = await model.foundMotorCycle(motorcycle_id)
          const motorcycle_img_name = [];
          const motorcycle_img = [];
-         const typesId = []
-         const othersId = []
-
-         if (motorcycle_type) {
-            const typesArr = motorcycle_type?.split(',')
-            if (typesArr?.length > 0) {
-               for (let i = 0; i < typesArr.length; i++) {
-                  typesId.push(Number(typesArr[i]))
-               }
-            }
-         }
-
-         if (others) {
-            const othersArr = others?.split(',')
-            if (othersArr?.length > 0) {
-               for (let i = 0; i < othersArr?.length; i++) {
-                  othersId.push(Number(othersArr[i]))
-               }
-            }
-         }
 
          if (uploadPhoto.length) {
             foundMotorCycle?.motorcycle_images_name.forEach((e) => {
@@ -550,7 +457,7 @@ module.exports = {
             motorcycle_description,
             motorcycle_condition,
             motorcycle_vide_link,
-            typesId,
+            motorcycle_type,
             motorcycle_price,
             motorcycle_firt_date,
             motorcycle_firt_date_year,
@@ -564,7 +471,7 @@ module.exports = {
             motorcycle_transmission,
             motorcycle_cubic_capacity,
             motorcycle_exterior_colour,
-            othersId,
+            others,
             motorcycle_vat,
             motorcycle_discount_offers,
             motorcycle_vendor,

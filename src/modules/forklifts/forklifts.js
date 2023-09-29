@@ -80,20 +80,6 @@ module.exports = {
          } = req.body
 
          if (offset && limit) {
-            const featuresId = []
-            const forklift_city = city ? city?.split(',') : ""
-            const securityArr = security ? security?.split(',') : ""
-            const fuelArr = fuel_type ? fuel_type?.split(',') : ""
-            const transmissionArr = transmission ? transmission?.split(',') : ""
-
-            if (features) {
-               const featuresArr = features?.split(',')
-               if (featuresArr?.length > 0) {
-                  for (let i = 0; i < featuresArr.length; i++) {
-                     featuresId.push(Number(featuresArr[i]))
-                  }
-               }
-            }
 
             const forkliftList = await model.forkliftList(
                forklift_condition,
@@ -109,19 +95,19 @@ module.exports = {
                forklift_operating_hours_from,
                forklift_operating_hours_to,
                forklift_country,
-               forklift_city,
+               city,
                zipcode,
                forklift_radius,
-               fuelArr,
-               transmissionArr,
-               featuresId,
+               fuel_type,
+               transmission,
+               features,
                forklift_lifting_capacity_from,
                forklift_lifting_capacity_to,
                forklift_lifting_height_from,
                forklift_lifting_height_to,
                forklift_height_from,
                forklift_height_to,
-               securityArr,
+               security,
                forklift_renting_possible,
                forklift_discount_offers,
                forklift_vendor,
@@ -200,21 +186,6 @@ module.exports = {
             day
          } = req.body
 
-         const featuresId = []
-         const forklift_city = city ? city?.split(',') : ""
-         const securityArr = security ? security?.split(',') : ""
-         const fuelArr = fuel_type ? fuel_type?.split(',') : ""
-         const transmissionArr = transmission ? transmission?.split(',') : ""
-
-         if (features) {
-            const featuresArr = features?.split(',')
-            if (featuresArr?.length > 0) {
-               for (let i = 0; i < featuresArr.length; i++) {
-                  featuresId.push(Number(featuresArr[i]))
-               }
-            }
-         }
-
          const forkliftCount = await model.forkliftCount(
             forklift_condition,
             forklift_category,
@@ -229,19 +200,19 @@ module.exports = {
             forklift_operating_hours_from,
             forklift_operating_hours_to,
             forklift_country,
-            forklift_city,
+            city,
             zipcode,
             forklift_radius,
-            fuelArr,
-            transmissionArr,
-            featuresId,
+            fuel_type,
+            transmission,
+            features,
             forklift_lifting_capacity_from,
             forklift_lifting_capacity_to,
             forklift_lifting_height_from,
             forklift_lifting_height_to,
             forklift_height_from,
             forklift_height_to,
-            securityArr,
+            security,
             forklift_renting_possible,
             forklift_discount_offers,
             forklift_vendor,
@@ -345,17 +316,6 @@ module.exports = {
 
          const forklift_img_name = [];
          const forklift_img = [];
-         const featuresId = []
-         const securityArr = security ? security?.split(',') : ""
-
-         if (features) {
-            const featuresArr = features?.split(',')
-            if (featuresArr?.length > 0) {
-               for (let i = 0; i < featuresArr.length; i++) {
-                  featuresId.push(Number(featuresArr[i]))
-               }
-            }
-         }
 
          uploadPhoto?.forEach((e) => {
             forklift_img.push(
@@ -382,11 +342,11 @@ module.exports = {
             forklift_radius,
             forklift_fuel_type,
             forklift_transmission,
-            featuresId,
+            features,
             forklift_lifting_capacity,
             forklift_lifting_height,
             forklift_height,
-            securityArr,
+            security,
             forklift_renting_possible,
             forklift_discount_offers,
             forklift_vendor,
@@ -459,17 +419,6 @@ module.exports = {
          const foundForklift = await model.foundForklift(id)
          const forklift_img_name = [];
          const forklift_img = [];
-         const featuresId = []
-         const securityArr = security ? security?.split(',') : ""
-
-         if (features) {
-            const featuresArr = features?.split(',')
-            if (featuresArr?.length > 0) {
-               for (let i = 0; i < featuresArr.length; i++) {
-                  featuresId.push(Number(featuresArr[i]))
-               }
-            }
-         }
 
          if (uploadPhoto.length) {
             foundForklift?.forklift_images_name.forEach((e) => {
@@ -521,11 +470,11 @@ module.exports = {
             forklift_radius,
             forklift_fuel_type,
             forklift_transmission,
-            featuresId,
+            features,
             forklift_lifting_capacity,
             forklift_lifting_height,
             forklift_height,
-            securityArr,
+            security,
             forklift_renting_possible,
             forklift_discount_offers,
             forklift_vendor,

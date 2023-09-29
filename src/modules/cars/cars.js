@@ -157,7 +157,7 @@ module.exports = {
             interior_material,
             car_airbags,
             car_air_conditioning,
-            others,
+            extras,
             others,
             car_vendor,
             car_dealer_rating,
@@ -261,8 +261,6 @@ module.exports = {
             picture,
             days
          } = req.body
-
-         console.log(car_make);
 
          // const bodyArr = body ? body?.split(',') : false
          // const typeArr = type ? type?.split(',') : false

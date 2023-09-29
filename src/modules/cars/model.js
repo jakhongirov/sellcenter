@@ -262,8 +262,8 @@ const foundCarsList = (
    interiorMaterialgArr,
    car_airbags,
    car_air_conditioning,
-   extrasId,
-   othersId,
+   extras,
+   others,
    car_vendor,
    car_dealer_rating,
    car_discount_offers,
@@ -290,6 +290,8 @@ const foundCarsList = (
    const parkingConditions = parkingArr?.map(parking => `car_parking_sensors = '${parking}'`).join(' OR ');
    const interiorColourConditions = interiorColourgArr?.map(e => `car_interior_colour = '${e}'`).join(' OR ');
    const interiorMaterialConditions = interiorMaterialgArr?.map(e => `car_interior_material = '${e}'`).join(' OR ');
+   const extrasString = extras?.map(extra => `'${extra}'`).join(', ');
+   const othersString = others?.map(other => `'${other}'`).join(', ');
 
    const FOUND_CARS_LIST = `
       SELECT 
@@ -364,8 +366,8 @@ const foundCarsList = (
          ${car_damaged ? `and car_damaged = '${car_damaged}'` : ""}
          ${car_commercial ? `and car_commercial = '${car_commercial}'` : ""}
          ${car_programme ? `and car_programme = '${car_programme}'` : ""}
-         ${extrasId ? `and extras @> ${extrasId}` : ""}
-         ${othersId ? `and others @> ${othersId}` : ""}
+         ${extras?.length > 0 ? `and extras @> ARRAY[${extrasString}]` : ""}
+         ${others?.length > 0 ? `and others @> ARRAY[${othersString}]` : ""}
          ${picture == true ? `and Array_Length(car_images_url, 1) > 0` : ""}
          ${video == true ? `and car_vide_link != '' ` : ""}
          ${days ? `and car_ad_create_at > current_date - interval '${days} days'` : ""}
@@ -420,8 +422,8 @@ const foundCarsCount = (
    interiorMaterialgArr,
    car_airbags,
    car_air_conditioning,
-   extrasId,
-   othersId,
+   extras,
+   others,
    car_vendor,
    car_dealer_rating,
    car_discount_offers,
@@ -446,6 +448,8 @@ const foundCarsCount = (
    const parkingConditions = parkingArr?.map(parking => `car_parking_sensors = '${parking}'`).join(' OR ');
    const interiorColourConditions = interiorColourgArr?.map(e => `car_interior_colour = '${e}'`).join(' OR ');
    const interiorMaterialConditions = interiorMaterialgArr?.map(e => `car_interior_material = '${e}'`).join(' OR ');
+   const extrasString = extras?.map(extra => `'${extra}'`).join(', ');
+   const othersString = others?.map(other => `'${other}'`).join(', ');
 
    const FOUND_CARS_COUNT = `
    SELECT 
@@ -507,8 +511,8 @@ const foundCarsCount = (
       ${car_damaged ? `and car_damaged = '${car_damaged}'` : ""}
       ${car_commercial ? `and car_commercial = '${car_commercial}'` : ""}
       ${car_programme ? `and car_programme = '${car_programme}'` : ""}
-      ${extrasId ? `and extras @> ${extrasId}` : ""}
-      ${othersId ? `and extras @> ${othersId}` : ""}
+      ${extras?.length > 0 ? `and extras @> ARRAY[${extrasString}]` : ""}
+      ${others?.length > 0 ? `and others @> ARRAY[${othersString}]` : ""}
       ${picture == true ? `and Array_Length(car_images_url, 1) > 0` : ""}
       ${video == true ? `and car_vide_link != '' ` : ""}
       ${days ? `and car_ad_create_at > current_date - interval '${days} days'` : ""};

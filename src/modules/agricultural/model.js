@@ -193,6 +193,11 @@ const vehicleList = (
    limit,
    offset
 ) => {
+   const cityConditions = vehicle_city?.map(e => `vehicle_city_zipcode = '${e}'`).join(' OR ');
+   const featuresConditions = featuresId?.map(e => `vehicle_features = '${e}'`).join(' OR ');
+   const interiorFeaturesConditions = interiorFeaturesId?.map(e => `vehicle_interior_features = '${e}'`).join(' OR ');
+   const securityConditions = securityArr?.map(e => `vehicle_security = '${e}'`).join(' OR ');
+
    const VEHICLE_LIST = `
       SELECT
          *
@@ -215,14 +220,14 @@ const vehicleList = (
          ${vehicle_operating_hours_from ? `and ${vehicle_operating_hours_from} <= vehicle_operating_hours` : ""}
          ${vehicle_operating_hours_to ? `and ${vehicle_operating_hours_to} >= vehicle_operating_hours` : ""}
          ${vehicle_country ? `and vehicle_country ilike '%${vehicle_country}%'` : ""}
-         ${vehicle_city?.length > 0 ? `and ARRAY[vehicle_city_zipcode] @> ${vehicle_city_zipcode}` : ""}
+         ${cityConditions ? `and (${cityConditions})` : ""}
          ${zipcode ? `and vehicle_city_zipcode ilike '%${zipcode}%'` : ""}
          ${vehicle_radius ? `and ${vehicle_radius} >= vehicle_radius` : ""}
-         ${featuresId?.length > 0 ? `and ${featuresId} @> vehicle_features` : ''}
+         ${featuresConditions ? `and (${featuresConditions})` : ''}
          ${vehicle_air_conditioning ? `and vehicle_air_conditioning = '${vehicle_air_conditioning}'` : ""}
-         ${interiorFeaturesId?.length > 0 ? `and ${interiorFeaturesId} @> vehicle_interior_features` : ''}
+         ${interiorFeaturesConditions ? `and (${interiorFeaturesConditions})` : ''}
          ${vehicle_emissions_sticker ? `and vehicle_emissions_sticker = '${vehicle_emissions_sticker}'` : ""}
-         ${securityArr?.length > 0 ? `and ${securityArr} @> vehicle_security` : ''}
+         ${securityConditions ? `and (${securityConditions})` : ''}
          ${vehicle_municipal == true ? `and vehicle_municipal = ${vehicle_municipal}` : ""}
          ${vehicle_new_hu == true ? `and vehicle_new_hu = ${vehicle_new_hu}` : ""}
          ${vehicle_renting_possible == true ? `and vehicle_renting_possible = ${vehicle_renting_possible}` : ""}
@@ -274,6 +279,11 @@ const vehicleCount = (
    picture,
    video
 ) => {
+   const cityConditions = vehicle_city?.map(e => `vehicle_city_zipcode = '${e}'`).join(' OR ');
+   const featuresConditions = featuresId?.map(e => `vehicle_features = '${e}'`).join(' OR ');
+   const interiorFeaturesConditions = interiorFeaturesId?.map(e => `vehicle_interior_features = '${e}'`).join(' OR ');
+   const securityConditions = securityArr?.map(e => `vehicle_security = '${e}'`).join(' OR ');
+
    const VEHICLE_LIST = `
       SELECT
          count(vehicle_id)
@@ -296,14 +306,14 @@ const vehicleCount = (
          ${vehicle_operating_hours_from ? `and ${vehicle_operating_hours_from} <= vehicle_operating_hours` : ""}
          ${vehicle_operating_hours_to ? `and ${vehicle_operating_hours_to} >= vehicle_operating_hours` : ""}
          ${vehicle_country ? `and vehicle_country ilike '%${vehicle_country}%'` : ""}
-         ${vehicle_city?.length > 0 ? `and ARRAY[vehicle_city_zipcode] @> ${vehicle_city_zipcode}` : ""}
+         ${cityConditions ? `and (${cityConditions})` : ""}
          ${zipcode ? `and vehicle_city_zipcode ilike '%${zipcode}%'` : ""}
          ${vehicle_radius ? `and ${vehicle_radius} >= vehicle_radius` : ""}
-         ${featuresId?.length > 0 ? `and ${featuresId} @> vehicle_features` : ''}
+         ${featuresConditions ? `and (${featuresConditions})` : ''}
          ${vehicle_air_conditioning ? `and vehicle_air_conditioning = '${vehicle_air_conditioning}'` : ""}
-         ${interiorFeaturesId?.length > 0 ? `and ${interiorFeaturesId} @> vehicle_interior_features` : ''}
+         ${interiorFeaturesConditions ? `and (${interiorFeaturesConditions})` : ''}
          ${vehicle_emissions_sticker ? `and vehicle_emissions_sticker = '${vehicle_emissions_sticker}'` : ""}
-         ${securityArr?.length > 0 ? `and ${securityArr} @> vehicle_security` : ''}
+         ${securityConditions ? `and (${securityConditions})` : ''}
          ${vehicle_municipal == true ? `and vehicle_municipal = ${vehicle_municipal}` : ""}
          ${vehicle_new_hu == true ? `and vehicle_new_hu = ${vehicle_new_hu}` : ""}
          ${vehicle_renting_possible == true ? `and vehicle_renting_possible = ${vehicle_renting_possible}` : ""}

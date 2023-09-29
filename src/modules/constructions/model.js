@@ -176,6 +176,10 @@ const constructionList = (
    limit,
    offset
 ) => {
+   const cityConditions = machine_city?.map(city = `machine_city_zipcode = '${city}'`).join(' OR ');
+   const safetyString = safetyId?.map(e => `'${e}'`).join(', ');
+   const featuresString = featuresId?.map(e => `'${e}'`).join(', ');
+
    const CONSTRUCTION_LIST = `
       SELECT
          *
@@ -196,12 +200,12 @@ const constructionList = (
          ${machine_operating_hours_from ? `and ${machine_operating_hours_from} <= machine_operating_hours` : ""}
          ${machine_operating_hours_to ? `and ${machine_operating_hours_to} >= machine_operating_hours` : ""}
          ${machine_country ? `and machine_country = '${machine_country}'` : ""}
-         ${machine_city?.length > 0 ? `and ${machine_city} @> ARRAY[machine_city_zipcode]` : ""}
+         ${cityConditions ? `and (${cityConditions})` : ""}
          ${zipcode ? `and machine_city_zipcode ilike '%${zipcode}%'` : ""}
          ${machine_radius ? `and ${machine_radius} >= machine_radius` : ""}
-         ${safetyId?.length > 0 ? `and ${safetyId} @> machine_safety` : ""}
+         ${safetyId?.length > 0 ? `and machine_features @> ARRAY[${safetyString}]` : ""}
          ${machine_emissions_sticker ? `and machine_emissions_sticker = '${machine_emissions_sticker}'` : ""}
-         ${featuresId?.length > 0 ? `and ${featuresId} @> machine_features` : ""}
+         ${featuresId?.length > 0 ? `and machine_safety @> ARRAY[${featuresString}]` : ""}
          ${machine_renting_possible == true ? `and machine_renting_possible = ${machine_renting_possible}` : ""}
          ${machine_road_licence == true ? `and machine_road_licence = ${machine_road_licence}` : ""}
          ${machine_discount_offers == true ? `and machine_discount_offers = ${machine_discount_offers}` : ""}
@@ -247,6 +251,10 @@ const constructionCount = (
    video,
    day,
 ) => {
+   const cityConditions = machine_city?.map(city => `machine_city_zipcode = '${city}'`).join(' OR ');
+   const safetyConditions = safetyId?.map(e => `machine_safety = '${e}'`).join(' OR ');
+   const featuresConditions = featuresId?.map(e => `machine_features = '${e}'`).join(' OR ');
+
    const CONSTRUCTION_LIST = `
       SELECT
          count(machine_id)
@@ -267,12 +275,12 @@ const constructionCount = (
          ${machine_operating_hours_from ? `and ${machine_operating_hours_from} <= machine_operating_hours` : ""}
          ${machine_operating_hours_to ? `and ${machine_operating_hours_to} >= machine_operating_hours` : ""}
          ${machine_country ? `and machine_country = '${machine_country}'` : ""}
-         ${machine_city?.length > 0 ? `and ${machine_city} @> ARRAY[machine_city_zipcode]` : ""}
+         ${cityConditions ? `and (${cityConditions})` : ""}
          ${zipcode ? `and machine_city_zipcode ilike '%${zipcode}%'` : ""}
          ${machine_radius ? `and ${machine_radius} >= machine_radius` : ""}
-         ${safetyId?.length > 0 ? `and ${safetyId} @> machine_safety` : ""}
+         ${safetyConditions ? `and (${safetyConditions})` : ""}
          ${machine_emissions_sticker ? `and machine_emissions_sticker = '${machine_emissions_sticker}'` : ""}
-         ${featuresId?.length > 0 ? `and ${featuresId} @> machine_features` : ""}
+         ${featuresConditions ? `and (${featuresConditions})` : ""}
          ${machine_renting_possible == true ? `and machine_renting_possible = ${machine_renting_possible}` : ""}
          ${machine_road_licence == true ? `and machine_road_licence = ${machine_road_licence}` : ""}
          ${machine_discount_offers == true ? `and machine_discount_offers = ${machine_discount_offers}` : ""}
