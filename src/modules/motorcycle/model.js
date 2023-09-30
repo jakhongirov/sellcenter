@@ -90,7 +90,8 @@ const FOUND_MOTORCYCLE = `
       motorcycle_images_name
    FROM
       motorcycles
-   WHERE = $1;
+   WHERE 
+      motorcycle_id = $1;
 `;
 
 const UPDATE_MOTORCYCLE = `
