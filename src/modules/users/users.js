@@ -48,10 +48,45 @@ module.exports = {
          if (id) {
             const user = await model.foundUserById(id)
 
+            if (user) {
+               const carCount = await model.userCarCount(user?.user_id)
+               const motorcycleCount = await model.userMotorcycleCount(user?.user_id)
+               const motorhomeCount = await model.userMotorhomeCount(user?.user_id)
+               const truckCount = await model.userTruckCount(user?.user_id)
+               const trailerCount = await model.userTrailerCount(user?.user_id)
+               const vanCount = await model.userVanCount(user?.user_id)
+               const semiTruckCount = await model.userSemiTruckCount(user?.user_id)
+               const semiTrailerCount = await model.userSemiTrailerCount(user?.user_id)
+               const coacheCount = await model.userCoacheCount(user?.user_id)
+               const agriculturalVehiclesCount = await model.userAgriculturalCount(user?.user_id)
+               const constructionMachineCount = await model.userConstructionCount(user?.user_id)
+               const forkliftTrucksCount = await model.userForkliftTrucksCount(user?.user_id)
+
+               return res.json({
+                  status: 200,
+                  message: "Success",
+                  data: user,
+                  count: {
+                     cars_count: carCount?.count,
+                     motorcycle_count: motorcycleCount?.count,
+                     motorhome_count: motorhomeCount?.count,
+                     truck_count: truckCount?.count,
+                     trailer_count: trailerCount?.count,
+                     van_count: vanCount?.count,
+                     semi_trailer_truck_count: semiTruckCount?.count,
+                     semi_trailer_count: semiTrailerCount?.count,
+                     coache_count: coacheCount?.count,
+                     agricultural_vehicle_count: agriculturalVehiclesCount?.count,
+                     construction_machine_count: constructionMachineCount?.count,
+                     forklift_truck_count: forkliftTrucksCount?.count,
+                  }
+               })
+
+            }
+
             return res.json({
-               status: 200,
-               message: "Success",
-               data: user
+               status: 404,
+               message: "Not found"
             })
          } else {
             return res.json({
