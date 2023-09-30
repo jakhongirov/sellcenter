@@ -378,12 +378,12 @@ module.exports = {
             coache_transmission,
             coache_emission_class,
             coache_emissions_sticker,
-            features,
+            features?.split(','),
             coache_air_conditioning,
             coache_number_of_seats,
             coache_cruise_control,
             coache_trailer_coupling_fix,
-            interior_features,
+            interior_features?.split(','),
             coache_exterior_colour,
             coache_damaged,
             coache_full_service_history,
@@ -521,12 +521,12 @@ module.exports = {
             coache_transmission,
             coache_emission_class,
             coache_emissions_sticker,
-            features,
+            features?.split(','),
             coache_air_conditioning,
             coache_number_of_seats,
             coache_cruise_control,
             coache_trailer_coupling_fix,
-            interior_features,
+            interior_features?.split(','),
             coache_exterior_colour,
             coache_damaged,
             coache_full_service_history,
@@ -572,7 +572,7 @@ module.exports = {
          if (foundCoache) {
             foundCoache?.coache_images_name.forEach((e) => {
                new FS(
-                  path.resolv(
+                  path.resolve(
                      __dirname,
                      '..',
                      '..',

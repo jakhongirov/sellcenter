@@ -313,9 +313,9 @@ module.exports = {
             machine_country,
             machine_city_zipcode,
             machine_radius,
-            features,
+            features?.split(','),
             machine_emissions_sticker,
-            safety,
+            safety?.split(','),
             machine_renting_possible,
             machine_road_licence,
             machine_discount_offers,
@@ -434,9 +434,9 @@ module.exports = {
             machine_country,
             machine_city_zipcode,
             machine_radius,
-            features,
+            features?.split(','),
             machine_emissions_sticker,
-            safety,
+            safety?.split(','),
             machine_renting_possible,
             machine_road_licence,
             machine_discount_offers,
@@ -479,7 +479,7 @@ module.exports = {
          if (foundConstruction) {
             foundConstruction?.machine_images_name.forEach((e) => {
                new FS(
-                  path.resolv(
+                  path.resolve(
                      __dirname,
                      '..',
                      '..',

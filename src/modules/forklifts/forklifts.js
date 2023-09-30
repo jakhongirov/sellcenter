@@ -342,11 +342,11 @@ module.exports = {
             forklift_radius,
             forklift_fuel_type,
             forklift_transmission,
-            features,
+            features?.split(','),
             forklift_lifting_capacity,
             forklift_lifting_height,
             forklift_height,
-            security,
+            security?.split(','),
             forklift_renting_possible,
             forklift_discount_offers,
             forklift_vendor,
@@ -470,11 +470,11 @@ module.exports = {
             forklift_radius,
             forklift_fuel_type,
             forklift_transmission,
-            features,
+            features?.split(','),
             forklift_lifting_capacity,
             forklift_lifting_height,
             forklift_height,
-            security,
+            security?.split(','),
             forklift_renting_possible,
             forklift_discount_offers,
             forklift_vendor,
@@ -516,7 +516,7 @@ module.exports = {
          if (foundForklift) {
             foundForklift?.forklift_images_name.forEach((e) => {
                new FS(
-                  path.resolv(
+                  path.resolve(
                      __dirname,
                      '..',
                      '..',
