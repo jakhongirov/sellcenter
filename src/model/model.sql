@@ -139,7 +139,7 @@ CREATE TABLE motorcycles (
    motorcycle_images_url text [],
    motorcycle_images_name text [],
    motorcycle_vide_link text,
-   motorcycle_type text [],
+   motorcycle_type text,
    motorcycle_price int,
    motorcycle_firt_date text,
    motorcycle_firt_date_year int,

@@ -180,7 +180,7 @@ const motorcycleList = (
    motorcycle_cubic_capacity_from,
    motorcycle_cubic_capacity_to,
    colorArr,
-   othersId,
+   others,
    motorcycle_vat,
    days,
    picture,
@@ -232,7 +232,7 @@ const motorcycleList = (
          ${motorcycle_cubic_capacity_from ? `and motorcycle_cubic_capacity >= ${motorcycle_cubic_capacity_from}` : ""}
          ${motorcycle_cubic_capacity_to ? `and motorcycle_cubic_capacity =< ${motorcycle_cubic_capacity_to}` : ""}
          ${colorArrConditions ? `and (${colorArrConditions})` : ''}
-         ${othersId?.length ? `and others @> ARRAY[${othersString}]` : ""}
+         ${others?.length ? `and others @> ARRAY[${othersString}]` : ""}
          ${motorcycle_vat ? `and motorcycle_vat = '${motorcycle_vat}'` : ""}
          ${days ? `and motorcycle_ad_create_at > current_date - interval '${days} days'` : ""}
          ${picture == true ? `and Array_Length(motorcycle_images_url, 1) > 0` : ""}
@@ -275,7 +275,7 @@ const motorcycleCount = (
    motorcycle_cubic_capacity_from,
    motorcycle_cubic_capacity_to,
    colorArr,
-   othersId,
+   others,
    motorcycle_vat,
    days,
    picture,
@@ -325,7 +325,7 @@ const motorcycleCount = (
       ${motorcycle_cubic_capacity_from ? `and motorcycle_cubic_capacity >= ${motorcycle_cubic_capacity_from}` : ""}
       ${motorcycle_cubic_capacity_to ? `and motorcycle_cubic_capacity =< ${motorcycle_cubic_capacity_to}` : ""}
       ${colorArrConditions ? `and (${colorArrConditions})` : ''}
-      ${othersId?.length ? `and others @> ARRAY[${othersString}]` : ""}
+      ${others?.length ? `and others @> ARRAY[${othersString}]` : ""}
       ${motorcycle_vat ? `and motorcycle_vat = '${motorcycle_vat}'` : ""}
       ${days ? `and motorcycle_ad_create_at > current_date - interval '${days} days'` : ""}
       ${picture == true ? `and Array_Length(motorcycle_images_url, 1) > 0` : ""}
