@@ -48,6 +48,16 @@ const ADD_INTERIOR_DATA = `
    RETURNING *;
 `;
 
+const UPDATE_STATUS = `
+   UPDATE 
+      cars
+   SET
+      car_active = $2
+   WHERE
+      car_id = $1
+   RETURNING *;
+`;
+
 const ADD_CAR = `
    INSERT INTO
       cars (
@@ -203,7 +213,6 @@ const FOUND_CAR_BY_ID = `
    WHERE
       car_id = $1
 `;
-
 
 const carsList = (limit, offset) => {
    const CARS_LIST = `
@@ -769,6 +778,7 @@ const updateCar = (
    car_img_name
 )
 const deleteCar = (car_id) => fetch(DELETE_CAR, car_id)
+const updateStatus = (car_id, status) => fetch(UPDATE_STATUS, car_id, status)
 
 module.exports = {
    carsList,
@@ -780,5 +790,6 @@ module.exports = {
    foundCarById,
    deleteCar,
    addEngineData,
-   addInteriorData
+   addInteriorData,
+   updateStatus
 }

@@ -786,6 +786,43 @@ module.exports = {
       }
    },
 
+   UPDATE_STATUS: async (req, res) => {
+      try {
+         const { car_id, status } = req.body
+         const foundCarById = await model.foundCarById(car_id)
+
+         if (foundCarById) {
+            const updateStatus = await model.updateStatus(car_id, status)
+
+            if (updateStatus) {
+               return res.json({
+                  status: 200,
+                  message: "Success",
+                  data: updateStatus
+               })
+            } else {
+               return res.json({
+                  status: 400,
+                  message: "Bad request"
+               })
+            }
+
+         } else {
+            return res.json({
+               status: 404,
+               message: "Not found"
+            })
+         }
+
+      } catch (error) {
+         console.log(error)
+         res.json({
+            status: 500,
+            message: "Internal Server Error",
+         })
+      }
+   },
+
    DELETE_CAR: async (req, res) => {
       try {
          const { car_id } = req.body

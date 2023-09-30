@@ -144,6 +144,16 @@ const DELETE_MOTORCYCLE = `
    RETURNING *;
 `;
 
+const UPDATE_STATUS = `
+   UPDATE
+      motorcycles
+   SET
+      motorcycle_active = $2
+   WHERE
+      motorcycle_id = $1
+   RETURNING *;
+`;
+
 const motorcycleListAdmin = (limit, offset) => {
    const LIST = `
       SELECT
@@ -487,6 +497,7 @@ const updateMotorcycle = (
    motorcycle_img_name
 )
 const deleteMotorcycle = (motorcycle_id) => fetch(DELETE_MOTORCYCLE, motorcycle_id)
+const updateStatus = (motorcycle_id, status) => fetch(UPDATE_STATUS, motorcycle_id, status)
 
 module.exports = {
    motorcycleListAdmin,
@@ -496,5 +507,6 @@ module.exports = {
    addMotorcycle,
    foundMotorCycle,
    updateMotorcycle,
-   deleteMotorcycle
+   deleteMotorcycle,
+   updateStatus
 }

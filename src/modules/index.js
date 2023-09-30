@@ -162,6 +162,7 @@ router
    .put('/car/add/engine', cars.PUT_ENGINE)
    .put('/car/add/interior', cars.PUT_INTERIOR)
    .put('/car/update', FileUpload.array("photos"), cars.UPDATE_CAR)
+   .put('/car/update/status', cars.UPDATE_STATUS)
    .delete('/car/delete', cars.DELETE_CAR)
 
    // Motorcycle marks
@@ -183,6 +184,7 @@ router
    .get('/motorcycles/:id', motorcycle.GET_MOTORCYCLE_ID)
    .post('/motorcycles/add', FileUpload.array("photos"), motorcycle.POST_MOTORCYCLE)
    .put('/motorcycles/update', FileUpload.array("photos"), motorcycle.PUT_MOTORCYCLE)
+   .put('/motorcycles/update/status', motorcycle.UPDATE_STATUS)
    .delete('/motorcycles/delete', motorcycle.DELETE_MOTORCYCLE)
 
    // Motor home marks
