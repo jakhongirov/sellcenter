@@ -517,7 +517,7 @@ module.exports = {
          if (foundMotorCycle) {
             foundMotorCycle?.motorcycle_images_name.forEach((e) => {
                new FS(
-                  path.resolv(
+                  path.resolve(
                      __dirname,
                      '..',
                      '..',
