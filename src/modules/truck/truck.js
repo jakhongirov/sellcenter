@@ -92,31 +92,6 @@ module.exports = {
          } = req.body
 
          if (offset && limit) {
-            const truck_city = city ? city?.split(',') : ""
-            const fuelArr = fuel_type ? fuel_type?.split(',') : ""
-            const colorArr = exterior_colour ? exterior_colour?.split(',') : ""
-            const transmissionArr = transmission ? transmission?.split(',') : ""
-            const wheelformulaArr = wheel_formula ? wheel_formula?.split(',') : ""
-            const featuresId = []
-            const interiorFeaturesId = []
-
-            if (features) {
-               const featuresArr = features?.split(',')
-               if (featuresArr?.length > 0) {
-                  for (let i = 0; i < featuresArr.length; i++) {
-                     featuresId.push(Number(featuresArr[i]))
-                  }
-               }
-            }
-
-            if (interior_features) {
-               const interiorFeaturesArr = interior_features?.split(',')
-               if (interiorFeaturesArr?.length > 0) {
-                  for (let i = 0; i < interiorFeaturesArr.length; i++) {
-                     interiorFeaturesId.push(Number(interiorFeaturesArr[i]))
-                  }
-               }
-            }
 
             const truckList = await model.truckList(
                truck_condition,
@@ -134,25 +109,25 @@ module.exports = {
                truck_power_from,
                truck_power_to,
                truck_country,
-               truck_city,
+               city,
                zipcode,
                truck_radius,
-               fuelArr,
-               transmissionArr,
+               fuel_type,
+               transmission,
                truck_emission_class,
                truck_emissions_sticker,
-               featuresId,
+               features,
                truck_air_conditioning,
                truck_axles,
-               wheelformulaArr,
+               wheel_formula,
                truck_gvw_from,
                truck_gvw_to,
                truck_hydraulic_installation,
                truck_trailer_coupling_fix,
                truck_cruise_control,
                truck_driving_cab,
-               interiorFeaturesId,
-               colorArr,
+               interior_features,
+               exterior_colour,
                day,
                truck_damaged,
                truck_full_service_history,
@@ -247,32 +222,6 @@ module.exports = {
             video
          } = req.body
 
-         const truck_city = city ? city?.split(',') : ""
-         const fuelArr = fuel_type ? fuel_type?.split(',') : ""
-         const colorArr = exterior_colour ? exterior_colour?.split(',') : ""
-         const transmissionArr = transmission ? transmission?.split(',') : ""
-         const wheelformulaArr = wheel_formula ? wheel_formula?.split(',') : ""
-         const featuresId = []
-         const interiorFeaturesId = []
-
-         if (features) {
-            const featuresArr = features?.split(',')
-            if (featuresArr?.length > 0) {
-               for (let i = 0; i < featuresArr.length; i++) {
-                  featuresId.push(Number(featuresArr[i]))
-               }
-            }
-         }
-
-         if (interior_features) {
-            const interiorFeaturesArr = interior_features?.split(',')
-            if (interiorFeaturesArr?.length > 0) {
-               for (let i = 0; i < interiorFeaturesArr.length; i++) {
-                  interiorFeaturesId.push(Number(interiorFeaturesArr[i]))
-               }
-            }
-         }
-
          const truckCount = await model.truckCount(
             truck_condition,
             truck_category,
@@ -289,25 +238,25 @@ module.exports = {
             truck_power_from,
             truck_power_to,
             truck_country,
-            truck_city,
+            city,
             zipcode,
             truck_radius,
-            fuelArr,
-            transmissionArr,
+            fuel_type,
+            transmission,
             truck_emission_class,
             truck_emissions_sticker,
-            featuresId,
+            features,
             truck_air_conditioning,
             truck_axles,
-            wheelformulaArr,
+            wheel_formula,
             truck_gvw_from,
             truck_gvw_to,
             truck_hydraulic_installation,
             truck_trailer_coupling_fix,
             truck_cruise_control,
             truck_driving_cab,
-            interiorFeaturesId,
-            colorArr,
+            interior_features,
+            exterior_colour,
             day,
             truck_damaged,
             truck_full_service_history,
@@ -428,18 +377,6 @@ module.exports = {
 
          const truck_img_name = [];
          const truck_img = [];
-         const featuresArr = features?.split(',')
-         const interiorFeaturesArr = interior_features?.split(',')
-         const featuresId = []
-         const interiorFeaturesId = []
-
-         for (let i = 0; i < featuresArr.length; i++) {
-            featuresId.push(Number(featuresArr[i]))
-         }
-
-         for (let i = 0; i < interiorFeaturesArr.length; i++) {
-            interiorFeaturesId.push(Number(interiorFeaturesArr[i]))
-         }
 
          uploadPhoto?.forEach((e) => {
             truck_img.push(
@@ -469,7 +406,7 @@ module.exports = {
             truck_transmission,
             truck_emission_class,
             truck_emissions_sticker,
-            featuresId,
+            features?.split(','),
             truck_air_conditioning,
             truck_axles,
             truck_wheel_formula,
@@ -478,7 +415,7 @@ module.exports = {
             truck_trailer_coupling_fix,
             truck_cruise_control,
             truck_driving_cab,
-            interiorFeaturesId,
+            interior_features?.split(','),
             truck_exterior_colour,
             truck_damaged,
             truck_full_service_history,
@@ -569,18 +506,6 @@ module.exports = {
          const foundTruck = await model.foundTruck(id)
          const truck_img_name = [];
          const truck_img = [];
-         const featuresArr = features?.split(',')
-         const interiorFeaturesArr = interior_features?.split(',')
-         const featuresId = []
-         const interiorFeaturesId = []
-
-         for (let i = 0; i < featuresArr.length; i++) {
-            featuresId.push(Number(featuresArr[i]))
-         }
-
-         for (let i = 0; i < interiorFeaturesArr.length; i++) {
-            interiorFeaturesId.push(Number(interiorFeaturesArr[i]))
-         }
 
          if (uploadPhoto.length) {
             foundTruck?.truck_images_name.forEach((e) => {
@@ -634,7 +559,7 @@ module.exports = {
             truck_transmission,
             truck_emission_class,
             truck_emissions_sticker,
-            featuresId,
+            features?.split(','),
             truck_air_conditioning,
             truck_axles,
             truck_wheel_formula,
@@ -643,7 +568,7 @@ module.exports = {
             truck_trailer_coupling_fix,
             truck_cruise_control,
             truck_driving_cab,
-            interiorFeaturesId,
+            interior_features?.split(','),
             truck_exterior_colour,
             truck_damaged,
             truck_full_service_history,

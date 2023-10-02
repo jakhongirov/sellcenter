@@ -642,7 +642,7 @@ module.exports = {
          if (foundMotorhome) {
             foundMotorhome?.motor_home_images_name.forEach((e) => {
                new FS(
-                  path.resolv(
+                  path.resolve(
                      __dirname,
                      '..',
                      '..',

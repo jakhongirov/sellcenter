@@ -76,19 +76,6 @@ module.exports = {
          } = req.body
 
          if (limit && offset) {
-            const trailer_city = city ? city?.split(',') : ""
-            const securityArr = security ? security?.split(',') : ""
-            const featuresId = []
-
-            if (features) {
-               const featuresArr = features?.split(',')
-               if (featuresArr?.length > 0) {
-                  for (let i = 0; i < featuresArr.length; i++) {
-                     featuresId.push(Number(featuresArr[i]))
-                  }
-               }
-            }
-
             const trailerList = await model.trailerList(
                trailer_condition,
                trailer_category,
@@ -101,16 +88,16 @@ module.exports = {
                trailer_price_type,
                trailer_vat,
                trailer_country,
-               trailer_city,
+               city,
                zipcode,
                trailer_radius,
-               featuresId,
+               features,
                trailer_axles,
                trailer_gvw_from,
                trailer_gvw_to,
                trailer_load_capacity_from,
                trailer_load_capacity_to,
-               securityArr,
+               security,
                day,
                trailer_new_hu,
                trailer_renting_possible,
@@ -186,19 +173,6 @@ module.exports = {
             video,
          } = req.body
 
-         const trailer_city = city ? city?.split(',') : ""
-         const securityArr = security ? security?.split(',') : ""
-         const featuresId = []
-
-         if (features) {
-            const featuresArr = features?.split(',')
-            if (featuresArr?.length > 0) {
-               for (let i = 0; i < featuresArr.length; i++) {
-                  featuresId.push(Number(featuresArr[i]))
-               }
-            }
-         }
-
          const trailerCount = await model.trailerCount(
             trailer_condition,
             trailer_category,
@@ -211,16 +185,16 @@ module.exports = {
             trailer_price_type,
             trailer_vat,
             trailer_country,
-            trailer_city,
+            city,
             zipcode,
             trailer_radius,
-            featuresId,
+            features,
             trailer_axles,
             trailer_gvw_from,
             trailer_gvw_to,
             trailer_load_capacity_from,
             trailer_load_capacity_to,
-            securityArr,
+            security,
             day,
             trailer_new_hu,
             trailer_renting_possible,
@@ -324,17 +298,6 @@ module.exports = {
 
          const trailer_img_name = [];
          const trailer_img = [];
-         const securityArr = security ? security?.split(',') : ""
-         const featuresId = []
-
-         if (features) {
-            const featuresArr = features?.split(',')
-            if (featuresArr?.length > 0) {
-               for (let i = 0; i < featuresArr.length; i++) {
-                  featuresId.push(Number(featuresArr[i]))
-               }
-            }
-         }
 
          uploadPhoto?.forEach((e) => {
             trailer_img.push(
@@ -358,11 +321,11 @@ module.exports = {
             trailer_country,
             trailer_city_zipcode,
             trailer_radius,
-            featuresId,
+            features,
             trailer_axles,
             trailer_gvw,
             trailer_load_capacity,
-            securityArr,
+            security,
             trailer_new_hu,
             trailer_renting_possible,
             trailer_discount_offers,
@@ -434,17 +397,6 @@ module.exports = {
          const foundTrailer = await model.foundTrailer(id)
          const trailer_img_name = [];
          const trailer_img = [];
-         const securityArr = security ? security?.split(',') : ""
-         const featuresId = []
-
-         if (features) {
-            const featuresArr = features?.split(',')
-            if (featuresArr?.length > 0) {
-               for (let i = 0; i < featuresArr.length; i++) {
-                  featuresId.push(Number(featuresArr[i]))
-               }
-            }
-         }
 
          if (uploadPhoto.length) {
             foundTrailer?.truck_images_name.forEach((e) => {
@@ -492,11 +444,11 @@ module.exports = {
             trailer_country,
             trailer_city_zipcode,
             trailer_radius,
-            featuresId,
+            features,
             trailer_axles,
             trailer_gvw,
             trailer_load_capacity,
-            securityArr,
+            security,
             trailer_new_hu,
             trailer_renting_possible,
             trailer_discount_offers,

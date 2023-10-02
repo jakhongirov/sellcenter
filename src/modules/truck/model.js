@@ -242,6 +242,14 @@ const truckList = (
    limit,
    offset
 ) => {
+   const cityConditions = truck_city?.map(city => `truck_city_zipcode = '${city}'`).join(' OR ');
+   const fuelArrConditions = fuelArr?.map(e => `truck_fuel_type = '${e}'`).join(' OR ');
+   const transmissionConditions = transmissionArr?.map(e => `truck_transmission = '${e}'`).join(' OR ');
+   const featuresString = featuresId?.map(e => `'${e}'`).join(', ');
+   const interiorFeaturesString = interiorFeaturesId?.map(e => `'${e}'`).join(', ');
+   const wheelformulaConditions = wheelformulaArr?.map(e => `truck_wheel_formula = '${e}'`).join(' OR ');
+   const colorArrConditions = colorArr?.map(e => `truck_exterior_colour = '${e}'`).join(' OR ');
+
    const TRUCK_LIST = `
       SELECT
          *
