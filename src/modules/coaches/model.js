@@ -225,8 +225,8 @@ const coachesList = (
    const cityConditions = coache_city?.map(city => `coache_city_zipcode = '${city}'`).join(' OR ');
    const fuelConditions = fuelArr?.map(e => `coache_fuel_type = '${e}'`).join(' OR ');
    const transmissionConditions = transmissionArr?.map(e => `coache_transmission = '${e}'`).join(' OR ');
-   const featuresConditions = featuresId?.map(e => `coache_features = '${e}'`).join(' OR ');
-   const interiorFeaturesConditions = interiorFeaturesId?.map(e => `coache_interior_features = '${e}'`).join(' OR ');
+   const featuresString = featuresId?.map(e => `'${e}'`).join(', ');
+   const interiorFeaturesString = interiorFeaturesId?.map(e => `'${e}'`).join(', ');
    const colorConditions = colorArr?.map(e => `coache_exterior_colour = '${e}'`).join(' OR ');
 
    const COACHE_LIST = `
@@ -258,13 +258,13 @@ const coachesList = (
          ${transmissionConditions ? `and (${transmissionConditions})` : ''}
          ${coache_emission_class ? `and coache_emission_class = '${coache_emission_class}'` : ""}
          ${coache_emissions_sticker ? `and coache_emissions_sticker = '${coache_emissions_sticker}'` : ""}
-         ${featuresConditions ? `and (${featuresConditions})` : ''}
+         ${featuresId?.length > 0 ? `and coache_features @> ARRAY[${featuresString}]` : ''}
          ${coache_air_conditioning ? `and coache_air_conditioning = '${coache_air_conditioning}'` : ""}
          ${coache_number_of_seats_from ? `and ${coache_number_of_seats_from} <= coache_number_of_seats` : ""}
          ${coache_number_of_seats_to ? `and ${coache_number_of_seats_to} >= coache_number_of_seats` : ""}
          ${coache_cruise_control ? `and coache_cruise_control = '${coache_cruise_control}'` : ""}
          ${coache_trailer_coupling_fix == true ? `and coache_trailer_coupling_fix = ${coache_trailer_coupling_fix}` : ""}
-         ${interiorFeaturesConditions ? `and (${interiorFeaturesConditions})` : ''}
+         ${interiorFeaturesId?.length > 0 ? `and coache_interior_features @> ARRAY[${interiorFeaturesString}]` : ''}
          ${colorConditions ? `and (${colorConditions})` : ''}
          ${coache_damaged ? `and coache_damaged = '${coache_damaged}'` : ""}
          ${coache_full_service_history == true ? `and coache_full_service_history = ${coache_full_service_history}` : ""}

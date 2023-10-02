@@ -255,6 +255,14 @@ const foundMotorhomeList = (
    offset,
    limit
 ) => {
+   const typesConditions = typesId?.map(e => `motor_home_type = '${e}'`).join(' OR ');
+   const cityConditions = motor_home_city?.map(city => `motor_home_city_zipcode = '${city}'`).join(' OR ');
+   const fuelArrConditions = fuelArr?.map(e => `motor_home_fuel_type = '${e}'`).join(' OR ');
+   const transmissionArrConditions = transmissionArr?.map(e => `motor_home_transmission = '${e}'`).join(' OR ');
+   const featuresString = featuresId?.map(e => `'${e}'`).join(', ');
+   const interiorFeaturesString = interiorFeaturesId?.map(e => `'${e}'`).join(', ');
+   const colorArrConditions = colorArr?.map(e => `motor_home_exterior_colour = '${e}'`).join(' OR ');
+
    const MOTOR_HOME_LIST = `
       SELECT
          *
@@ -265,12 +273,12 @@ const foundMotorhomeList = (
          ${motor_home_condition ? `and motor_home_condition ilike '%${motor_home_condition}%'` : ''}
          ${motor_home_make ? `and motor_home_make = '${motor_home_make}'` : ''}
          ${motor_home_model ? `and motor_home_make = '${motor_home_model}'` : ''}
-         ${typesId.length > 0 ? `and ${typesId} @> motor_home_type` : ''}
-         ${fuelArr.length > 0 ? `and ${fuelArr} @> ARRAY[motor_home_fuel_type]` : ''}
-         ${transmissionArr.length > 0 ? `and ${transmissionArr} @> ARRAY[motor_home_transmission]` : ''}
-         ${featuresId.length > 0 ? `and ${featuresId} @> motor_home_features` : ''}
-         ${interiorFeaturesId.length > 0 ? `and ${interiorFeaturesId} @> motor_home_interior_features` : ''}
-         ${colorArr.length > 0 ? `and ${colorArr} @> ARRAY[motor_home_exterior_colour]` : ''}
+         ${typesConditions ? `and (${typesConditions})` : ''}
+         ${fuelArrConditions ? `and (${fuelArrConditions})` : ''}
+         ${transmissionArrConditions ? `and (${transmissionArrConditions})` : ''}
+         ${featuresId.length > 0 ? `and motor_home_features @> ARRAY[${featuresString}]` : ''}
+         ${interiorFeaturesId.length > 0 ? `and motor_home_interior_features @> ARRAY[${interiorFeaturesString}]` : ''}
+         ${colorArrConditions ? `and (${colorArrConditions})` : ''}
          ${motor_home_price_from ? `and ${motor_home_price_from} <= motor_home_price` : ""}
          ${motor_home_price_to ? `and ${motor_home_price_to} >= motor_home_price` : ""}
          ${motor_home_firt_date_year_from ? `and ${motor_home_firt_date_year_from} <= motor_home_firt_date_year` : ""}
@@ -289,7 +297,7 @@ const foundMotorhomeList = (
          ${motor_home_number_of_bunks_to ? `and ${motor_home_number_of_bunks_to} >= motor_home_number_of_bunks` : ""}
          ${motor_home_numbrt_of_owner ? `and ${motor_home_numbrt_of_owner} >= motor_home_numbrt_of_owner` : ""}
          ${motor_home_country ? `and ${motor_home_country} ilike '%motor_home_country%'` : ""}
-         ${motor_home_city?.length > 0 ? `and ${motor_home_city} ARRAY[motor_home_city_zipcode]` : ""}
+         ${cityConditions ? `and (${cityConditions})` : ""}
          ${zipcode ? `and ${zipcode} ilike '%motor_home_city_zipcode%'` : ""}
          ${motor_home_city_radius ? `and ${motor_home_city_radius} <= motor_home_city_radius` : ""}
          ${motor_home_axles <= 3 ? `and ${motor_home_axles} = motor_home_axles` : motor_home_axles > 3 ? `and 3 < motor_home_axles` : ''}
@@ -371,6 +379,14 @@ const foundMotorhomeCount = (
    pictures,
    video
 ) => {
+   const typesConditions = typesId?.map(e => `motor_home_type = '${e}'`).join(' OR ');
+   const cityConditions = motor_home_city?.map(city => `motor_home_city_zipcode = '${city}'`).join(' OR ');
+   const fuelArrConditions = fuelArr?.map(e => `motor_home_fuel_type = '${e}'`).join(' OR ');
+   const transmissionArrConditions = transmissionArr?.map(e => `motor_home_transmission = '${e}'`).join(' OR ');
+   const featuresString = featuresId?.map(e => `'${e}'`).join(', ');
+   const interiorFeaturesString = interiorFeaturesId?.map(e => `'${e}'`).join(', ');
+   const colorArrConditions = colorArr?.map(e => `motor_home_exterior_colour = '${e}'`).join(' OR ');
+
    const MOTOR_HOME_LIST = `
       SELECT
          count(motor_home_id)
@@ -381,12 +397,12 @@ const foundMotorhomeCount = (
          ${motor_home_condition ? `and motor_home_condition ilike '%${motor_home_condition}%'` : ''}
          ${motor_home_make ? `and motor_home_make = '${motor_home_make}'` : ''}
          ${motor_home_model ? `and motor_home_make = '${motor_home_model}'` : ''}
-         ${typesId.length > 0 ? `and ${typesId} @> motor_home_type` : ''}
-         ${fuelArr.length > 0 ? `and ${fuelArr} @> ARRAY[motor_home_fuel_type]` : ''}
-         ${transmissionArr.length > 0 ? `and ${transmissionArr} @> ARRAY[motor_home_transmission]` : ''}
-         ${featuresId.length > 0 ? `and ${featuresId} @> motor_home_features` : ''}
-         ${interiorFeaturesId.length > 0 ? `and ${interiorFeaturesId} @> motor_home_interior_features` : ''}
-         ${colorArr.length > 0 ? `and ${colorArr} @> ARRAY[motor_home_exterior_colour]` : ''}
+         ${typesConditions ? `and (${typesConditions})` : ''}
+         ${fuelArrConditions ? `and (${fuelArrConditions})` : ''}
+         ${transmissionArrConditions ? `and (${transmissionArrConditions})` : ''}
+         ${featuresId.length > 0 ? `and motor_home_features @> ARRAY[${featuresString}]` : ''}
+         ${interiorFeaturesId.length > 0 ? `and motor_home_interior_features @> ARRAY[${interiorFeaturesString}]` : ''}
+         ${colorArrConditions ? `and (${colorArrConditions})` : ''}
          ${motor_home_price_from ? `and ${motor_home_price_from} <= motor_home_price` : ""}
          ${motor_home_price_to ? `and ${motor_home_price_to} >= motor_home_price` : ""}
          ${motor_home_firt_date_year_from ? `and ${motor_home_firt_date_year_from} <= motor_home_firt_date_year` : ""}
@@ -405,7 +421,7 @@ const foundMotorhomeCount = (
          ${motor_home_number_of_bunks_to ? `and ${motor_home_number_of_bunks_to} >= motor_home_number_of_bunks` : ""}
          ${motor_home_numbrt_of_owner ? `and ${motor_home_numbrt_of_owner} >= motor_home_numbrt_of_owner` : ""}
          ${motor_home_country ? `and ${motor_home_country} ilike '%motor_home_country%'` : ""}
-         ${motor_home_city?.length > 0 ? `and ${motor_home_city} ARRAY[motor_home_city_zipcode]` : ""}
+         ${cityConditions ? `and (${cityConditions})` : ""}
          ${zipcode ? `and ${zipcode} ilike '%motor_home_city_zipcode%'` : ""}
          ${motor_home_city_radius ? `and ${motor_home_city_radius} <= motor_home_city_radius` : ""}
          ${motor_home_axles <= 3 ? `and ${motor_home_axles} = motor_home_axles` : motor_home_axles > 3 ? `3 < motor_home_axles` : ''}

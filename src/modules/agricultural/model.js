@@ -194,9 +194,9 @@ const vehicleList = (
    offset
 ) => {
    const cityConditions = vehicle_city?.map(e => `vehicle_city_zipcode = '${e}'`).join(' OR ');
-   const featuresConditions = featuresId?.map(e => `vehicle_features = '${e}'`).join(' OR ');
-   const interiorFeaturesConditions = interiorFeaturesId?.map(e => `vehicle_interior_features = '${e}'`).join(' OR ');
-   const securityConditions = securityArr?.map(e => `vehicle_security = '${e}'`).join(' OR ');
+   const featuresString = featuresId?.map(e => `'${e}'`).join(', ');
+   const interiorFeaturesString = interiorFeaturesId?.map(e => `'${e}'`).join(', ');
+   const securityString = securityArr?.map(e => `'${e}'`).join(', ');
 
    const VEHICLE_LIST = `
       SELECT
@@ -223,11 +223,11 @@ const vehicleList = (
          ${cityConditions ? `and (${cityConditions})` : ""}
          ${zipcode ? `and vehicle_city_zipcode ilike '%${zipcode}%'` : ""}
          ${vehicle_radius ? `and ${vehicle_radius} >= vehicle_radius` : ""}
-         ${featuresConditions ? `and (${featuresConditions})` : ''}
+         ${featuresId?.length > 0 ? `and vehicle_features @> ARRAY[${featuresString}]` : ''}
          ${vehicle_air_conditioning ? `and vehicle_air_conditioning = '${vehicle_air_conditioning}'` : ""}
-         ${interiorFeaturesConditions ? `and (${interiorFeaturesConditions})` : ''}
+         ${interiorFeaturesId?.length > 0 ? `and  vehicle_interior_features @> ARRAY[${interiorFeaturesString}]` : ''}
          ${vehicle_emissions_sticker ? `and vehicle_emissions_sticker = '${vehicle_emissions_sticker}'` : ""}
-         ${securityConditions ? `and (${securityConditions})` : ''}
+         ${securityArr?.length > 0 ? `and vehicle_security @> ARRAY[${securityString}]` : ''}
          ${vehicle_municipal == true ? `and vehicle_municipal = ${vehicle_municipal}` : ""}
          ${vehicle_new_hu == true ? `and vehicle_new_hu = ${vehicle_new_hu}` : ""}
          ${vehicle_renting_possible == true ? `and vehicle_renting_possible = ${vehicle_renting_possible}` : ""}
@@ -280,9 +280,9 @@ const vehicleCount = (
    video
 ) => {
    const cityConditions = vehicle_city?.map(e => `vehicle_city_zipcode = '${e}'`).join(' OR ');
-   const featuresConditions = featuresId?.map(e => `vehicle_features = '${e}'`).join(' OR ');
-   const interiorFeaturesConditions = interiorFeaturesId?.map(e => `vehicle_interior_features = '${e}'`).join(' OR ');
-   const securityConditions = securityArr?.map(e => `vehicle_security = '${e}'`).join(' OR ');
+   const featuresString = featuresId?.map(e => `'${e}'`).join(', ');
+   const interiorFeaturesString = interiorFeaturesId?.map(e => `'${e}'`).join(', ');
+   const securityString = securityArr?.map(e => `'${e}'`).join(', ');
 
    const VEHICLE_LIST = `
       SELECT
@@ -309,11 +309,11 @@ const vehicleCount = (
          ${cityConditions ? `and (${cityConditions})` : ""}
          ${zipcode ? `and vehicle_city_zipcode ilike '%${zipcode}%'` : ""}
          ${vehicle_radius ? `and ${vehicle_radius} >= vehicle_radius` : ""}
-         ${featuresConditions ? `and (${featuresConditions})` : ''}
+         ${featuresId?.length > 0 ? `and vehicle_features @> ARRAY[${featuresString}]` : ''}
          ${vehicle_air_conditioning ? `and vehicle_air_conditioning = '${vehicle_air_conditioning}'` : ""}
-         ${interiorFeaturesConditions ? `and (${interiorFeaturesConditions})` : ''}
+         ${interiorFeaturesId?.length > 0 ? `and vehicle_interior_features @> ARRAY[${interiorFeaturesString}]` : ''}
          ${vehicle_emissions_sticker ? `and vehicle_emissions_sticker = '${vehicle_emissions_sticker}'` : ""}
-         ${securityConditions ? `and (${securityConditions})` : ''}
+         ${securityArr?.length > 0 ? `and vehicle_security @> ARRAY[${securityString}]` : ''}
          ${vehicle_municipal == true ? `and vehicle_municipal = ${vehicle_municipal}` : ""}
          ${vehicle_new_hu == true ? `and vehicle_new_hu = ${vehicle_new_hu}` : ""}
          ${vehicle_renting_possible == true ? `and vehicle_renting_possible = ${vehicle_renting_possible}` : ""}

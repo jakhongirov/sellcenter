@@ -101,7 +101,7 @@ module.exports = {
                motor_home_condition,
                motor_home_make,
                motor_home_model,
-               typesId,
+               types,
                motor_home_price_from,
                motor_home_price_to,
                motor_home_firt_date_year_from,
@@ -113,12 +113,12 @@ module.exports = {
                motor_home_power_from,
                motor_home_power_to,
                motor_home_country,
-               motor_home_city,
+               city,
                zipcode,
                motor_home_city_radius,
-               fuelArr,
-               transmissionArr,
-               featuresId,
+               fuel_type,
+               transmission,
+               features,
                motor_home_length_from,
                motor_home_length_to,
                motor_home_gvw_from,
@@ -131,8 +131,8 @@ module.exports = {
                motor_home_radio,
                motor_home_parking_sensors,
                motor_home_air_conditioning,
-               interiorFeaturesId,
-               colorArr,
+               interior_features,
+               exterior_colour,
                day,
                motor_home_vat,
                motor_home_damaged,
@@ -233,46 +233,11 @@ module.exports = {
             video
          } = req.body
 
-         const motor_home_city = city ? city?.split(',') : ""
-         const fuelArr = fuel_type ? fuel_type?.split(',') : ""
-         const colorArr = exterior_colour ? exterior_colour?.split(',') : ""
-         const transmissionArr = transmission ? transmission?.split(',') : ""
-         const typesId = []
-         const featuresId = []
-         const interiorFeaturesId = []
-
-         if (types) {
-            const typesArr = types?.split(',')
-            if (typesArr?.length > 0) {
-               for (let i = 0; i < typesArr.length; i++) {
-                  typesId.push(Number(typesArr[i]))
-               }
-            }
-         }
-
-         if (features) {
-            const featuresArr = features?.split(',')
-            if (featuresArr?.length > 0) {
-               for (let i = 0; i < featuresArr.length; i++) {
-                  featuresId.push(Number(featuresArr[i]))
-               }
-            }
-         }
-
-         if (interior_features) {
-            const interiorFeaturesArr = interior_features?.split(',')
-            if (interiorFeaturesArr?.length > 0) {
-               for (let i = 0; i < interiorFeaturesArr.length; i++) {
-                  interiorFeaturesId.push(Number(interiorFeaturesArr[i]))
-               }
-            }
-         }
-
          const foundMotorhomeCount = await model.foundMotorhomeCount(
             motor_home_condition,
             motor_home_make,
             motor_home_model,
-            typesId,
+            types,
             motor_home_price_from,
             motor_home_price_to,
             motor_home_firt_date_year_from,
@@ -284,12 +249,12 @@ module.exports = {
             motor_home_power_from,
             motor_home_power_to,
             motor_home_country,
-            motor_home_city,
+            city,
             zipcode,
             motor_home_city_radius,
-            fuelArr,
-            transmissionArr,
-            featuresId,
+            fuel_type,
+            transmission,
+            features,
             motor_home_length_from,
             motor_home_length_to,
             motor_home_gvw_from,
@@ -302,8 +267,8 @@ module.exports = {
             motor_home_radio,
             motor_home_parking_sensors,
             motor_home_air_conditioning,
-            interiorFeaturesId,
-            colorArr,
+            interior_features,
+            exterior_colour,
             day,
             motor_home_vat,
             motor_home_damaged,
@@ -430,36 +395,6 @@ module.exports = {
 
          const motorhome_img_name = [];
          const motorhome_img = [];
-         const typesId = []
-         const featuresId = []
-         const interiorFeaturesId = []
-
-         if (types) {
-            const typesArr = types?.split(',')
-            if (typesArr?.length > 0) {
-               for (let i = 0; i < typesArr.length; i++) {
-                  typesId.push(Number(typesArr[i]))
-               }
-            }
-         }
-
-         if (features) {
-            const featuresArr = features?.split(',')
-            if (featuresArr?.length > 0) {
-               for (let i = 0; i < featuresArr.length; i++) {
-                  featuresId.push(Number(featuresArr[i]))
-               }
-            }
-         }
-
-         if (interior_features) {
-            const interiorFeaturesArr = interior_features?.split(',')
-            if (interiorFeaturesArr?.length > 0) {
-               for (let i = 0; i < interiorFeaturesArr.length; i++) {
-                  interiorFeaturesId.push(Number(interiorFeaturesArr[i]))
-               }
-            }
-         }
 
          uploadPhoto?.forEach((e) => {
             motorhome_img.push(
@@ -474,7 +409,7 @@ module.exports = {
             motor_home_describtion,
             motor_home_video_link,
             motor_home_condition,
-            typesId,
+            types,
             motor_home_price,
             motor_home_firt_date,
             motor_home_firt_date_year,
@@ -488,7 +423,7 @@ module.exports = {
             motor_home_transmission,
             motor_home_emission_class,
             motor_home_emissions_sticker,
-            featuresId,
+            features?.split(','),
             motor_home_length,
             motor_home_gvw,
             motor_home_number_of_bunks,
@@ -498,7 +433,7 @@ module.exports = {
             motor_home_radio,
             motor_home_parking_sensors,
             motor_home_air_conditioning,
-            interiorFeaturesId,
+            interior_features?.split(','),
             motor_home_exterior_colour,
             motor_home_vat,
             motor_home_damaged,
@@ -595,38 +530,8 @@ module.exports = {
          const motorhome_img_name = [];
          const motorhome_img = [];
          const foundMotorhome = await model.foundMotorhome(id)
-         const typesId = []
-         const featuresId = []
-         const interiorFeaturesId = []
 
-         if (types) {
-            const typesArr = types?.split(',')
-            if (typesArr?.length > 0) {
-               for (let i = 0; i < typesArr.length; i++) {
-                  typesId.push(Number(typesArr[i]))
-               }
-            }
-         }
-
-         if (features) {
-            const featuresArr = features?.split(',')
-            if (featuresArr?.length > 0) {
-               for (let i = 0; i < featuresArr.length; i++) {
-                  featuresId.push(Number(featuresArr[i]))
-               }
-            }
-         }
-
-         if (interior_features) {
-            const interiorFeaturesArr = interior_features?.split(',')
-            if (interiorFeaturesArr?.length > 0) {
-               for (let i = 0; i < interiorFeaturesArr.length; i++) {
-                  interiorFeaturesId.push(Number(interiorFeaturesArr[i]))
-               }
-            }
-         }
-
-         if (uploadPhoto.length) {
+         if (uploadPhoto?.length) {
             foundMotorhome?.motor_home_images_name.forEach((e) => {
                new FS(
                   path.resolve(
@@ -663,7 +568,7 @@ module.exports = {
             motor_home_describtion,
             motor_home_video_link,
             motor_home_condition,
-            typesId,
+            types,
             motor_home_price,
             motor_home_firt_date,
             motor_home_firt_date_year,
@@ -677,7 +582,7 @@ module.exports = {
             motor_home_transmission,
             motor_home_emission_class,
             motor_home_emissions_sticker,
-            featuresId,
+            features?.split(','),
             motor_home_length,
             motor_home_gvw,
             motor_home_number_of_bunks,
@@ -687,7 +592,7 @@ module.exports = {
             motor_home_radio,
             motor_home_parking_sensors,
             motor_home_air_conditioning,
-            interiorFeaturesId,
+            interior_features?.split(','),
             motor_home_exterior_colour,
             motor_home_vat,
             motor_home_damaged,

@@ -203,9 +203,9 @@ const constructionList = (
          ${cityConditions ? `and (${cityConditions})` : ""}
          ${zipcode ? `and machine_city_zipcode ilike '%${zipcode}%'` : ""}
          ${machine_radius ? `and ${machine_radius} >= machine_radius` : ""}
-         ${safetyId?.length > 0 ? `and machine_features @> ARRAY[${safetyString}]` : ""}
+         ${safetyId?.length > 0 ? `and machine_safety @> ARRAY[${safetyString}]` : ""}
          ${machine_emissions_sticker ? `and machine_emissions_sticker = '${machine_emissions_sticker}'` : ""}
-         ${featuresId?.length > 0 ? `and machine_safety @> ARRAY[${featuresString}]` : ""}
+         ${featuresId?.length > 0 ? `and machine_features @> ARRAY[${featuresString}]` : ""}
          ${machine_renting_possible == true ? `and machine_renting_possible = ${machine_renting_possible}` : ""}
          ${machine_road_licence == true ? `and machine_road_licence = ${machine_road_licence}` : ""}
          ${machine_discount_offers == true ? `and machine_discount_offers = ${machine_discount_offers}` : ""}
@@ -252,8 +252,8 @@ const constructionCount = (
    day,
 ) => {
    const cityConditions = machine_city?.map(city => `machine_city_zipcode = '${city}'`).join(' OR ');
-   const safetyConditions = safetyId?.map(e => `machine_safety = '${e}'`).join(' OR ');
-   const featuresConditions = featuresId?.map(e => `machine_features = '${e}'`).join(' OR ');
+   const safetyString = safetyId?.map(e => `'${e}'`).join(', ');
+   const featuresString = featuresId?.map(e => `'${e}'`).join(', ');
 
    const CONSTRUCTION_LIST = `
       SELECT
@@ -278,9 +278,9 @@ const constructionCount = (
          ${cityConditions ? `and (${cityConditions})` : ""}
          ${zipcode ? `and machine_city_zipcode ilike '%${zipcode}%'` : ""}
          ${machine_radius ? `and ${machine_radius} >= machine_radius` : ""}
-         ${safetyConditions ? `and (${safetyConditions})` : ""}
+         ${safetyId?.length > 0 ? `and machine_safety @> ARRAY[${safetyString}]` : ""}
          ${machine_emissions_sticker ? `and machine_emissions_sticker = '${machine_emissions_sticker}'` : ""}
-         ${featuresConditions ? `and (${featuresConditions})` : ""}
+         ${featuresId.length > 0 ? `and machine_features @> ARRAY[${featuresString}]` : ""}
          ${machine_renting_possible == true ? `and machine_renting_possible = ${machine_renting_possible}` : ""}
          ${machine_road_licence == true ? `and machine_road_licence = ${machine_road_licence}` : ""}
          ${machine_discount_offers == true ? `and machine_discount_offers = ${machine_discount_offers}` : ""}
