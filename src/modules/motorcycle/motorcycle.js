@@ -452,6 +452,7 @@ module.exports = {
          }
 
          const updateMotorcycle = await model.updateMotorcycle(
+            motorcycle_id,
             motorcycle_make,
             motorcycle_model,
             motorcycle_description,

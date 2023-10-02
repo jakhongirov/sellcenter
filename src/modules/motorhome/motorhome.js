@@ -96,41 +96,7 @@ module.exports = {
          } = req.body
 
          if (offset && limit) {
-            const motor_home_city = city ? city?.split(',') : ""
-            const fuelArr = fuel_type ? fuel_type?.split(',') : ""
-            const colorArr = exterior_colour ? exterior_colour?.split(',') : ""
-            const transmissionArr = transmission ? transmission?.split(',') : ""
-            const typesId = []
-            const featuresId = []
-            const interiorFeaturesId = []
-
-            if (types) {
-               const typesArr = types?.split(',')
-               if (typesArr?.length > 0) {
-                  for (let i = 0; i < typesArr.length; i++) {
-                     typesId.push(Number(typesArr[i]))
-                  }
-               }
-            }
-
-            if (features) {
-               const featuresArr = features?.split(',')
-               if (featuresArr?.length > 0) {
-                  for (let i = 0; i < featuresArr.length; i++) {
-                     featuresId.push(Number(featuresArr[i]))
-                  }
-               }
-            }
-
-            if (interior_features) {
-               const interiorFeaturesArr = interior_features?.split(',')
-               if (interiorFeaturesArr?.length > 0) {
-                  for (let i = 0; i < interiorFeaturesArr.length; i++) {
-                     interiorFeaturesId.push(Number(interiorFeaturesArr[i]))
-                  }
-               }
-            }
-
+            
             const foundMotorhomeList = await model.foundMotorhomeList(
                motor_home_condition,
                motor_home_make,
