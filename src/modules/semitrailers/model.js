@@ -181,6 +181,10 @@ const trailerList = (
    offset,
    limit
 ) => {
+   const cityConditions = trailer_city?.map(city => `trailer_city_zipcode = '${city}'`).join(' OR ');
+   const featuresString = featuresId?.map(e => `'${e}'`).join(', ');
+   const securityString = securityArr?.map(e => `'${e}'`).join(', ');
+
    const TRAILER_LIST = `
       SELECT
          *
@@ -199,16 +203,16 @@ const trailerList = (
          ${trailer_price_type ? `and trailer_price_type = '${trailer_price_type}'` : ""}
          ${trailer_vat ? `and trailer_vat = '${trailer_vat}'` : ""}
          ${trailer_country ? `and trailer_country ilike '%${trailer_country}%'` : ""}
-         ${trailer_city?.length > 0 ? `and ${trailer_city} @> ARRAY[trailer_city_zipcode]` : ""}
+         ${cityConditions ? `and (${cityConditions})` : ""}
          ${zipcode ? `and trailer_city_zipcode ilike '%${zipcode}%'` : ""}
          ${trailer_radius ? `and ${trailer_radius} >=  trailer_radius` : ""}
-         ${featuresId?.length > 0 ? `and ${featuresId} @> trailer_features` : ""}
+         ${featuresId?.length > 0 ? `and trailer_features @> ARRAY[${featuresString}]` : ""}
          ${trailer_axles <= 3 ? `and ${trailer_axles} = trailer_axles` : trailer_axles > 3 ? `and 3 < trailer_axles` : ''}
          ${trailer_gvw_from ? `and ${trailer_gvw_from} <=  trailer_gvw` : ""}
          ${trailer_gvw_to ? `and ${trailer_gvw_to} >=  trailer_gvw` : ""}
          ${trailer_load_capacity_from ? `and ${trailer_load_capacity_from} <=  trailer_load_capacity` : ""}
          ${trailer_load_capacity_to ? `and ${trailer_load_capacity_to} >=  trailer_load_capacity` : ""}
-         ${securityArr?.length > 0 ? `and ${securityArr} @> trailer_security` : ''}
+         ${securityArr?.length > 0 ? `and trailer_security @> ARRAY[${securityString}]` : ''}
          ${trailer_new_hu == true ? `and trailer_new_hu = ${trailer_new_hu}` : ""}
          ${trailer_renting_possible == true ? `and trailer_renting_possible = ${trailer_renting_possible}` : ""}
          ${trailer_discount_offers == true ? `and trailer_discount_offers = ${trailer_discount_offers}` : ""}
@@ -256,6 +260,10 @@ const trailerCount = (
    picture,
    video
 ) => {
+   const cityConditions = trailer_city?.map(city => `trailer_city_zipcode = '${city}'`).join(' OR ');
+   const featuresString = featuresId?.map(e => `'${e}'`).join(', ');
+   const securityString = securityArr?.map(e => `'${e}'`).join(', ');
+
    const TRAILER_LIST = `
       SELECT
          count(trailer_id)
@@ -274,16 +282,16 @@ const trailerCount = (
          ${trailer_price_type ? `and trailer_price_type = '${trailer_price_type}'` : ""}
          ${trailer_vat ? `and trailer_vat = '${trailer_vat}'` : ""}
          ${trailer_country ? `and trailer_country ilike '%${trailer_country}%'` : ""}
-         ${trailer_city?.length > 0 ? `and ${trailer_city} @> ARRAY[trailer_city_zipcode]` : ""}
+         ${cityConditions ? `and (${cityConditions})` : ""}
          ${zipcode ? `and trailer_city_zipcode ilike '%${zipcode}%'` : ""}ƒ
          ${trailer_radius ? `and ${trailer_radius} >=  trailer_radius` : ""}
-         ${featuresId?.length > 0 ? `and ${featuresId} @> trailer_features` : ""}
+         ${featuresId?.length > 0 ? `and trailer_features @> ARRAY[${featuresString}]` : ""}
          ${trailer_axles <= 3 ? `and ${trailer_axles} = trailer_axles` : trailer_axles > 3 ? `and 3 < trailer_axles` : ''}
          ${trailer_gvw_from ? `and ${trailer_gvw_from} <=  trailer_gvw` : ""}
          ${trailer_gvw_to ? `and ${trailer_gvw_to} >=  trailer_gvw` : ""}
          ${trailer_load_capacity_from ? `and ${trailer_load_capacity_from} <=  trailer_load_capacity` : ""}
          ${trailer_load_capacity_to ? `and ${trailer_load_capacity_to} >=  trailer_load_capacity` : ""}
-         ${securityArr?.length > 0 ? `and ${securityArr} @> trailer_security` : ''}
+         ${securityArr?.length > 0 ? `and trailer_security @> ARRAY[${securityString}]` : ''}
          ${trailer_new_hu == true ? `and trailer_new_hu = ${trailer_new_hu}` : ""}
          ${trailer_renting_possible == true ? `and trailer_renting_possible = ${trailer_renting_possible}` : ""}
          ${trailer_discount_offers == true ? `and trailer_discount_offers = ${trailer_discount_offers}` : ""}
