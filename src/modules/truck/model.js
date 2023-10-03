@@ -27,6 +27,16 @@ const DELETE_TRUCK = `
    RETURNING * ;
 `;
 
+const UPDATE_STATUS = `
+   UPDATE
+      trucks
+   SET
+      truck_active = $2
+   WHERE
+      truck_id = $1
+   RETURNING *;
+`;
+
 const ADD_TRUCK = `
    INSERT INTO
       trucks (
@@ -192,6 +202,7 @@ const truckListAdmin = (limit, offset) => {
 }
 const foundTruckById = (id) => fetch(FOUND_TRUCK_BY_ID, id)
 const foundTruck = (id) => fetch(FOUND_TRUCK, id)
+const updateStatus = (id, status) => fetch(UPDATE_STATUS, id, status)
 const deleteTruck = (id) => fetch(DELETE_TRUCK, id)
 const truckList = (
    truck_condition,
@@ -616,5 +627,6 @@ module.exports = {
    truckList,
    truckCount,
    addTruck,
-   updateTruck
+   updateTruck,
+   updateStatus
 }

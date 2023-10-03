@@ -33,7 +33,8 @@ const UPDATE_STATUS = `
    SET
       motor_home_active = $2
    WHERE
-      motor_home_id = $1;
+      motor_home_id = $1
+   RETURNING *;
 `;
 
 const ADD_MOTOR_HOME = `
@@ -660,6 +661,7 @@ module.exports = {
    motorhomeListAdmin,
    foundMotorhomeById,
    foundMotorhome,
+   updateStatus,
    deleteMotorhome,
    foundMotorhomeList,
    foundMotorhomeCount,
