@@ -304,20 +304,7 @@ const foundCarsList = (
 
    const FOUND_CARS_LIST = `
       SELECT 
-         car_make,
-         car_model,
-         car_images_url,
-         car_body,
-         car_transmission,
-         car_fuel_consumption,
-         car_number_seats,
-         car_number_door,
-         car_firt_date,
-         car_mileage,
-         car_hu_valid_until,
-         car_price,
-         user_phone,
-         user_email
+         *
       FROM
          cars
       WHERE

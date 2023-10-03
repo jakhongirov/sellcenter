@@ -19,6 +19,17 @@ const FOUND_FORKLIFT = `
       forklift_id = $1;
 `;
 
+
+const UPDATE_STATUS = `
+   UPDATE
+      forklift_trucks
+   SET
+      forklift_active = $2
+   WHERE
+      forklift_id = $1
+   RETURNING *;
+`;
+
 const UPDATE_FORKLIFT = `
    UPDATE
       forklift_trucks
@@ -154,6 +165,7 @@ const forkliftListAdmin = (limit, offset) => {
 const foundForkliftById = (id) => fetch(BY_ID, id)
 const foundForklift = (id) => fetch(FOUND_FORKLIFT, id)
 const deleteForklift = (id) => fetch(DELETE_FORKLIFT, id)
+const updateStatus = (id, status) => fetch(UPDATE_STATUS, id, status)
 const forkliftList = (
    forklift_condition,
    forklift_category,
@@ -473,5 +485,6 @@ module.exports = {
    foundForklift,
    addForklift,
    updateForklift,
-   deleteForklift
+   deleteForklift,
+   updateStatus
 }

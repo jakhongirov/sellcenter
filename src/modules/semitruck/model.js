@@ -27,9 +27,19 @@ const DELETE_SEMI_TRUCK = `
    RETURNING *;
 `;
 
+const UPDATE_STATUS = `
+   UPDATE
+      semi_trailer_trucks
+   SET
+      truck_active = $2
+   WHERE
+      truck_id = $1
+   RETURNING *;
+`;
+
 const UPDATE_SEMI_TRUCK = `
    UPDATE
-
+      semi_trailer_trucks
    SET
       truck_make = $2,
       truck_model = $3,
@@ -183,6 +193,7 @@ const semitruckListAdmin = (limit, offset) => {
 }
 const foundSemitruckById = (id) => fetch(BY_ID, id)
 const foundTruck = (id) => fetch(FOUND_SEMI_TRUCK, id)
+const updateStatus = (id, status) => fetch(UPDATE_STATUS, id, status)
 const deleteSemitruck = (id) => fetch(DELETE_SEMI_TRUCK, id)
 const semitruckList = (
    truck_condition,

@@ -27,6 +27,16 @@ const DELETE_COACHE = `
    RETURNING *;
 `;
 
+const UPDATE_STATUS = `
+   UPDATE
+      coaches
+   SET
+      coache_active = $2
+   WHERE
+      coache_id = $1
+   RETURNING *;
+`;
+
 const ADD_COACHE = `
    INSEERT INTO
       coaches (
@@ -178,6 +188,7 @@ const coacheListAdmin = (limit, offset) => {
 const foundCoacheById = (id) => fetch(BY_ID, id)
 const foundCoache = (id) => fetch(FOUND_COACHE, id)
 const deleteCoache = (id) => fetch(DELETE_COACHE, id)
+const updateStatus = (id, status) => fetch(UPDATE_STATUS, id, status)
 const coachesList = (
    coache_condition,
    coache_category,
@@ -560,5 +571,6 @@ module.exports = {
    coachesList,
    coachesCount,
    addCoache,
-   updateCoache
+   updateCoache,
+   updateStatus
 }

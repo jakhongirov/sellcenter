@@ -27,6 +27,16 @@ const DELETE_VAN = `
    RETURNING *;
 `;
 
+const UPDATE_STATUS = `
+   UPDATE
+      vans
+   SET
+      van_active = $2
+   WHERE
+      van_id = $1
+   RETURNING *;
+`;
+
 const ADD_VAN = `
    INSERT INTO
       vans (
@@ -192,6 +202,7 @@ const vanListAdmin = (limit, offset) => {
 const foundVanById = (id) => fetch(BY_ID, id)
 const foundVan = (id) => fetch(FOUND_VAN, id)
 const deleteVan = (id) => fetch(DELETE_VAN, id)
+const updateStatus = (id, status) => fetch(UPDATE_STATUS, id, status)
 const vansList = (
    van_condition,
    van_category,
@@ -621,5 +632,6 @@ module.exports = {
    vansList,
    vansCount,
    addVan,
-   updateVan
+   updateVan,
+   updateStatus
 }

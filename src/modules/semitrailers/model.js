@@ -27,6 +27,16 @@ const DELETE_TRAILER = `
    RETURNING *;
 `;
 
+const UPDATE_STAUS = `
+   UPDATE
+      semi_trailers
+   SET
+      trailer_active = $2
+   WHERE
+      trailer_id = $1
+   RETURNING *;
+`;
+
 const ADD_TRAILER = `
    INSERT INTO
       semi_trailers (
@@ -148,6 +158,7 @@ const semitrailerListAdmin = (limit, offset) => {
 const foundTrailerById = (id) => fetch(BY_ID, id)
 const foundTrailer = (id) => fetch(FOUND_TRAILER, id)
 const deleteTrailer = (id) => fetch(DELETE_TRAILER, id)
+const updateStatus = (id, status) => fetch(UPDATE_STAUS, id, status)
 const trailerList = (
    trailer_condition,
    trailer_category,
@@ -439,5 +450,6 @@ module.exports = {
    trailerList,
    trailerCount,
    addTrailer,
-   updateTrailer
+   updateTrailer,
+   updateStatus
 }

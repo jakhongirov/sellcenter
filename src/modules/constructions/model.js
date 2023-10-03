@@ -27,6 +27,16 @@ const DELETE_CONSTRUCTION = `
    RETURNING *;
 `;
 
+const UPDATE_STATUS = `
+   UPDATE
+      construction_machines
+   SET
+      machine_active = $2
+   WHERE
+      machine_id = $1
+   RETURNING *;
+`;
+
 const UPDATE_CONSTRUCTION = `
    UPDATE
       construction_machines
@@ -145,6 +155,7 @@ const constructionListAdmin = (limit, offset) => {
 const foundConstructionById = (id) => fetch(BY_ID, id)
 const foundConstruction = (id) => fetch(FOUND_CONSTRUCTION, id)
 const deleteConstruction = (id) => fetch(DELETE_CONSTRUCTION, id)
+const updateStatus = (id, status) => fetch(UPDATE_STATUS, id, status)
 const constructionList = (
    machine_condition,
    machine_category,
@@ -424,5 +435,6 @@ module.exports = {
    addConstruction,
    foundConstruction,
    updateConstruction,
-   deleteConstruction
+   deleteConstruction,
+   updateStatus
 }

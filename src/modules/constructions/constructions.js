@@ -471,6 +471,43 @@ module.exports = {
       }
    },
 
+   UPDATE_STATUS: async (req, res) => {
+      try {
+         const { id, status } = req.body
+         const foundConstructionById = await model.foundConstructionById(id)
+
+         if (foundConstructionById) {
+            const updateStatus = await model.updateStatus(id, status)
+
+            if (updateStatus) {
+               return res.json({
+                  status: 200,
+                  message: "Success",
+                  data: updateStatus
+               })
+            } else {
+               return res.json({
+                  status: 400,
+                  message: "Bad request"
+               })
+            }
+
+         } else {
+            return res.json({
+               status: 404,
+               message: "Not found"
+            })
+         }
+
+      } catch (error) {
+         console.log(error)
+         res.json({
+            status: 500,
+            message: "Internal Server Error",
+         })
+      }
+   },
+
    DELETE_CONSTRUCTION: async (req, res) => {
       try {
          const { id } = req.body

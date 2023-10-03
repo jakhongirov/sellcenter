@@ -228,6 +228,7 @@ router
    .get('/trucks/:id', trucks.GET_TRUCK_ID)
    .post('/trucks/add', FileUpload.array("photos"), trucks.POST_TRUCK)
    .put('/trucks/update', FileUpload.array("photos"), trucks.PUT_TRUCK)
+   .put('/trucks/update/status', trucks.UPDATE_STATUS)
    .delete('/trucks/delete', trucks.DELETE_TRUCK)
 
    // Trailer makrs 
@@ -249,6 +250,7 @@ router
    .get('/trailers/:id', trailers.GET_TRAILER_BY_ID)
    .post('/trailers/add', FileUpload.array("photos"), trailers.POST_TRAILER)
    .put('/trailers/update', FileUpload.array("photos"), trailers.PUT_TRAILER)
+   .put('/trailers/update/status', trailers.UPDATE_STATUS)
    .delete('/trailers/delete', trailers.DELETE_TRAILER)
 
    // Van makrs 
@@ -270,6 +272,7 @@ router
    .get('/vans/:id', vans.GET_VAN_ID)
    .post('/vans/add', FileUpload.array("photos"), vans.POST_VAN)
    .put('/vans/update', FileUpload.array("photos"), vans.PUT_VAN)
+   .put('/vans/update/status', vans.UPDATE_STATUS)
    .delete('/vans/delete', vans.DELETE_VAN)
 
    // Semi truck makrs 
@@ -312,6 +315,7 @@ router
    .get('/semitrailer/:id', semitrailers.GET_TRAILER_BY_ID)
    .post('/semitrailer/add', FileUpload.array("photos"), semitrailers.POST_TRAILER)
    .put('/semitrailer/update', FileUpload.array("photos"), semitrailers.PUT_TRAILER)
+   .put('/semitrailer/update/status', semitrailers.UPDATE_STATUS)
    .delete('/semitrailer/delete', semitrailers.DELETE_TRAILER)
 
    // Coache makrs 
@@ -333,6 +337,7 @@ router
    .get('/coaches/:id', coaches.GET_COACHE_ID)
    .post('/coaches/add', FileUpload.array("photos"), coaches.POST_COACHE)
    .put('/coaches/update', FileUpload.array("photos"), coaches.PUT_COACHE)
+   .put('/coaches/update/status', coaches.UPDATE_STATUS)
    .delete('/coaches/delete', coaches.DELETE_COACHE)
 
    // Agricultural makrs 
@@ -354,6 +359,7 @@ router
    .get('/agriculturals/:id', agriculturals.GET_VEHICLE_ID)
    .post('/agriculturals/add', FileUpload.array("photos"), agriculturals.POST_VEHICLE)
    .put('/agriculturals/update', FileUpload.array("photos"), agriculturals.PUT_VEHICLE)
+   .put('/agriculturals/update/status', agriculturals.UPDATE_STATUS)
    .delete('/agriculturals/delete', agriculturals.DELETE_VEHICLE)
 
    // Construction makrs 
@@ -375,6 +381,7 @@ router
    .get('/constructions/:id', constructions.GET_CONSTRUCTION_ID)
    .post('/constructions/add', FileUpload.array("photos"), constructions.POST_CONSTRUCTION)
    .put('/constructions/update', FileUpload.array("photos"), constructions.PUT_CONSTRUCTION)
+   .put('/constructions/update/status', constructions.UPDATE_STATUS)
    .delete('/constructions/delete', constructions.DELETE_CONSTRUCTION)
 
    // Forklift makrs 
@@ -396,6 +403,7 @@ router
    .get('/forklifts/:id', forklifts.GET_FORKLIFT_ID)
    .post('/forklifts/add', FileUpload.array("photos"), forklifts.POST_FORKLIFT)
    .put('/forklifts/update', FileUpload.array("photos"), forklifts.PUT_FORKLIFT)
+   .put('/forklifts/update/status', forklifts.UPDATE_STATUS)
    .delete('/forklifts/delete', forklifts.DELETE_FORKLIFT)
 
 module.exports = router   

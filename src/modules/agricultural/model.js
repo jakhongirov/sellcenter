@@ -27,6 +27,16 @@ const DELETE_VEHICLE = `
    RETURNING *;
 `;
 
+const UPDATE_STATUS = `
+   UPDATE
+      agricultural_vehicles
+   SET
+      vehicle_active = $2
+   WHERE
+      vehicle_id = $1
+   RETURNING *;
+`;
+
 const UPDATE_VEHICLE = `
    UPDATE
       agricultural_vehicles
@@ -157,6 +167,7 @@ const adgriculturalList = (limit, offset) => {
 const foundVehcileById = (id) => fetch(BY_ID, id)
 const foundVehcile = (id) => fetch(FOUND_VEHICLE, id)
 const deleteVehicle = (id) => fetch(DELETE_VEHICLE, id)
+const updateStatus = (id, status) => fetch(UPDATE_STATUS, id, status)
 const vehicleList = (
    vehicle_condition,
    vehicle_category,
@@ -474,5 +485,6 @@ module.exports = {
    vehicleCount,
    addVehicle,
    updateVehicle,
-   adgriculturalList
+   adgriculturalList,
+   updateStatus
 }
