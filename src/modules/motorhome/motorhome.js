@@ -96,7 +96,7 @@ module.exports = {
          } = req.body
 
          if (offset && limit) {
-            
+
             const foundMotorhomeList = await model.foundMotorhomeList(
                motor_home_condition,
                motor_home_make,
@@ -622,6 +622,43 @@ module.exports = {
             return res.json({
                status: 400,
                message: "Bad request"
+            })
+         }
+
+      } catch (error) {
+         console.log(error)
+         res.json({
+            status: 500,
+            message: "Internal Server Error",
+         })
+      }
+   },
+
+   UPDATE_STATUS: async (req, res) => {
+      try {
+         const { id, status } = req.body
+         const foundMotorhomeById = await model.foundMotorhomeById(id)
+
+         if (foundMotorhomeById) {
+            const updateStatus = await model.updateStatus(id, status)
+
+            if (updateStatus) {
+               return res.json({
+                  status: 200,
+                  message: "Success",
+                  data: updateStatus
+               })
+            } else {
+               return res.json({
+                  status: 400,
+                  message: "Bad request"
+               })
+            }
+
+         } else {
+            return res.json({
+               status: 404,
+               message: "Not found"
             })
          }
 

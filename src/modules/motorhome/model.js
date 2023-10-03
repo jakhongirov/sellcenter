@@ -25,7 +25,16 @@ const DELETE_MOTOR_HOME = `
    WHERE
       motor_home_id = $1
    RETURNING *;
-`
+`;
+
+const UPDATE_STATUS = `
+   UPDATE
+      motor_homes
+   SET
+      motor_home_active = $2
+   WHERE
+      motor_home_id = $1;
+`;
 
 const ADD_MOTOR_HOME = `
    INSERT INTO
@@ -201,6 +210,7 @@ const motorhomeListAdmin = (limit, offset) => {
 }
 const foundMotorhomeById = (id) => fetch(BY_ID, id)
 const foundMotorhome = (id) => fetch(FOUND_MOTOR_HOME, id)
+const updateStatus = (id, status) => fetch(UPDATE_STATUS, id, status)
 const deleteMotorhome = (id) => fetch(DELETE_MOTOR_HOME, id)
 const foundMotorhomeList = (
    motor_home_condition,

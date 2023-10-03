@@ -206,6 +206,7 @@ router
    .get('/motorhomes/:id', motorhomes.GET_MOTORHOME_ID)
    .post('/motorhomes/add', FileUpload.array("photos"), motorhomes.POST_MOTOR_HOME)
    .put('/motorhomes/update', FileUpload.array("photos"), motorhomes.PUT_MOTOR_HOME)
+   .put('/motorhomes/update/status', motorhomes.UPDATE_STATUS)
    .delete('/motorhomes/delete', motorhomes.DELETE_MOTOR_HOME)
 
    // Truck makrs 
