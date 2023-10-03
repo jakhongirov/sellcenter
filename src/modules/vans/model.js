@@ -243,6 +243,13 @@ const vansList = (
    limit,
    offset
 ) => {
+   const cityConditions = van_city?.map(city => `van_city_zipcode = '${city}'`).join(' OR ');
+   const fuelArrConditions = fuelArr?.map(e => `van_fuel_type = '${e}'`).join(' OR ');
+   const transmissionConditions = transmissionArr?.map(e => `van_transmission = '${e}'`).join(' OR ');
+   const featuresString = featuresId?.map(e => `'${e}'`).join(', ');
+   const interiorFeaturesString = interiorFeaturesId?.map(e => `'${e}'`).join(', ');
+   const colorConditions = colorArr?.map(e => `van_exterior_colour = '${e}'`).join(' OR ');
+
    const VAN_LIST = `
       SELECT
          *
@@ -265,14 +272,14 @@ const vansList = (
          ${van_power_from ? `and ${van_power_from} <= van_power` : ""}
          ${van_power_to ? `and ${van_power_to} >= van_power` : ""}
          ${van_country ? `and van_country ilike '%${van_country}%'` : ""}
-         ${van_city?.length > 0 ? `and ${van_city} @> ARRAY[van_city_zipcode]` : ""}
+         ${cityConditions ? `and (${cityConditions})` : ""}
          ${zipcode ? `and van_city_zipcode ilike '%${zipcode}%'` : ""}
          ${van_radius ? `and ${van_radius} >= van_radius` : ""}
-         ${fuelArr?.length > 0 ? `and ${fuelArr} @> ARRAY[van_fuel_type]` : ''}
-         ${transmissionArr?.length > 0 ? `and ${transmissionArr} @> ARRAY[van_transmission]` : ''}
+         ${fuelArrConditions ? `and (${fuelArrConditions})` : ''}
+         ${transmissionConditions ? `and (${transmissionConditions})` : ''}
          ${van_emission_class ? `and van_emission_class = '${van_emission_class}'` : ""}
          ${van_emissions_sticker ? `and van_emissions_sticker = '${van_emissions_sticker}'` : ""}
-         ${featuresId?.length > 0 ? `and ${featuresId} @> van_features` : ''}
+         ${featuresId?.length > 0 ? `and van_features @> ARRAY[${featuresString}]` : ''}
          ${van_air_conditioning ? `and van_air_conditioning = '${van_air_conditioning}'` : ""}
          ${van_gvw_from ? `and ${van_gvw_from} <= van_gvw` : ""}
          ${van_gvw_to ? `and ${van_gvw_to} >= van_gvw` : ""}
@@ -283,8 +290,8 @@ const vansList = (
          ${van_number_of_seats_to ? `and ${van_number_of_seats_to} >= van_number_of_seats` : ""}
          ${van_cruise_control ? `and van_cruise_control = '${van_cruise_control}'` : ""}
          ${van_trailer_coupling_fix == true ? `and van_trailer_coupling_fix = ${van_trailer_coupling_fix}` : ""}
-         ${interiorFeaturesId?.length > 0 ? `and ${interiorFeaturesId} @> van_interior_features` : ''}
-         ${colorArr?.length > 0 ? `and ${colorArr} @> ARRAY[van_exterior_colour]` : ''}
+         ${interiorFeaturesId?.length > 0 ? `and van_interior_features @> ARRAY[${interiorFeaturesString}]` : ''}
+         ${colorConditions ? `and (${colorConditions})` : ''}
          ${van_damaged ? `and van_damaged = '${van_damaged}'` : ""}
          ${van_approved_used_programme ? `and van_approved_used_programme = '${van_approved_used_programme}'` : ""}
          ${van_full_service_history == true ? `and van_full_service_history = ${van_full_service_history}` : ""}
@@ -354,6 +361,13 @@ const vansCount = (
    picture,
    video,
 ) => {
+   const cityConditions = van_city?.map(city => `van_city_zipcode = '${city}'`).join(' OR ');
+   const fuelArrConditions = fuelArr?.map(e => `van_fuel_type = '${e}'`).join(' OR ');
+   const transmissionConditions = transmissionArr?.map(e => `van_transmission = '${e}'`).join(' OR ');
+   const featuresString = featuresId?.map(e => `'${e}'`).join(', ');
+   const interiorFeaturesString = interiorFeaturesId?.map(e => `'${e}'`).join(', ');
+   const colorConditions = colorArr?.map(e => `van_exterior_colour = '${e}'`).join(' OR ');
+
    const VAN_LIST = `
       SELECT
          count(van_id)
@@ -376,14 +390,14 @@ const vansCount = (
          ${van_power_from ? `and ${van_power_from} <= van_power` : ""}
          ${van_power_to ? `and ${van_power_to} >= van_power` : ""}
          ${van_country ? `and van_country ilike '%${van_country}%'` : ""}
-         ${van_city?.length > 0 ? `and ${van_city} @> ARRAY[van_city_zipcode]` : ""}
+         ${cityConditions ? `and (${cityConditions})` : ""}
          ${zipcode ? `and van_city_zipcode ilike '%${zipcode}%'` : ""}
          ${van_radius ? `and ${van_radius} >= van_radius` : ""}
-         ${fuelArr?.length > 0 ? `and ${fuelArr} @> ARRAY[van_fuel_type]` : ''}
-         ${transmissionArr?.length > 0 ? `and ${transmissionArr} @> ARRAY[van_transmission]` : ''}
+         ${fuelArrConditions ? `and (${fuelArrConditions})` : ''}
+         ${transmissionConditions ? `and (${transmissionConditions})` : ''}
          ${van_emission_class ? `and van_emission_class = '${van_emission_class}'` : ""}
          ${van_emissions_sticker ? `and van_emissions_sticker = '${van_emissions_sticker}'` : ""}
-         ${featuresId?.length > 0 ? `and ${featuresId} @> van_features` : ''}
+         ${featuresId?.length > 0 ? `and van_features @> ARRAY[${featuresString}]` : ''}
          ${van_air_conditioning ? `and van_air_conditioning = '${van_air_conditioning}'` : ""}
          ${van_gvw_from ? `and ${van_gvw_from} <= van_gvw` : ""}
          ${van_gvw_to ? `and ${van_gvw_to} >= van_gvw` : ""}
@@ -394,8 +408,8 @@ const vansCount = (
          ${van_number_of_seats_to ? `and ${van_number_of_seats_to} >= van_number_of_seats` : ""}
          ${van_cruise_control ? `and van_cruise_control = '${van_cruise_control}'` : ""}
          ${van_trailer_coupling_fix == true ? `and van_trailer_coupling_fix = ${van_trailer_coupling_fix}` : ""}
-         ${interiorFeaturesId?.length > 0 ? `and ${interiorFeaturesId} @> van_interior_features` : ''}
-         ${colorArr?.length > 0 ? `and ${colorArr} @> ARRAY[van_exterior_colour]` : ''}
+         ${interiorFeaturesId?.length > 0 ? `and van_interior_features @> ARRAY[${interiorFeaturesString}]` : ''}
+         ${colorConditions ? `and (${colorConditions})` : ''}
          ${van_damaged ? `and van_damaged = '${van_damaged}'` : ""}
          ${van_approved_used_programme ? `and van_approved_used_programme = '${van_approved_used_programme}'` : ""}
          ${van_full_service_history == true ? `and van_full_service_history = ${van_full_service_history}` : ""}

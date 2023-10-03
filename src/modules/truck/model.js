@@ -272,25 +272,25 @@ const truckList = (
          ${truck_power_from ? `and ${truck_power_from} <= truck_power` : ""}
          ${truck_power_to ? `and ${truck_power_to} >= truck_power` : ""}
          ${truck_country ? `and truck_country ilike '%${truck_country}%'` : ""}
-         ${truck_city?.length > 0 ? `and ${truck_city} @> ARRAY[truck_city_zipcode]` : ""}
+         ${cityConditions ? `and (${cityConditions})` : ""}
          ${zipcode ? `and truck_city_zipcode ilike '%${zipcode}%'` : ""}
          ${truck_radius ? `and ${truck_radius} >= truck_radius` : ""}
-         ${fuelArr?.length > 0 ? `and ${fuelArr} @> ARRAY[truck_fuel_type]` : ''}
-         ${transmissionArr?.length > 0 ? `and ${transmissionArr} @> ARRAY[truck_transmission]` : ''}
+         ${fuelArrConditions ? `and (${fuelArrConditions})` : ''}
+         ${transmissionConditions ? `and (${transmissionConditions})` : ''}
          ${truck_emission_class ? `and truck_emission_class = '${truck_emission_class}'` : ""}
          ${truck_emissions_sticker ? `and truck_emissions_sticker = '${truck_emissions_sticker}'` : ""}
-         ${featuresId?.length > 0 ? `and ${featuresId} @> truck_features` : ""}
+         ${featuresId?.length > 0 ? `and truck_features @> ARRAY[${featuresString}]` : ""}
          ${truck_air_conditioning ? `and truck_air_conditioning = '${truck_air_conditioning}'` : ""}
          ${truck_axles <= 3 ? `and ${truck_axles} = truck_axles` : truck_axles > 3 ? `and 3 < truck_axles` : ''}
-         ${wheelformulaArr?.length > 0 ? `and ${wheelformulaArr} @> ARRAY[truck_wheel_formula]` : ''}
+         ${wheelformulaConditions ? `and (${wheelformulaConditions})` : ''}
          ${truck_gvw_from ? `and ${truck_gvw_from} <= truck_gvw` : ""}
          ${truck_gvw_to ? `and ${truck_gvw_to} >= truck_gvw` : ""}
          ${truck_hydraulic_installation ? `and truck_hydraulic_installation = '${truck_hydraulic_installation}'` : ""}
          ${truck_trailer_coupling_fix == true ? `and truck_trailer_coupling_fix = ${truck_trailer_coupling_fix}` : ""}
          ${truck_cruise_control ? `and truck_cruise_control = '${truck_cruise_control}'` : ""}
          ${truck_driving_cab ? `and truck_driving_cab = '${truck_driving_cab}'` : ""}
-         ${interiorFeaturesId?.length > 0 ? `and ${interiorFeaturesId} @> truck_interior_features` : ""}
-         ${colorArr?.length > 0 ? `and ${colorArr} @> ARRAY[truck_exterior_colour]` : ''}
+         ${interiorFeaturesId?.length > 0 ? `and truck_interior_features @> ARRAY[${interiorFeaturesString}]` : ""}
+         ${colorArrConditions ? `and (${colorArrConditions})` : ''}
          ${truck_damaged ? `and truck_damaged = '${truck_damaged}'` : ""}
          ${truck_full_service_history == true ? `and truck_full_service_history = ${truck_full_service_history}` : ""}
          ${truck_municipal == true ? `and truck_municipal = ${truck_municipal}` : ""}
@@ -357,6 +357,14 @@ const truckCount = (
    picture,
    video
 ) => {
+   const cityConditions = truck_city?.map(city => `truck_city_zipcode = '${city}'`).join(' OR ');
+   const fuelArrConditions = fuelArr?.map(e => `truck_fuel_type = '${e}'`).join(' OR ');
+   const transmissionConditions = transmissionArr?.map(e => `truck_transmission = '${e}'`).join(' OR ');
+   const featuresString = featuresId?.map(e => `'${e}'`).join(', ');
+   const interiorFeaturesString = interiorFeaturesId?.map(e => `'${e}'`).join(', ');
+   const wheelformulaConditions = wheelformulaArr?.map(e => `truck_wheel_formula = '${e}'`).join(' OR ');
+   const colorArrConditions = colorArr?.map(e => `truck_exterior_colour = '${e}'`).join(' OR ');
+
    const TRUCK_LIST = `
       SELECT
          count(truck_id)
@@ -379,25 +387,25 @@ const truckCount = (
          ${truck_power_from ? `and ${truck_power_from} <= truck_power` : ""}
          ${truck_power_to ? `and ${truck_power_to} >= truck_power` : ""}
          ${truck_country ? `and truck_country ilike '%${truck_country}%'` : ""}
-         ${truck_city?.length > 0 ? `and ${truck_city} @> ARRAY[truck_city_zipcode]` : ""}
+         ${cityConditions ? `and (${cityConditions})` : ""}
          ${zipcode ? `and truck_city_zipcode ilike '%${zipcode}%'` : ""}
          ${truck_radius ? `and ${truck_radius} >= truck_radius` : ""}
-         ${fuelArr?.length > 0 ? `and ${fuelArr} @> ARRAY[truck_fuel_type]` : ''}
-         ${transmissionArr?.length > 0 ? `and ${transmissionArr} @> ARRAY[truck_transmission]` : ''}
+         ${fuelArrConditions ? `and (${fuelArrConditions})` : ''}
+         ${transmissionConditions ? `and (${transmissionConditions})` : ''}
          ${truck_emission_class ? `and truck_emission_class = '${truck_emission_class}'` : ""}
          ${truck_emissions_sticker ? `and truck_emissions_sticker = '${truck_emissions_sticker}'` : ""}
-         ${featuresId?.length > 0 ? `and ${featuresId} @> truck_features` : ""}
+         ${featuresId?.length > 0 ? `and truck_features @> ARRAY[${featuresString}]` : ""}
          ${truck_air_conditioning ? `and truck_air_conditioning = '${truck_air_conditioning}'` : ""}
          ${truck_axles <= 3 ? `and ${truck_axles} = truck_axles` : truck_axles > 3 ? `and 3 < truck_axles` : ''}
-         ${wheelformulaArr?.length > 0 ? `and ${wheelformulaArr} @> ARRAY[truck_wheel_formula]` : ''}
+         ${wheelformulaConditions ? `and (${wheelformulaConditions})` : ''}
          ${truck_gvw_from ? `and ${truck_gvw_from} <= truck_gvw` : ""}
          ${truck_gvw_to ? `and ${truck_gvw_to} >= truck_gvw` : ""}
          ${truck_hydraulic_installation ? `and truck_hydraulic_installation = '${truck_hydraulic_installation}'` : ""}
          ${truck_trailer_coupling_fix == true ? `and truck_trailer_coupling_fix = ${truck_trailer_coupling_fix}` : ""}
          ${truck_cruise_control ? `and truck_cruise_control = '${truck_cruise_control}'` : ""}
          ${truck_driving_cab ? `and truck_driving_cab = '${truck_driving_cab}'` : ""}
-         ${interiorFeaturesId?.length > 0 ? `and ${interiorFeaturesId} @> truck_interior_features` : ""}
-         ${colorArr?.length > 0 ? `and ${colorArr} @> ARRAY[truck_exterior_colour]` : ''}
+         ${interiorFeaturesId?.length > 0 ? `and truck_interior_features @> ARRAY[${interiorFeaturesString}]` : ""}
+         ${colorArrConditions ? `and (${colorArrConditions})` : ''}
          ${truck_damaged ? `and truck_damaged = '${truck_damaged}'` : ""}
          ${truck_full_service_history == true ? `and truck_full_service_history = ${truck_full_service_history}` : ""}
          ${truck_municipal == true ? `and truck_municipal = ${truck_municipal}` : ""}

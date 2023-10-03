@@ -94,30 +94,6 @@ module.exports = {
          } = req.body
 
          if (offset && limit) {
-            const van_city = city ? city?.split(',') : ""
-            const fuelArr = fuel_type ? fuel_type?.split(',') : ""
-            const colorArr = exterior_colour ? exterior_colour?.split(',') : ""
-            const transmissionArr = transmission ? transmission?.split(',') : ""
-            const featuresId = []
-            const interiorFeaturesId = []
-
-            if (features) {
-               const featuresArr = features?.split(',')
-               if (featuresArr?.length > 0) {
-                  for (let i = 0; i < featuresArr.length; i++) {
-                     featuresId.push(Number(featuresArr[i]))
-                  }
-               }
-            }
-
-            if (interior_features) {
-               const interiorFeaturesArr = interior_features?.split(',')
-               if (interiorFeaturesArr?.length > 0) {
-                  for (let i = 0; i < interiorFeaturesArr.length; i++) {
-                     interiorFeaturesId.push(Number(interiorFeaturesArr[i]))
-                  }
-               }
-            }
 
             const vansList = await model.vansList(
                van_condition,
@@ -135,14 +111,14 @@ module.exports = {
                van_power_from,
                van_power_to,
                van_country,
-               van_city,
+               city,
                zipcode,
                van_radius,
-               fuelArr,
-               transmissionArr,
+               fuel_type,
+               transmission,
                van_emission_class,
                van_emissions_sticker,
-               featuresId,
+               features,
                van_air_conditioning,
                van_gvw_from,
                van_gvw_to,
@@ -153,8 +129,8 @@ module.exports = {
                van_number_of_seats_to,
                van_cruise_control,
                van_trailer_coupling_fix,
-               interiorFeaturesId,
-               colorArr,
+               interior_features,
+               exterior_colour,
                day,
                van_damaged,
                van_approved_used_programme,
@@ -252,31 +228,6 @@ module.exports = {
             video
          } = req.body
 
-         const van_city = city ? city?.split(',') : ""
-         const fuelArr = fuel_type ? fuel_type?.split(',') : ""
-         const colorArr = exterior_colour ? exterior_colour?.split(',') : ""
-         const transmissionArr = transmission ? transmission?.split(',') : ""
-         const featuresId = []
-         const interiorFeaturesId = []
-
-         if (features) {
-            const featuresArr = features?.split(',')
-            if (featuresArr?.length > 0) {
-               for (let i = 0; i < featuresArr.length; i++) {
-                  featuresId.push(Number(featuresArr[i]))
-               }
-            }
-         }
-
-         if (interior_features) {
-            const interiorFeaturesArr = interior_features?.split(',')
-            if (interiorFeaturesArr?.length > 0) {
-               for (let i = 0; i < interiorFeaturesArr.length; i++) {
-                  interiorFeaturesId.push(Number(interiorFeaturesArr[i]))
-               }
-            }
-         }
-
          const vansCount = await model.vansCount(
             van_condition,
             van_category,
@@ -293,14 +244,14 @@ module.exports = {
             van_power_from,
             van_power_to,
             van_country,
-            van_city,
+            city,
             zipcode,
             van_radius,
-            fuelArr,
-            transmissionArr,
+            fuel_type,
+            transmission,
             van_emission_class,
             van_emissions_sticker,
-            featuresId,
+            features,
             van_air_conditioning,
             van_gvw_from,
             van_gvw_to,
@@ -311,8 +262,8 @@ module.exports = {
             van_number_of_seats_to,
             van_cruise_control,
             van_trailer_coupling_fix,
-            interiorFeaturesId,
-            colorArr,
+            interior_features,
+            exterior_colour,
             day,
             van_damaged,
             van_approved_used_programme,
@@ -435,26 +386,6 @@ module.exports = {
 
          const van_img_name = [];
          const van_img = [];
-         const featuresId = []
-         const interiorFeaturesId = []
-
-         if (features) {
-            const featuresArr = features?.split(',')
-            if (featuresArr?.length > 0) {
-               for (let i = 0; i < featuresArr.length; i++) {
-                  featuresId.push(Number(featuresArr[i]))
-               }
-            }
-         }
-
-         if (interior_features) {
-            const interiorFeaturesArr = interior_features?.split(',')
-            if (interiorFeaturesArr?.length > 0) {
-               for (let i = 0; i < interiorFeaturesArr.length; i++) {
-                  interiorFeaturesId.push(Number(interiorFeaturesArr[i]))
-               }
-            }
-         }
 
          uploadPhoto?.forEach((e) => {
             van_img.push(
@@ -484,7 +415,7 @@ module.exports = {
             van_transmission,
             van_emission_class,
             van_emissions_sticker,
-            featuresId,
+            features?.split(","),
             van_air_conditioning,
             van_gvw,
             van_parking_sensors,
@@ -493,7 +424,7 @@ module.exports = {
             van_number_of_seats,
             van_cruise_control,
             van_trailer_coupling_fix,
-            interiorFeaturesId,
+            interior_features?.split(","),
             van_exterior_colour,
             van_damaged,
             van_approved_used_programme,
@@ -584,26 +515,6 @@ module.exports = {
          const foundVan = await model.foundVan(id)
          const van_img_name = [];
          const van_img = [];
-         const featuresId = []
-         const interiorFeaturesId = []
-
-         if (features) {
-            const featuresArr = features?.split(',')
-            if (featuresArr?.length > 0) {
-               for (let i = 0; i < featuresArr.length; i++) {
-                  featuresId.push(Number(featuresArr[i]))
-               }
-            }
-         }
-
-         if (interior_features) {
-            const interiorFeaturesArr = interior_features?.split(',')
-            if (interiorFeaturesArr?.length > 0) {
-               for (let i = 0; i < interiorFeaturesArr.length; i++) {
-                  interiorFeaturesId.push(Number(interiorFeaturesArr[i]))
-               }
-            }
-         }
 
          if (uploadPhoto.length) {
             foundVan?.van_images_name.forEach((e) => {
@@ -657,7 +568,7 @@ module.exports = {
             van_transmission,
             van_emission_class,
             van_emissions_sticker,
-            featuresId,
+            features?.split(","),
             van_air_conditioning,
             van_gvw,
             van_parking_sensors,
@@ -666,7 +577,7 @@ module.exports = {
             van_number_of_seats,
             van_cruise_control,
             van_trailer_coupling_fix,
-            interiorFeaturesId,
+            interior_features?.split(","),
             van_exterior_colour,
             van_damaged,
             van_approved_used_programme,
