@@ -224,7 +224,7 @@ const motorcycleList = (
          ${motorcycle_condition ? `and motorcycle_condition = '${motorcycle_condition}'` : ""}
          ${motorcycle_make ? `and motorcycle_make = '${motorcycle_make}'` : ""}
          ${motorcycle_model ? `and motorcycle_model ilike '%${motorcycle_model}%'` : ""}
-         ${typesId.length ? `and motorcycle_type @> ${typesId}` : ""}
+         ${typesId?.length ? `and motorcycle_type @> ${typesId}` : ""}
          ${motorcycle_price_from ? `and motorcycle_price >= ${motorcycle_price_from}` : ""}
          ${motorcycle_price_to ? `and motorcycle_price =< ${motorcycle_price_to}` : ""}
          ${motorcycle_firt_date_year_from ? `and motorcycle_firt_date_year >= ${motorcycle_firt_date_year_from}` : ""}
@@ -317,7 +317,7 @@ const motorcycleCount = (
       ${motorcycle_condition ? `and motorcycle_condition = '${motorcycle_condition}'` : ""}
       ${motorcycle_make ? `and motorcycle_make = '${motorcycle_make}'` : ""}
       ${motorcycle_model ? `and motorcycle_model ilike '%${motorcycle_model}%'` : ""}
-      ${typesId.length ? `and motorcycle_type @> ${typesId}` : ""}
+      ${typesId?.length ? `and motorcycle_type @> ${typesId}` : ""}
       ${motorcycle_price_from ? `and motorcycle_price >= ${motorcycle_price_from}` : ""}
       ${motorcycle_price_to ? `and motorcycle_price =< ${motorcycle_price_to}` : ""}
       ${motorcycle_firt_date_year_from ? `and motorcycle_firt_date_year >= ${motorcycle_firt_date_year_from}` : ""}
