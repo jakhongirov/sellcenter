@@ -169,7 +169,7 @@ CREATE TABLE motorcycles (
    motorcycle_ad_create_at timestamptz DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE motor_home_makes(
+CREATE TABLE =home_makes(
    motor_home_make_id bigserial PRiMARY KEY,
    motor_home_make_name text not null
 );

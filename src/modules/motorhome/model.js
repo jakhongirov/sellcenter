@@ -287,8 +287,8 @@ const foundMotorhomeList = (
          ${typesConditions ? `and (${typesConditions})` : ''}
          ${fuelArrConditions ? `and (${fuelArrConditions})` : ''}
          ${transmissionArrConditions ? `and (${transmissionArrConditions})` : ''}
-         ${featuresId.length > 0 ? `and motor_home_features @> ARRAY[${featuresString}]` : ''}
-         ${interiorFeaturesId.length > 0 ? `and motor_home_interior_features @> ARRAY[${interiorFeaturesString}]` : ''}
+         ${featuresId?.length > 0 ? `and motor_home_features @> ARRAY[${featuresString}]` : ''}
+         ${interiorFeaturesId?.length > 0 ? `and motor_home_interior_features @> ARRAY[${interiorFeaturesString}]` : ''}
          ${colorArrConditions ? `and (${colorArrConditions})` : ''}
          ${motor_home_price_from ? `and ${motor_home_price_from} <= motor_home_price` : ""}
          ${motor_home_price_to ? `and ${motor_home_price_to} >= motor_home_price` : ""}
@@ -411,8 +411,8 @@ const foundMotorhomeCount = (
          ${typesConditions ? `and (${typesConditions})` : ''}
          ${fuelArrConditions ? `and (${fuelArrConditions})` : ''}
          ${transmissionArrConditions ? `and (${transmissionArrConditions})` : ''}
-         ${featuresId.length > 0 ? `and motor_home_features @> ARRAY[${featuresString}]` : ''}
-         ${interiorFeaturesId.length > 0 ? `and motor_home_interior_features @> ARRAY[${interiorFeaturesString}]` : ''}
+         ${featuresId?.length > 0 ? `and motor_home_features @> ARRAY[${featuresString}]` : ''}
+         ${interiorFeaturesId?.length > 0 ? `and motor_home_interior_features @> ARRAY[${interiorFeaturesString}]` : ''}
          ${colorArrConditions ? `and (${colorArrConditions})` : ''}
          ${motor_home_price_from ? `and ${motor_home_price_from} <= motor_home_price` : ""}
          ${motor_home_price_to ? `and ${motor_home_price_to} >= motor_home_price` : ""}
