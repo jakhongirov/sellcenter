@@ -38,7 +38,7 @@ const UPDATE_STATUS = `
 `;
 
 const ADD_COACHE = `
-   INSEERT INTO
+   INSERT INTO
       coaches (
          coache_make,
          coache_model,

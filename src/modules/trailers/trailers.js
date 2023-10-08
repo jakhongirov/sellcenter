@@ -528,7 +528,7 @@ module.exports = {
          if (foundTrailer) {
             foundTrailer?.trailer_images_name.forEach((e) => {
                new FS(
-                  path.resolv(
+                  path.resolve(
                      __dirname,
                      '..',
                      '..',

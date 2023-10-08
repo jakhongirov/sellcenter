@@ -652,7 +652,7 @@ module.exports = {
          if (foundTruck) {
             foundTruck?.truck_images_name.forEach((e) => {
                new FS(
-                  path.resolv(
+                  path.resolve(
                      __dirname,
                      '..',
                      '..',
