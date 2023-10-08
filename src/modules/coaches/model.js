@@ -20,7 +20,7 @@ const FOUND_COACHE = `
 `;
 
 const DELETE_COACHE = `
-   DELERE FROM
+   DELETE FROM
       coaches
    WHERE
       coache_id = $1
