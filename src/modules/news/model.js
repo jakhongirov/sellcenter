@@ -80,10 +80,9 @@ const newsList = (limit, offset, lang) => {
          news
       WHERE
          news_active = true
+         and news_lang = '${lang}'
       ORDER BY
-         news_id
-      WHERE
-         news_lang = '${lang}'
+         news_id DESC
       LIMIT ${limit}
       OFFSET ${offset}
    `;

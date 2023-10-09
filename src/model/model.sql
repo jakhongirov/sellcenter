@@ -162,14 +162,14 @@ CREATE TABLE motorcycles (
    motorcycle_number_owners int,
    motorcycle_approved_used_programme text,
    motorcycle_dealer_rating int DEFAULT 0,
-   motorcycle_active boolean DEFAULT false,
+   motorcycle_active boolean DEFAULT true,
    user_id int REFERENCES users(user_id) ON DELETE CASCADE,
    user_phone text,
    user_email text,
    motorcycle_ad_create_at timestamptz DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE =home_makes(
+CREATE TABLE = home_makes(
    motor_home_make_id bigserial PRiMARY KEY,
    motor_home_make_name text not null
 );
@@ -229,7 +229,7 @@ CREATE TABLE motor_homes (
    user_id int REFERENCES users(user_id) ON DELETE CASCADE,
    user_phone text,
    user_email text,
-   motor_home_active boolean DEFAULT false,
+   motor_home_active boolean DEFAULT true,
    motor_home_ad_create_at timestamptz DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -290,10 +290,9 @@ CREATE TABLE trucks (
    user_id int REFERENCES users(user_id) ON DELETE CASCADE,
    user_phone text,
    user_email text,
-   truck_active boolean DEFAULT false,
+   truck_active boolean DEFAULT true,
    truck_ad_create_at timestamptz DEFAULT CURRENT_TIMESTAMP
 );
-
 
 CREATE TABLE trailer_makes(
    trailer_make_id bigserial PRiMARY KEY,
@@ -337,7 +336,7 @@ CREATE TABLE trailers (
    user_id int REFERENCES users(user_id) ON DELETE CASCADE,
    user_phone text,
    user_email text,
-   trailer_active boolean DEFAULT false,
+   trailer_active boolean DEFAULT true,
    trailer_ad_create_at timestamptz DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -399,7 +398,7 @@ CREATE TABLE vans (
    user_id int REFERENCES users(user_id) ON DELETE CASCADE,
    user_phone text,
    user_email text,
-   van_active boolean DEFAULT false,
+   van_active boolean DEFAULT true,
    van_ad_create_at timestamptz DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -458,7 +457,7 @@ CREATE TABLE semi_trailer_trucks (
    user_id int REFERENCES users(user_id) ON DELETE CASCADE,
    user_phone text,
    user_email text,
-   truck_active boolean DEFAULT false,
+   truck_active boolean DEFAULT true,
    truck_ad_create_at timestamptz DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -504,7 +503,7 @@ CREATE TABLE semi_trailers (
    user_id int REFERENCES users(user_id) ON DELETE CASCADE,
    user_phone text,
    user_email text,
-   trailer_active boolean DEFAULT false,
+   trailer_active boolean DEFAULT true,
    trailer_ad_create_at timestamptz DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -560,7 +559,7 @@ CREATE TABLE coaches (
    user_id int REFERENCES users(user_id) ON DELETE CASCADE,
    user_phone text,
    user_email text,
-   coache_active boolean DEFAULT false,
+   coache_active boolean DEFAULT true,
    coache_ad_create_at timestamptz DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -609,7 +608,7 @@ CREATE TABLE agricultural_vehicles(
    user_id int REFERENCES users(user_id) ON DELETE CASCADE,
    user_phone text,
    user_email text,
-   vehicle_active boolean DEFAULT false,
+   vehicle_active boolean DEFAULT true,
    vehicle_ad_create_at timestamptz DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -654,7 +653,7 @@ CREATE TABLE construction_machines (
    user_id int REFERENCES users(user_id) ON DELETE CASCADE,
    user_phone text,
    user_email text,
-   machine_active boolean DEFAULT false,
+   machine_active boolean DEFAULT true,
    machine_ad_create_at timestamptz DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -702,7 +701,7 @@ CREATE TABLE forklift_trucks (
    user_id int REFERENCES users(user_id) ON DELETE CASCADE,
    user_phone text,
    user_email text,
-   forklift_active boolean DEFAULT false,
+   forklift_active boolean DEFAULT true,
    forklift_ad_create_at timestamptz DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -736,4 +735,14 @@ CREATE TABLE news (
    news_image_name text,
    news_active boolean DEFAULT true,
    news_create_at timestamptz DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE price_list (
+   price_item_id bigserial PRiMARY KEY,
+   price_item_title text not null,
+   price_item_desc text not null,
+   price_item_price int not null,
+   price_item_lang text not null,
+   price_item_active boolean DEFAULT true,
+   price_item_create_at timestamptz DEFAULT CURRENT_TIMESTAMP
 );
