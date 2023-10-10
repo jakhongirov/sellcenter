@@ -91,11 +91,9 @@ module.exports = {
                      },
                      unit_amount: item.price_item_price,
                   },
+                  quantity: 1,
                }
             }),
-            automatic_payment_methods: {
-               enabled: true,
-            },
             success_url: `https://sell-center-dery.netlify.app/`,
             cancel_url: `https://sell-center-dery.netlify.app/about`,
          })
