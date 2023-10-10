@@ -112,22 +112,14 @@ module.exports = {
       try {
          const { title, desc, price, lang } = req.body
 
-         if (title && desc && price && lang) {
-            const addPriceItem = await model.addPriceItem(title, desc, price, lang)
+         const addPriceItem = await model.addPriceItem(title, desc, price, lang)
 
-            if (addPriceItem) {
-               return res.json({
-                  status: 200,
-                  message: "Success",
-                  data: addPriceItem
-               })
-            } else {
-               return res.json({
-                  status: 400,
-                  message: "Bad request"
-               })
-            }
-
+         if (addPriceItem) {
+            return res.json({
+               status: 200,
+               message: "Success",
+               data: addPriceItem
+            })
          } else {
             return res.json({
                status: 400,
@@ -148,28 +140,21 @@ module.exports = {
       try {
          const { id, title, desc, price, lang } = req.body
 
-         if (id && title && desc && price && lang) {
-            const updatePriceItem = await model.updatePriceItem(id, title, desc, price, lang)
+         const updatePriceItem = await model.updatePriceItem(id, title, desc, price, lang)
 
-            if (updatePriceItem) {
-               return res.json({
-                  status: 200,
-                  message: "Success",
-                  data: updatePriceItem
-               })
-            } else {
-               return res.json({
-                  status: 400,
-                  message: "Bad request"
-               })
-            }
-
+         if (updatePriceItem) {
+            return res.json({
+               status: 200,
+               message: "Success",
+               data: updatePriceItem
+            })
          } else {
             return res.json({
                status: 400,
                message: "Bad request"
             })
          }
+
 
       } catch (error) {
          console.log(error)
