@@ -21,8 +21,11 @@ const adsCard = require('./adsCard/adsCard')
 // Sliders file
 const sliders = require('./slider/slider')
 
-// News
+// News file
 const news = require('./news/news')
+
+// PRICE LIST file
+const priceList = require('./priceList/priceList')
 
 //Cars files
 const carBrand = require('./carBrand/carBrand')
@@ -140,6 +143,15 @@ router
    .put('/news/update', FileUpload.single("photo"), news.PUT)
    .put('/news/update/status', news.PUT_STATUS)
    .delete('/news/delete', news.DELETE)
+
+   // PRICE LIST
+   .get('/price/admin/list', priceList.GET_ADMIN)
+   .get('/price/list', priceList.GET)
+   .post('/pay', priceList.PAYMENT)
+   .post('/price/list/add', priceList.ADD_PRICE)
+   .put('/price/list/update', priceList.UPDATE_PRICE)
+   .put('/price/list/update/status', priceList.UPDATE_PRICE_STATUS)
+   .delete('/price/list/delete', priceList.DELETE_PRICE)
 
    // Car makrs 
    .get('/car/marks', carBrand.GET_MARKS)

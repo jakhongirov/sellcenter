@@ -1,12 +1,12 @@
 CREATE TABLE admins (
-   admin_id bigserial PRiMARY KEY,
+   admin_id bigserial PRIMARY KEY,
    admin_email text,
    admin_password text,
    admin_create_at timestamptz DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE users (
-   user_id bigserial PRiMARY KEY,
+   user_id bigserial PRIMARY KEY,
    user_email text not null,
    user_password text not null,
    user_first_name text,
@@ -28,7 +28,7 @@ CREATE TABLE users (
 );
 
 CREATE TABLE user_companies (
-   company_id bigserial PRiMARY KEY,
+   company_id bigserial PRIMARY KEY,
    company_name text not null,
    company_mail text not null,
    company_address_street text,
@@ -47,18 +47,18 @@ CREATE TABLE user_companies (
 );
 
 CREATE TABLE car_makes(
-   car_make_id bigserial PRiMARY KEY,
+   car_make_id bigserial PRIMARY KEY,
    car_make_name text not null
 );
 
 CREATE TABLE car_models(
-   car_model_id bigserial PRiMARY KEY,
+   car_model_id bigserial PRIMARY KEY,
    car_model_name text not null,
    car_make_id int not null REFERENCES car_makes(car_make_id) ON DELETE CASCADE
 );
 
 CREATE TABLE cars (
-   car_id bigserial PRiMARY KEY,
+   car_id bigserial PRIMARY KEY,
    car_make text,
    car_model text,
    car_description text,
@@ -120,18 +120,18 @@ CREATE TABLE cars (
 );
 
 CREATE TABLE motorcycle_makes(
-   motorcycle_make_id bigserial PRiMARY KEY,
+   motorcycle_make_id bigserial PRIMARY KEY,
    motorcycle_make_name text not null
 );
 
 CREATE TABLE motorcycle_models(
-   motorcycle_model_id bigserial PRiMARY KEY,
+   motorcycle_model_id bigserial PRIMARY KEY,
    motorcycle_model_name text not null,
    motorcycle_make_id int not null REFERENCES motorcycle_makes(motorcycle_make_id) ON DELETE CASCADE
 );
 
 CREATE TABLE motorcycles (
-   motorcycle_id bigserial PRiMARY KEY,
+   motorcycle_id bigserial PRIMARY KEY,
    motorcycle_make text,
    motorcycle_model text,
    motorcycle_description text,
@@ -170,18 +170,18 @@ CREATE TABLE motorcycles (
 );
 
 CREATE TABLE = home_makes(
-   motor_home_make_id bigserial PRiMARY KEY,
+   motor_home_make_id bigserial PRIMARY KEY,
    motor_home_make_name text not null
 );
 
 CREATE TABLE motor_home_models(
-   motor_home_model_id bigserial PRiMARY KEY,
+   motor_home_model_id bigserial PRIMARY KEY,
    motor_home_model_name text not null,
    motor_home_make_id int not null REFERENCES motor_home_makes(motor_home_make_id) ON DELETE CASCADE
 );
 
 CREATE TABLE motor_homes (
-   motor_home_id bigserial PRiMARY KEY,
+   motor_home_id bigserial PRIMARY KEY,
    motor_home_make text,
    motor_home_model text,
    motor_home_describtion text,
@@ -234,18 +234,18 @@ CREATE TABLE motor_homes (
 );
 
 CREATE TABLE truck_makes(
-   truck_make_id bigserial PRiMARY KEY,
+   truck_make_id bigserial PRIMARY KEY,
    truck_make_name text not null
 );
 
 CREATE TABLE truck_models(
-   truck_model_id bigserial PRiMARY KEY,
+   truck_model_id bigserial PRIMARY KEY,
    truck_model_name text not null,
    truck_make_id int not null REFERENCES truck_makes(truck_make_id) ON DELETE CASCADE
 );
 
 CREATE TABLE trucks (
-   truck_id bigserial PRiMARY KEY,
+   truck_id bigserial PRIMARY KEY,
    truck_make text,
    truck_model text,
    truck_describtion text,
@@ -295,18 +295,18 @@ CREATE TABLE trucks (
 );
 
 CREATE TABLE trailer_makes(
-   trailer_make_id bigserial PRiMARY KEY,
+   trailer_make_id bigserial PRIMARY KEY,
    trailer_make_name text not null
 );
 
 CREATE TABLE trailer_models(
-   trailer_model_id bigserial PRiMARY KEY,
+   trailer_model_id bigserial PRIMARY KEY,
    trailer_model_name text not null,
    trailer_make_id int not null REFERENCES trailer_makes(trailer_make_id) ON DELETE CASCADE
 );
 
 CREATE TABLE trailers (
-   trailer_id bigserial PRiMARY KEY,
+   trailer_id bigserial PRIMARY KEY,
    trailer_make text,
    trailer_model text,
    trailer_describtion text,
@@ -341,18 +341,18 @@ CREATE TABLE trailers (
 );
 
 CREATE TABLE van_makes(
-   van_make_id bigserial PRiMARY KEY,
+   van_make_id bigserial PRIMARY KEY,
    van_make_name text not null
 );
 
 CREATE TABLE van_models(
-   van_model_id bigserial PRiMARY KEY,
+   van_model_id bigserial PRIMARY KEY,
    van_model_name text not null,
    van_make_id int not null REFERENCES van_makes(van_make_id) ON DELETE CASCADE
 );
 
 CREATE TABLE vans (
-   van_id bigserial PRiMARY KEY,
+   van_id bigserial PRIMARY KEY,
    van_make text,
    van_model text,
    van_describtion text,
@@ -403,18 +403,18 @@ CREATE TABLE vans (
 );
 
 CREATE TABLE semi_trailer_truck_makes(
-   semi_trailer_truck_make_id bigserial PRiMARY KEY,
+   semi_trailer_truck_make_id bigserial PRIMARY KEY,
    semi_trailer_truck_make_name text not null
 );
 
 CREATE TABLE semi_trailer_truck_models(
-   semi_trailer_truck_model_id bigserial PRiMARY KEY,
+   semi_trailer_truck_model_id bigserial PRIMARY KEY,
    semi_trailer_truck_model_name text not null,
    semi_trailer_truck_make_id int not null REFERENCES semi_trailer_truck_makes(semi_trailer_truck_make_id) ON DELETE CASCADE
 );
 
 CREATE TABLE semi_trailer_trucks (
-   truck_id bigserial PRiMARY KEY,
+   truck_id bigserial PRIMARY KEY,
    truck_make text,
    truck_model text,
    truck_describtion text,
@@ -462,18 +462,18 @@ CREATE TABLE semi_trailer_trucks (
 );
 
 CREATE TABLE semi_trailer_makes(
-   semi_trailer_make_id bigserial PRiMARY KEY,
+   semi_trailer_make_id bigserial PRIMARY KEY,
    semi_trailer_make_name text not null
 );
 
 CREATE TABLE semi_trailer_models(
-   semi_trailer_model_id bigserial PRiMARY KEY,
+   semi_trailer_model_id bigserial PRIMARY KEY,
    semi_trailer_model_name text not null,
    semi_trailer_make_id int not null REFERENCES semi_trailer_makes(semi_trailer_make_id) ON DELETE CASCADE
 );
 
 CREATE TABLE semi_trailers (
-   trailer_id bigserial PRiMARY KEY,
+   trailer_id bigserial PRIMARY KEY,
    trailer_make text,
    trailer_model text,
    trailer_describtion text,
@@ -508,18 +508,18 @@ CREATE TABLE semi_trailers (
 );
 
 CREATE TABLE coache_makes(
-   coache_make_id bigserial PRiMARY KEY,
+   coache_make_id bigserial PRIMARY KEY,
    coache_make_name text not null
 );
 
 CREATE TABLE coache_models(
-   coache_model_id bigserial PRiMARY KEY,
+   coache_model_id bigserial PRIMARY KEY,
    coache_model_name text not null,
    coache_make_id int not null REFERENCES coache_makes(coache_make_id) ON DELETE CASCADE
 );
 
 CREATE TABLE coaches (
-   coache_id bigserial PRiMARY KEY,
+   coache_id bigserial PRIMARY KEY,
    coache_make text,
    coache_model text,
    coache_describtion text,
@@ -564,18 +564,18 @@ CREATE TABLE coaches (
 );
 
 CREATE TABLE agricultural_vehicle_makes(
-   agricultural_vehicle_make_id bigserial PRiMARY KEY,
+   agricultural_vehicle_make_id bigserial PRIMARY KEY,
    agricultural_vehicle_make_name text not null
 );
 
 CREATE TABLE agricultural_vehicle_models(
-   agricultural_vehicle_model_id bigserial PRiMARY KEY,
+   agricultural_vehicle_model_id bigserial PRIMARY KEY,
    agricultural_vehicle_model_name text not null,
    agricultural_vehicle_make_id int not null REFERENCES agricultural_vehicle_makes(agricultural_vehicle_make_id) ON DELETE CASCADE
 );
 
 CREATE TABLE agricultural_vehicles(
-   vehicle_id bigserial PRiMARY KEY,
+   vehicle_id bigserial PRIMARY KEY,
    vehicle_make text,
    vehicle_model text,
    vehicle_describtion text,
@@ -613,18 +613,18 @@ CREATE TABLE agricultural_vehicles(
 );
 
 CREATE TABLE construction_makes(
-   construction_make_id bigserial PRiMARY KEY,
+   construction_make_id bigserial PRIMARY KEY,
    construction_make_name text not null
 );
 
 CREATE TABLE construction_models(
-   construction_model_id bigserial PRiMARY KEY,
+   construction_model_id bigserial PRIMARY KEY,
    construction_model_name text not null,
    construction_make_id int not null REFERENCES construction_makes(construction_make_id) ON DELETE CASCADE
 );
 
 CREATE TABLE construction_machines (
-   machine_id bigserial PRiMARY KEY,
+   machine_id bigserial PRIMARY KEY,
    machine_make text,
    machine_model text,
    machine_describtion text,
@@ -658,18 +658,18 @@ CREATE TABLE construction_machines (
 );
 
 CREATE TABLE forklift_makes(
-   forklift_make_id bigserial PRiMARY KEY,
+   forklift_make_id bigserial PRIMARY KEY,
    forklift_make_name text not null
 );
 
 CREATE TABLE forklift_models(
-   forklift_model_id bigserial PRiMARY KEY,
+   forklift_model_id bigserial PRIMARY KEY,
    forklift_model_name text not null,
    forklift_make_id int not null REFERENCES forklift_makes(forklift_make_id) ON DELETE CASCADE
 );
 
 CREATE TABLE forklift_trucks (
-   forklift_id bigserial PRiMARY KEY,
+   forklift_id bigserial PRIMARY KEY,
    forklift_make text,
    forklift_model text,
    forklift_describtion text,
@@ -706,7 +706,7 @@ CREATE TABLE forklift_trucks (
 );
 
 CREATE TABLE ads_cards (
-   card_id bigserial PRiMARY KEY,
+   card_id bigserial PRIMARY KEY,
    card_title text not null,
    card_text text not null,
    card_image_url text,
@@ -717,7 +717,7 @@ CREATE TABLE ads_cards (
 );
 
 CREATE TABLE sliders (
-   slider_id bigserial PRiMARY KEY,
+   slider_id bigserial PRIMARY KEY,
    slider_title text,
    slider_image_url text,
    slider_image_name text,
@@ -727,7 +727,7 @@ CREATE TABLE sliders (
 );
 
 CREATE TABLE news (
-   news_id bigserial PRiMARY KEY,
+   news_id bigserial PRIMARY KEY,
    news_title text not null,
    news_lang text not null,
    news_desc text not null,
@@ -738,7 +738,7 @@ CREATE TABLE news (
 );
 
 CREATE TABLE price_list (
-   price_item_id bigserial PRiMARY KEY,
+   price_item_id bigserial PRIMARY KEY,
    price_item_title text not null,
    price_item_desc text not null,
    price_item_price int not null,
